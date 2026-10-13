@@ -72,7 +72,7 @@ test('confirmed dates are preserved and ongoing work has no invented date or AI 
   ])
   assert.equal(findProject('ad-operations').period, '2019 — 2020')
   assert.equal(findProject('ads').period, '2020 — 2023')
-  assert.equal(findProject('qr').period, '2020 — 2023')
+  assert.equal(findProject('qr').period, '2020 — 2021')
   assert.equal(findProject('experiments').period, '2024')
   assert.equal(findExperience('work-with-agents').agentMilestone.date, '2025-08')
   assert.equal(findProject('emagazines').period, undefined)

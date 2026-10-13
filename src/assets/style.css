@@ -16,6 +16,14 @@
   --font-mono: var(--font-mono);
 }
 
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* =========================================================
    Thuỳ Dương — Portfolio
    Design tokens → base → layout → components → utilities

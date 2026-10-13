@@ -5,7 +5,7 @@ import { skills } from '../data/skills'
 </script>
 
 <template>
-  <section id="skills" aria-labelledby="skills-title" class="skills-section relative py-16 sm:py-20 scroll-mt-24">
+  <section id="skills" aria-labelledby="skills-title" class="skills-section relative py-8 sm:py-12 lg:py-16 scroll-mt-24">
     <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHead
         eyebrow="01 — Kỹ năng"
@@ -13,7 +13,7 @@ import { skills } from '../data/skills'
         title-id="skills-title"
         sub="Mô hình năng lực chuyên sâu về xây dựng giao diện hiện đại, chuyển động tương tác và hệ sinh thái kỹ thuật liên quan."
       />
-      <div class="skills-bento grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+      <div class="skills-bento grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6 items-stretch">
         <SkillCard
           v-for="skill in skills"
           :key="skill.id || skill.title"

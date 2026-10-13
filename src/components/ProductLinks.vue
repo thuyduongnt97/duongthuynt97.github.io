@@ -13,10 +13,16 @@ const productLabel = (link) => ({
   athena: 'Athena',
   'cao-toc-bac-nam': 'Cao tốc Bắc–Nam',
   'ham-giao-thong': 'Hầm đường bộ',
+  'box-sticky-kenh14': 'Kenh14 Sticky',
+  'box-inline-kenh14': 'Kenh14 Inline',
+  'box-asiad-schedule': 'Soha Lịch đấu',
+  'box-asiad-medals': 'Soha Huy chương',
+  'short-bizfly': 'Bizfly Shortlink',
 })[link.id] ?? link.label
 const productText = (link) => {
   if (link.kind === 'github') return 'Mã nguồn'
   if (props.compact && props.links.length === 1 && link.kind === 'demo' && link.id.endsWith('-demo')) return 'Demo'
+  if (props.compact && link.kind === 'site') return productLabel(link)
   return link.kind === 'demo' ? `Demo · ${productLabel(link)}` : `Xem ${productLabel(link)}`
 }
 </script>

@@ -74,19 +74,22 @@ const filteredProjects = computed(() => {
   return allProjects.value.filter((p) => matchesFilter(p, currentFilter.value))
 })
 
-// Priority Flagship IDs for Tier 1: Top 3-4 flagship projects
-const FLAGSHIP_IDS = ['landing-pages', 'experiments', 'government-map', 'maps']
+// Priority Flagship IDs for Tier 1: Top featured projects
+const FLAGSHIP_IDS = ['landing-pages', 'qr', 'experiments', 'government-map', 'maps']
 
-// Tier 1: "Dự án tiêu biểu" (Featured Projects) - strictly 3-4 top projects in Split layout
+// Tier 1: "Dự án tiêu biểu" (Featured Projects) in Split alternating layout
 const tier1FeaturedProjects = computed(() => {
-  const flagships = filteredProjects.value.filter((p) => FLAGSHIP_IDS.includes(p.id))
+  const flagships = FLAGSHIP_IDS
+    .map((id) => filteredProjects.value.find((p) => p.id === id))
+    .filter(Boolean)
   if (flagships.length >= 3) {
-    return flagships.slice(0, 4)
+    return flagships.slice(0, 5)
   }
   // If fewer than 3 flagships match the current filter, top up with other matching projects
-  const others = filteredProjects.value.filter((p) => !FLAGSHIP_IDS.includes(p.id))
+  const featuredIds = new Set(flagships.map((p) => p.id))
+  const others = filteredProjects.value.filter((p) => !featuredIds.has(p.id))
   const combined = [...flagships, ...others]
-  return combined.slice(0, Math.min(combined.length, 4))
+  return combined.slice(0, Math.min(combined.length, 5))
 })
 
 // Tier 2: "Dự án khác / Hệ thống bổ trợ" (Other Projects / Archive)
@@ -265,15 +268,27 @@ onBeforeUnmount(() => {
           </div>
         </div>
 
-        <!-- Compact Bento Grid with Stagger Animation -->
-        <TransitionGroup name="stagger-compact" tag="div" class="archive-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
-          <ProjectCard
-            v-for="project in visibleArchiveProjects"
-            :key="project.id"
-            :project="project"
-            compact
-          />
-        </TransitionGroup>
+        <!-- Horizontal Scrollable list on mobile, Bento Grid on desktop -->
+        <div class="archive-scroll-wrapper">
+          <TransitionGroup
+            name="stagger-compact"
+            tag="div"
+            class="archive-grid flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0 sm:gap-5 lg:gap-6 items-stretch"
+          >
+            <ProjectCard
+              v-for="project in visibleArchiveProjects"
+              :key="project.id"
+              :project="project"
+              compact
+              class="min-w-[85vw] sm:min-w-[320px] md:min-w-0 snap-center shrink-0 md:shrink"
+            />
+          </TransitionGroup>
+
+          <!-- Mobile Swipe Hint -->
+          <div class="md:hidden flex items-center justify-center gap-1.5 text-xs text-[var(--text-faint)] mt-2" aria-hidden="true">
+            <span>← Vuốt ngang để xem thêm {{ visibleArchiveProjects.length }} dự án →</span>
+          </div>
+        </div>
 
         <!-- Load More / Collapse Button -->
         <div v-if="tier2OtherProjects.length > INITIAL_ARCHIVE_COUNT" class="archive-actions">
@@ -317,8 +332,8 @@ onBeforeUnmount(() => {
 <style scoped>
 .experience-section {
   position: relative;
-  padding-top: clamp(3rem, 6vw, 5rem);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
+  padding-top: clamp(2rem, 4vw, 4rem);
+  padding-bottom: clamp(2rem, 4vw, 4rem);
 }
 
 .experience-anchor,
@@ -345,7 +360,7 @@ onBeforeUnmount(() => {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
-  width: fit-content;
+  width: 100%;
   max-width: 100%;
   overflow-x: auto;
   scrollbar-width: none;
@@ -358,10 +373,10 @@ onBeforeUnmount(() => {
 .filter-tab-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 0.9rem;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
   border-radius: 0.75rem;
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-muted);
   border: 1px solid transparent;
@@ -371,6 +386,14 @@ onBeforeUnmount(() => {
   cursor: pointer;
   user-select: none;
   transition: all 180ms ease;
+}
+
+@media (min-width: 640px) {
+  .filter-tab-btn {
+    gap: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.82rem;
+  }
 }
 
 .filter-tab-btn:hover {
@@ -457,21 +480,34 @@ onBeforeUnmount(() => {
 
 /* Archive */
 .archive-section {
-  margin-top: 3.5rem;
-  padding-top: 2.5rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--border);
 }
 
+@media (min-width: 640px) {
+  .archive-section {
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+  }
+}
+
 .archive-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   scroll-margin-top: 8rem;
+}
+
+@media (min-width: 640px) {
+  .archive-header {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .archive-header__title {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
   font-weight: 700;
   color: var(--text);
 }
@@ -483,32 +519,52 @@ onBeforeUnmount(() => {
 }
 
 .archive-header__desc {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   margin-top: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .archive-header__desc {
+    font-size: 0.82rem;
+  }
 }
 
 .archive-actions {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .archive-actions {
+    margin-top: 2rem;
+  }
 }
 
 .btn-load-more {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1.5rem;
+  gap: 0.6rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 9999px;
   background: var(--surface-solid);
   border: 1px solid var(--border);
   color: var(--text);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   user-select: none;
   box-shadow: var(--shadow-sm);
   transition: all 200ms ease;
+}
+
+@media (min-width: 640px) {
+  .btn-load-more {
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
 }
 
 .btn-load-more:hover {

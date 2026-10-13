@@ -21,13 +21,17 @@ const mockupUrl = computed(() => {
   if (props.project.id === 'landing-pages') return 'omogieotrieumamxanh.vn'
   if (props.project.id === 'government-map') return 'gis.portal.gov.vn/map'
   if (props.project.id === 'experiments') return 'abtesting.internal/dashboard'
+  if (props.project.id === 'qr') return 'short.bizfly.vn'
   if (props.project.id === 'maps') return 'baogiaothong.vn/cao-toc-bac-nam'
   if (props.project.id === 'ads') return 'ads-simulator.internal/sandbox'
   if (props.project.id === 'emagazines') return 'special.magazine/scrollytelling'
   if (props.project.id === 'recognition-event') return 'ai-vision.event/checkin'
-  if (props.project.id === 'feature-core') return 'design-system/core-boxes'
-  return `${props.project.id}.internal/preview`
+  if (props.project.id === 'feature-core') return 'kenh14.vn & soha.vn/box-feature'
+  return `${props.project.id}.internal/specs`
 })
+
+const isLive = computed(() => Boolean(props.project.demoUrl || props.project.links?.length))
+const hasSandbox = computed(() => ['landing-pages', 'government-map', 'experiments', 'qr', 'maps', 'ads', 'emagazines', 'recognition-event', 'feature-core'].includes(props.project.id))
 </script>
 
 <template>
@@ -49,8 +53,8 @@ const mockupUrl = computed(() => {
         <span class="mockup-url-text">{{ mockupUrl }}</span>
       </div>
       <div class="mockup-badge">
-        <span class="pulse-indicator" />
-        {{ project.videoUrl ? 'Video Demo' : (project.demoUrl ? 'Live Demo' : 'Live Mockup') }}
+        <span class="pulse-indicator" :class="{ 'pulse-indicator--green': isLive }" />
+        {{ project.videoUrl ? 'Video Demo' : (isLive ? 'Live Demo' : (hasSandbox ? 'Interactive Sandbox' : 'System Spec')) }}
       </div>
     </div>
 
@@ -181,6 +185,90 @@ const mockupUrl = computed(() => {
         </div>
       </div>
 
+      <!-- DYNAMIC QR & SHORTLINK ENGINE -->
+      <div v-else-if="project.id === 'qr'" class="preview-qr">
+        <div class="preview-qr__topbar">
+          <div class="qr-brand">
+            <span class="qr-pulse-dot" />
+            <strong>Bizfly Dynamic QR &amp; Shortlink</strong>
+          </div>
+          <div class="qr-badge-live">
+            <span class="live-dot" /> Redis Cache Active
+          </div>
+        </div>
+
+        <div class="preview-qr__main">
+          <!-- Left: Dynamic QR Generator Simulation -->
+          <div class="qr-visual-card">
+            <div class="qr-code-box">
+              <svg class="qr-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer Finder Patterns -->
+                <rect x="6" y="6" width="26" height="26" rx="4" fill="none" stroke="#38bdf8" stroke-width="4" />
+                <rect x="12" y="12" width="14" height="14" rx="2" fill="#38bdf8" />
+                <rect x="68" y="6" width="26" height="26" rx="4" fill="none" stroke="#38bdf8" stroke-width="4" />
+                <rect x="74" y="12" width="14" height="14" rx="2" fill="#38bdf8" />
+                <rect x="6" y="68" width="26" height="26" rx="4" fill="none" stroke="#38bdf8" stroke-width="4" />
+                <rect x="12" y="74" width="14" height="14" rx="2" fill="#38bdf8" />
+                <!-- Center Dynamic Data Matrix Dots -->
+                <rect x="42" y="8" width="6" height="6" rx="1.5" fill="#818cf8" />
+                <rect x="52" y="8" width="6" height="6" rx="1.5" fill="#38bdf8" />
+                <rect x="42" y="18" width="6" height="6" rx="1.5" fill="#38bdf8" />
+                <rect x="8" y="42" width="6" height="6" rx="1.5" fill="#38bdf8" />
+                <rect x="18" y="42" width="6" height="6" rx="1.5" fill="#818cf8" />
+                <rect x="28" y="42" width="6" height="6" rx="1.5" fill="#38bdf8" />
+                <rect x="8" y="52" width="6" height="6" rx="1.5" fill="#818cf8" />
+                <rect x="42" y="42" width="16" height="16" rx="3" fill="#6366f1" />
+                <rect x="68" y="42" width="6" height="6" rx="1.5" fill="#38bdf8" />
+                <rect x="78" y="42" width="6" height="6" rx="1.5" fill="#818cf8" />
+                <rect x="88" y="42" width="6" height="6" rx="1.5" fill="#38bdf8" />
+                <rect x="68" y="52" width="6" height="6" rx="1.5" fill="#818cf8" />
+                <rect x="88" y="52" width="6" height="6" rx="1.5" fill="#38bdf8" />
+                <rect x="42" y="68" width="6" height="6" rx="1.5" fill="#38bdf8" />
+                <rect x="52" y="68" width="6" height="6" rx="1.5" fill="#818cf8" />
+                <rect x="42" y="78" width="6" height="6" rx="1.5" fill="#818cf8" />
+                <rect x="52" y="78" width="6" height="6" rx="1.5" fill="#38bdf8" />
+                <rect x="68" y="68" width="26" height="26" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3 3" />
+                <text x="81" y="84" font-size="8" font-family="monospace" fill="#38bdf8" text-anchor="middle" font-weight="bold">SCAN</text>
+              </svg>
+            </div>
+            <div class="qr-code-slug">
+              <span class="slug-prefix">short.bizfly.vn/</span><span class="slug-code">x9K2pQ</span>
+            </div>
+          </div>
+
+          <!-- Right: Dynamic Routing & Analytics Simulation -->
+          <div class="qr-details-panel">
+            <div class="routing-row">
+              <span class="routing-label">Target URL (Dynamic):</span>
+              <div class="routing-url-pill">
+                <span class="pill-method">302</span>
+                <span class="pill-url">https://bizfly.vn/event/digital-growth</span>
+              </div>
+            </div>
+
+            <div class="routing-stats-grid">
+              <div class="routing-stat-box">
+                <span class="stat-number text-sky-400">&lt; 15ms</span>
+                <span class="stat-name">Avg Latency</span>
+              </div>
+              <div class="routing-stat-box">
+                <span class="stat-number text-emerald-400">99.8%</span>
+                <span class="stat-name">Cache Hit</span>
+              </div>
+              <div class="routing-stat-box">
+                <span class="stat-number text-amber-300">5.2M+</span>
+                <span class="stat-name">Total Scans</span>
+              </div>
+            </div>
+
+            <div class="routing-status-badge">
+              <span class="status-pulse-dot" />
+              <span>Realtime Destination Sync &bull; 0 downtime</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- 4. HIGHWAY & TUNNEL INTERACTIVE (BÁO GIAO THÔNG) -->
       <div v-else-if="project.id === 'maps'" class="preview-highway">
         <div class="preview-highway__header">
@@ -282,35 +370,83 @@ const mockupUrl = computed(() => {
         </div>
       </div>
 
-      <!-- 8. CORE BOX FEATURE & DESIGN SYSTEM -->
+      <!-- 8. CORE BOX FEATURE & DESIGN SYSTEM (STICKY & INLINE BOXES) -->
       <div v-else-if="project.id === 'feature-core'" class="preview-core">
-        <div class="preview-core__grid">
-          <div class="core-box-item">
-            <span class="core-box-type">&lt;PollBox /&gt;</span>
-            <div class="core-mini-bar"><div style="width: 65%;" /></div>
-            <div class="core-mini-bar"><div style="width: 35%;" /></div>
+        <div class="preview-core__header">
+          <div class="core-header-left">
+            <span class="core-badge-tag">Headless Engine</span>
+            <strong>Core Box Feature</strong>
           </div>
-          <div class="core-box-item is-featured">
-            <span class="core-box-type">&lt;ScoreQuiz /&gt;</span>
-            <strong>Dynamic Campaign Core</strong>
-            <span class="core-tag">Headless Props</span>
+          <span class="core-chip-live">● Live on Kenh14 &amp; Soha</span>
+        </div>
+
+        <div class="preview-core__showcase">
+          <!-- Mode 1: In-article Inline Box simulation -->
+          <div class="core-mode-panel core-mode--inline">
+            <div class="mode-meta">
+              <span class="mode-tag">1. In-article Inline Box</span>
+              <span class="mode-spec">Soha &bull; Lịch đấu &amp; Bảng huy chương</span>
+            </div>
+            <div class="simulated-article-box">
+              <div class="sim-text-line" />
+              <div class="sim-box-widget">
+                <div class="widget-top">
+                  <span class="widget-title">⚡ ASIAD 2026 · Lịch thi đấu Đoàn VN</span>
+                  <span class="widget-live">Live</span>
+                </div>
+                <div class="widget-row">
+                  <span>Bắn súng 10m</span>
+                  <strong class="text-emerald-400">Chung kết · 09:30</strong>
+                </div>
+              </div>
+              <div class="sim-text-line sim-text-line--short" />
+            </div>
           </div>
-          <div class="core-box-item">
-            <span class="core-box-type">&lt;VideoTimeline /&gt;</span>
-            <div class="core-mini-wave" />
+
+          <!-- Mode 2: Viewport Sticky Box simulation -->
+          <div class="core-mode-panel core-mode--sticky">
+            <div class="mode-meta">
+              <span class="mode-tag">2. Viewport Sticky Box</span>
+              <span class="mode-spec">Kenh14 &bull; World Cup 2026 Widget</span>
+            </div>
+            <div class="simulated-sticky-box">
+              <div class="sticky-widget-pill">
+                <span class="sticky-badge-pin">📌 Sticky</span>
+                <div class="sticky-info">
+                  <strong>World Cup Live Hub</strong>
+                  <span>Tự động neo bám khi cuộn trang</span>
+                </div>
+              </div>
+              <div class="sticky-tech-notes">
+                <span>CLS = 0.00</span>
+                <span>Reactive State</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- 9. DEFAULT / FALLBACK PREVIEW -->
-      <div v-else class="preview-default">
-        <div class="preview-default__card">
-          <div class="preview-default__icon">
-            <BaseIcon name="code" />
+      <!-- 9. INTERNAL OPERATIONS & SYSTEM SPEC PREVIEW -->
+      <div v-else class="preview-ops">
+        <div class="preview-ops__card">
+          <div class="preview-ops__head">
+            <div class="ops-icon-box">
+              <BaseIcon :name="project.icon || 'refresh'" />
+            </div>
+            <div class="ops-title-group">
+              <span class="ops-category-tag">Hệ thống nội bộ &bull; Vận hành</span>
+              <strong>{{ project.name }}</strong>
+              <p>{{ project.role }}</p>
+            </div>
           </div>
-          <div class="preview-default__info">
-            <strong>{{ project.name }}</strong>
-            <p>{{ project.role }}</p>
+          <div v-if="project.achievements?.length" class="ops-tasks-preview">
+            <div class="ops-tasks-label">Nhiệm vụ &amp; Phạm vi vận hành:</div>
+            <ul class="ops-tasks-list" role="list">
+              <li v-for="(ach, idx) in project.achievements" :key="idx">
+                <span class="task-bullet">✓</span>
+                <span>{{ ach }}</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -334,7 +470,7 @@ const mockupUrl = computed(() => {
             <line x1="11" y1="8" x2="11" y2="14" />
             <line x1="8" y1="11" x2="14" y2="11" />
           </svg>
-          <span class="overlay-text">{{ mini ? 'Phóng to UI' : 'Xem chi tiết UI' }}</span>
+          <span class="overlay-text">{{ mini ? 'Phóng to' : (hasSandbox ? 'Khám phá Sandbox' : 'Xem chi tiết') }}</span>
         </div>
       </div>
     </div>
@@ -1356,77 +1492,528 @@ const mockupUrl = computed(() => {
 
 /* 8. Core Box Preview */
 .preview-core {
-  background: var(--bg-soft);
+  background: #090d16;
   border-radius: 10px;
   padding: 0.75rem;
-}
-
-.preview-core__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-}
-
-.core-box-item {
-  padding: 0.5rem;
-  border-radius: 8px;
-  background: var(--surface-solid);
-  border: 1px solid var(--border);
+  color: #e2e8f0;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  font-size: 0.65rem;
-}
-
-.core-box-item.is-featured {
-  border-color: var(--accent);
-  background: var(--interactive-soft);
-}
-
-.core-box-type {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-weight: 700;
-  font-size: 0.62rem;
-}
-
-.core-mini-bar {
-  height: 4px;
-  background: var(--border);
-  border-radius: 9999px;
-  overflow: hidden;
-}
-
-.core-mini-bar div {
+  gap: 0.5rem;
   height: 100%;
-  background: var(--accent);
 }
 
-.core-tag {
-  font-size: 0.6rem;
-  color: var(--text-faint);
+.preview-core__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.35rem;
 }
 
-/* 9. Default Fallback */
-.preview-default {
-  padding: 1.5rem;
+.core-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.core-badge-tag {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}
+
+.core-header-left strong {
+  font-size: 0.72rem;
+  color: #f8fafc;
+}
+
+.core-chip-live {
+  font-size: 0.58rem;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.1rem 0.35rem;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+
+.preview-core__showcase {
   display: grid;
-  place-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  flex: 1;
+  align-items: stretch;
 }
 
-.preview-default__card {
+.core-mode-panel {
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.45rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  justify-content: space-between;
+}
+
+.mode-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.mode-tag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.mode-spec {
+  font-size: 0.52rem;
+  color: #94a3b8;
+}
+
+.simulated-article-box {
+  background: rgba(15, 23, 42, 0.8);
+  padding: 0.35rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sim-text-line {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  width: 90%;
+}
+
+.sim-text-line--short {
+  width: 60%;
+}
+
+.sim-box-widget {
+  background: #1e293b;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 5px;
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.widget-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.widget-title {
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.widget-live {
+  font-size: 0.48rem;
+  background: #dc2626;
+  color: #fff;
+  padding: 0.05rem 0.2rem;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.widget-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.52rem;
+  color: #cbd5e1;
+}
+
+.simulated-sticky-box {
+  background: rgba(15, 23, 42, 0.8);
+  padding: 0.35rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  border: 1px dashed rgba(129, 140, 248, 0.35);
+}
+
+.sticky-widget-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #1e1b4b;
+  border: 1px solid rgba(129, 140, 248, 0.4);
+  padding: 0.3rem 0.4rem;
+  border-radius: 6px;
+}
+
+.sticky-badge-pin {
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #a5b4fc;
+}
+
+.sticky-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sticky-info strong {
+  font-size: 0.6rem;
+  color: #e0e7ff;
+}
+
+.sticky-info span {
+  font-size: 0.48rem;
+  color: #94a3b8;
+}
+
+.sticky-tech-notes {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.52rem;
+  color: #64748b;
+  font-family: var(--font-mono);
+  margin-top: 0.25rem;
+}
+
+/* Mini thumbnail overrides for core */
+.project-mockup.is-mini .preview-core {
+  padding: 0.35rem 0.45rem;
+  gap: 0.25rem;
+}
+
+.project-mockup.is-mini .core-chip-live,
+.project-mockup.is-mini .mode-spec,
+.project-mockup.is-mini .sim-text-line {
+  display: none;
+}
+
+/* 9. Internal Ops / System Spec Preview */
+.preview-ops {
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  background: #090d16;
+  border-radius: 10px;
+}
+
+.preview-ops__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.preview-ops__head {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.preview-default__icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--interactive-soft);
-  color: var(--accent);
+.ops-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(148, 163, 184, 0.1);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: #94a3b8;
   display: grid;
   place-items: center;
+  flex-shrink: 0;
+}
+
+.ops-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.ops-category-tag {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ops-title-group strong {
+  font-size: 0.85rem;
+  color: #f1f5f9;
+}
+
+.ops-title-group p {
+  font-size: 0.68rem;
+  color: #64748b;
+}
+
+.ops-tasks-preview {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 0.5rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.ops-tasks-label {
+  font-size: 0.58rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ops-tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ops-tasks-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-size: 0.65rem;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
+
+.task-bullet {
+  color: #10b981;
+  font-weight: bold;
+  font-size: 0.68rem;
+  flex-shrink: 0;
+}
+
+/* 10. Dynamic QR & Shortlink Preview */
+.preview-qr {
+  background: #090d16;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.preview-qr__topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.45rem;
+}
+
+.qr-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  color: #f8fafc;
+}
+
+.qr-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.qr-badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.62rem;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 0.15rem 0.45rem;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+
+.live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: #34d399;
+}
+
+.preview-qr__main {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.qr-visual-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #0f172a;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  flex-shrink: 0;
+}
+
+.qr-code-box {
+  width: 72px;
+  height: 72px;
+}
+
+.qr-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.qr-code-slug {
+  margin-top: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: #94a3b8;
+}
+
+.slug-prefix {
+  color: #64748b;
+}
+
+.slug-code {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.qr-details-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.routing-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.routing-label {
+  font-size: 0.6rem;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.routing-url-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  overflow: hidden;
+}
+
+.pill-method {
+  background: #0284c7;
+  color: #ffffff;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 0.55rem;
+  flex-shrink: 0;
+}
+
+.pill-url {
+  color: #e2e8f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.routing-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+}
+
+.routing-stat-box {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.3rem 0.4rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.78rem;
+  line-height: 1.1;
+}
+
+.stat-name {
+  font-size: 0.55rem;
+  color: #94a3b8;
+  margin-top: 0.15rem;
+}
+
+.routing-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.6rem;
+  color: #a5b4fc;
+  margin-top: 0.1rem;
+}
+
+.status-pulse-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: #818cf8;
+}
+
+/* Mini thumbnail mode overrides for QR */
+.project-mockup.is-mini .preview-qr {
+  padding: 0.45rem 0.6rem;
+  gap: 0.35rem;
+}
+
+.project-mockup.is-mini .qr-code-box {
+  width: 44px;
+  height: 44px;
+}
+
+.project-mockup.is-mini .routing-status-badge {
+  display: none;
+}
+
+.project-mockup.is-mini .routing-stats-grid {
+  gap: 0.25rem;
+}
+
+.project-mockup.is-mini .stat-number {
+  font-size: 0.65rem;
+}
+
+.project-mockup.is-mini .stat-name {
+  font-size: 0.5rem;
 }
 </style>

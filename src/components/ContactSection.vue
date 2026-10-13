@@ -4,13 +4,13 @@ import { profile } from '../data/profile'
 </script>
 
 <template>
-  <section id="contact" class="contact" aria-labelledby="contact-title">
-    <div class="container">
-      <div v-reveal class="cta">
+  <section id="contact" class="contact py-8 sm:py-12 lg:py-16 scroll-mt-24" aria-labelledby="contact-title">
+    <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div v-reveal class="cta p-5 sm:p-8 lg:p-12">
         <span class="eyebrow">06 — Liên hệ</span>
         <h2 id="contact-title">Cùng phát triển <span class="gradient-text">sản phẩm web</span></h2>
         <p>Kết nối với mình về frontend, landing page, trải nghiệm tương tác hoặc phát triển sản phẩm fullstack.</p>
-        <div class="cta__row">
+        <div class="cta__row flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 mt-6">
           <a v-if="profile.email" class="btn btn--primary" :href="`mailto:${profile.email}`">
             <BaseIcon name="mail" /> Gửi email
           </a>

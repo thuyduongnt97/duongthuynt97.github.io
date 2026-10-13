@@ -410,15 +410,22 @@ onMounted(() => {
 @media (max-width: 960px) {
   .hero-intro {
     min-height: 0;
-    padding-top: calc(var(--nav-h) + 2rem);
-    padding-bottom: 2rem;
+    padding-top: calc(var(--nav-h) + 1.25rem);
+    padding-bottom: 1.5rem;
   }
   .hero-intro__grid {
     grid-template-columns: 1fr;
-    gap: 2.25rem;
+    gap: 1.5rem;
   }
   .hero-intro__ambient::before {
     filter: blur(44px);
+  }
+  .hero-status-pill {
+    margin-bottom: 0.65rem;
+  }
+  .hero-subtitle {
+    margin-bottom: 1.2rem;
+    font-size: 0.92rem;
   }
 }
 

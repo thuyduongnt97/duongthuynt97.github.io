@@ -89,8 +89,8 @@ import { careerMilestones } from '../data/timeline'
 <style scoped>
 .timeline-section {
   position: relative;
-  padding-top: clamp(3rem, 6vw, 5rem);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
+  padding-top: clamp(2rem, 4vw, 4rem);
+  padding-bottom: clamp(2rem, 4vw, 4rem);
   scroll-margin-top: 6rem;
 }
 
@@ -172,10 +172,17 @@ import { careerMilestones } from '../data/timeline'
   position: relative;
   background: var(--surface-solid);
   border: 1px solid var(--border);
-  border-radius: 1rem;
-  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border-radius: 0.875rem;
+  padding: 1rem;
   box-shadow: var(--shadow-sm);
   transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+@media (min-width: 640px) {
+  .timeline-card {
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
 }
 
 .timeline-card:hover {

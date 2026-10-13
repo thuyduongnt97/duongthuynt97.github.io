@@ -163,15 +163,21 @@ const technicalStandards = [
 <style scoped>
 .vitals-section {
   position: relative;
-  padding: clamp(3rem, 6vw, 5.5rem) 0;
+  padding: clamp(2rem, 4vw, 4rem) 0;
   scroll-margin-top: calc(var(--nav-h) + 20px);
 }
 
 .vitals-bento {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.25fr);
-  gap: clamp(1.25rem, 2.5vw, 2rem);
+  gap: 1rem;
   align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .vitals-bento {
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+  }
 }
 
 @media (max-width: 960px) {
@@ -184,12 +190,19 @@ const technicalStandards = [
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: clamp(1.25rem, 2.5vw, 1.85rem);
-  border-radius: 20px;
+  padding: 1rem;
+  border-radius: 16px;
   background: var(--surface-solid);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
   transition: transform 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
+}
+
+@media (min-width: 640px) {
+  .vitals-card {
+    padding: clamp(1.25rem, 2.5vw, 1.85rem);
+    border-radius: 20px;
+  }
 }
 
 [data-theme="light"] .vitals-card {
@@ -209,9 +222,16 @@ const technicalStandards = [
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  padding-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.85rem;
+}
+
+@media (min-width: 640px) {
+  .vitals-card__header {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
 }
 
 .vitals-badge {
@@ -250,34 +270,55 @@ const technicalStandards = [
   font-family: var(--font-mono);
 }
 
-/* Gauges Grid */
+/* Gauges Grid: 2x2 compact on mobile, generous on desktop */
 .gauges-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
+  gap: 0.55rem;
 }
 
-@media (max-width: 520px) {
+@media (min-width: 640px) {
   .gauges-grid {
-    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gauges-grid {
+    gap: 1.25rem;
   }
 }
 
 .gauge-box {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.85rem;
-  border-radius: 14px;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 12px;
   background: var(--bg-soft);
   border: 1px solid var(--border);
 }
 
+@media (min-width: 640px) {
+  .gauge-box {
+    gap: 0.85rem;
+    padding: 0.85rem;
+    border-radius: 14px;
+  }
+}
+
 .gauge-ring {
   position: relative;
-  width: 56px;
-  height: 56px;
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .gauge-ring {
+    width: 56px;
+    height: 56px;
+  }
 }
 
 .gauge-svg {
@@ -305,9 +346,15 @@ const technicalStandards = [
   inset: 0;
   display: grid;
   place-items: center;
-  font-size: 0.95rem;
+  font-size: 0.82rem;
   font-weight: 800;
   color: var(--text);
+}
+
+@media (min-width: 640px) {
+  .gauge-score {
+    font-size: 0.95rem;
+  }
 }
 
 .gauge-info {
@@ -317,15 +364,28 @@ const technicalStandards = [
 }
 
 .gauge-name {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--text);
+  line-height: 1.2;
+}
+
+@media (min-width: 640px) {
+  .gauge-name {
+    font-size: 0.85rem;
+  }
 }
 
 .gauge-status {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 600;
   color: #059669;
+}
+
+@media (min-width: 640px) {
+  .gauge-status {
+    font-size: 0.7rem;
+  }
 }
 
 [data-theme="dark"] .gauge-status {
@@ -333,28 +393,47 @@ const technicalStandards = [
 }
 
 .gauge-metrics {
+  display: none;
   font-size: 0.65rem;
   color: var(--text-faint);
   margin-top: 0.2rem;
   line-height: 1.35;
 }
 
+@media (min-width: 640px) {
+  .gauge-metrics {
+    display: block;
+  }
+}
+
 /* Standards List */
 .standards-list {
   display: flex;
   flex-direction: column;
-  gap: 0.95rem;
+  gap: 0.65rem;
+}
+
+@media (min-width: 640px) {
+  .standards-list {
+    gap: 0.95rem;
+  }
 }
 
 .standard-item {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: 0.6rem;
+}
+
+@media (min-width: 640px) {
+  .standard-item {
+    gap: 0.75rem;
+  }
 }
 
 .standard-icon {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 8px;
   background: var(--interactive-soft);
   color: var(--interactive-accent);
@@ -364,9 +443,23 @@ const technicalStandards = [
   margin-top: 0.1rem;
 }
 
+@media (min-width: 640px) {
+  .standard-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 .standard-icon .icon {
-  width: 1rem;
-  height: 1rem;
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+@media (min-width: 640px) {
+  .standard-icon .icon {
+    width: 1rem;
+    height: 1rem;
+  }
 }
 
 .standard-content {
@@ -376,35 +469,63 @@ const technicalStandards = [
 }
 
 .standard-title {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--text);
 }
 
+@media (min-width: 640px) {
+  .standard-title {
+    font-size: 0.875rem;
+  }
+}
+
 .standard-desc {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.45;
+}
+
+@media (min-width: 640px) {
+  .standard-desc {
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
 }
 
 .standards-footer {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 1.5rem;
-  padding-top: 1.15rem;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
   border-top: 1px dashed var(--border);
+}
+
+@media (min-width: 640px) {
+  .standards-footer {
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    padding-top: 1.15rem;
+  }
 }
 
 .spec-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.25rem 0.6rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 6px;
   background: var(--bg-soft);
   border: 1px solid var(--border);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
+}
+
+@media (min-width: 640px) {
+  .spec-pill {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.72rem;
+  }
 }
 
 .spec-label {
