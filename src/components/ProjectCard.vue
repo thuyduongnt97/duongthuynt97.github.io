@@ -774,6 +774,8 @@ const badgeConfig = computed(() => {
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
   transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  min-width: 0;
+  max-width: 100%;
 }
 
 @media (min-width: 640px) {
@@ -835,6 +837,7 @@ const badgeConfig = computed(() => {
   flex: 1;
   justify-content: space-between;
   gap: 0.75rem;
+  min-width: 0;
 }
 
 .compact-project__meta {
@@ -862,6 +865,40 @@ const badgeConfig = computed(() => {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .compact-project__mockup {
+    display: none;
+  }
+
+  .compact-project-card {
+    padding: 0.9rem;
+  }
+
+  .compact-project__title {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
+    line-height: 1.35;
+  }
+
+  .compact-project__desc {
+    -webkit-line-clamp: 2;
+  }
+
+  .compact-project__meta,
+  .compact-project__footer,
+  .compact-project__actions {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .compact-project__btn {
+    margin-left: 0;
+    max-width: 100%;
+  }
 }
 
 .compact-project__role {

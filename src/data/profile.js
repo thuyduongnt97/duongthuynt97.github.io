@@ -26,7 +26,7 @@ export const profile = {
   github: 'https://github.com/thuyduongnt97',
 
   // File nằm trong thư mục /public
-  cvUrl: `${import.meta.env?.BASE_URL ?? '/'}Thuy-Duong-CV.pdf`,
+  cvUrl: `${import.meta.env?.BASE_URL ?? '/'}NguyenThiThuyDuong_SoftwareEngineer.pdf`,
 
   // Các chức danh chạy chữ ở hero
   get roles() {

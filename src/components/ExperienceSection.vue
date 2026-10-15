@@ -273,21 +273,16 @@ onBeforeUnmount(() => {
           <TransitionGroup
             name="stagger-compact"
             tag="div"
-            class="archive-grid flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0 sm:gap-5 lg:gap-6 items-stretch"
+            class="archive-grid"
           >
             <ProjectCard
               v-for="project in visibleArchiveProjects"
               :key="project.id"
               :project="project"
               compact
-              class="min-w-[85vw] sm:min-w-[320px] md:min-w-0 snap-center shrink-0 md:shrink"
             />
           </TransitionGroup>
 
-          <!-- Mobile Swipe Hint -->
-          <div class="md:hidden flex items-center justify-center gap-1.5 text-xs text-[var(--text-faint)] mt-2" aria-hidden="true">
-            <span>← Vuốt ngang để xem thêm {{ visibleArchiveProjects.length }} dự án →</span>
-          </div>
         </div>
 
         <!-- Load More / Collapse Button -->
@@ -510,6 +505,46 @@ onBeforeUnmount(() => {
   font-size: clamp(1.05rem, 2vw, 1.35rem);
   font-weight: 700;
   color: var(--text);
+}
+
+.archive-header__info,
+.archive-scroll-wrapper,
+.archive-grid {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .archive-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .archive-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .archive-header__title {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    line-height: 1.35;
+  }
+
+  .archive-header__title .count-tag {
+    margin-left: 1.85rem;
+  }
 }
 
 .archive-icon {
