@@ -68,7 +68,7 @@ const technicalStandards = [
         eyebrow="05 — Thước đo chất lượng kỹ thuật"
         title="Engineering Quality & Web Vitals"
         title-id="engineering-vitals-title"
-        sub="Minh chứng sống động về tư duy kỹ thuật sâu và năng lực Senior Frontend: 100% tuân thủ các chuẩn mực tối ưu hiệu năng, trợ năng và kiến trúc mã nguồn sạch của chính website này."
+        sub="Minh chứng sống động về tư duy kỹ thuật sâu và năng lực phát triển phần mềm: 100% tuân thủ các chuẩn mực tối ưu hiệu năng, trợ năng và kiến trúc mã nguồn sạch của chính website này."
       />
 
       <div class="vitals-bento">
@@ -121,7 +121,7 @@ const technicalStandards = [
             <div class="vitals-badge vitals-badge--indigo">
               <BaseIcon name="layers" /> Clean Code &amp; Runtime Specs
             </div>
-            <span class="vitals-sub">Core Web Vitals &amp; Senior Engineering Practices</span>
+            <span class="vitals-sub">Core Web Vitals &amp; Software Engineering Practices</span>
           </header>
 
           <div class="standards-list">

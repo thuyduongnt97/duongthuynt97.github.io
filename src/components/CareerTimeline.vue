@@ -1,316 +1,35 @@
 <script setup>
-import BaseIcon from './BaseIcon.vue'
-import SectionHead from './SectionHead.vue'
-import { careerMilestones } from '../data/timeline'
+import { careerMilestones, timelineSection } from '../data/timeline'
+
+const nodeColors = { amber: 'bg-amber-500', emerald: 'bg-emerald-500', purple: 'bg-purple-500', slate: 'bg-slate-500', cyan: 'bg-cyan-500' }
+const textColors = { amber: 'text-amber-700 dark:text-amber-400', emerald: 'text-emerald-700 dark:text-emerald-500', purple: 'text-purple-700 dark:text-purple-400', slate: 'text-slate-500 dark:text-slate-400', cyan: 'text-cyan-700 dark:text-cyan-400' }
+const badgeColors = {
+  emerald: 'border-emerald-500/30 bg-emerald-500/15 text-emerald-700 dark:text-emerald-400',
+  amber: 'border-amber-500/30 bg-amber-500/15 text-amber-700 dark:text-amber-400',
+  cyan: 'border-cyan-500/30 bg-cyan-500/15 text-cyan-700 dark:text-cyan-400',
+  slate: 'border-transparent bg-slate-200 text-slate-500 dark:bg-slate-800 dark:text-slate-400',
+}
 </script>
 
 <template>
-  <section id="timeline" class="timeline-section" aria-labelledby="timeline-title">
-    <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <SectionHead
-        eyebrow="03 — Sự nghiệp"
-        title="Lộ trình kinh nghiệm & Dấu mốc"
-        title-id="timeline-title"
-        sub="Chi tiết 7+ năm phát triển sản phẩm web thực chiến: từ nghiên cứu & chuyển giao công nghệ, AdTech, bản đồ GIS đến Senior Frontend Engineer và AI Agent workflow."
-      />
-
-      <div class="timeline-container relative pl-8 md:pl-12">
-        <!-- Vertical Spine Line -->
-        <div class="timeline-spine" aria-hidden="true" />
-
-        <div class="timeline-list flex flex-col gap-6 sm:gap-7" role="list">
-          <div
-            v-for="(item, index) in careerMilestones"
-            :key="item.id"
-            v-reveal="index * 60"
-            :id="item.isCurrent ? 'agent-milestone' : undefined"
-            class="timeline-item group"
-            :class="{ 'timeline-item--current': item.isCurrent }"
-            role="listitem"
-          >
-            <!-- Timeline Node Indicator -->
-            <div class="timeline-node-wrap" aria-hidden="true">
-              <div
-                class="timeline-node"
-                :class="{ 'timeline-node--current': item.isCurrent }"
-              >
-                <BaseIcon :name="item.icon" class="timeline-node-icon" />
-              </div>
-            </div>
-
-            <!-- Milestone Content Card -->
-            <article
-              v-spotlight
-              class="card timeline-card card--spotlight-layer"
-              :class="{ 'timeline-card--current': item.isCurrent }"
-            >
-              <div class="card-spotlight" aria-hidden="true" />
-
-              <header class="timeline-card__header">
-                <div class="timeline-card__badges">
-                  <div class="period-pill font-mono">
-                    <BaseIcon name="calendar" class="period-icon" />
-                    <span>{{ item.period }}</span>
-                  </div>
-                  <span
-                    v-if="item.badge"
-                    class="badge-milestone"
-                    :class="{ 'badge-milestone--current': item.isCurrent }"
-                  >
-                    <span v-if="item.isCurrent" class="pulse-dot animate-ping" />
-                    {{ item.badge }}
-                  </span>
-                  <span v-if="item.location" class="location-text">
-                    <BaseIcon name="pin" class="location-icon" />
-                    {{ item.location }}
-                  </span>
-                </div>
-
-                <div class="timeline-card__titles">
-                  <h3 class="timeline-card__role font-display">{{ item.role }}</h3>
-                  <div class="timeline-card__company-wrap">
-                    <strong class="timeline-card__company">{{ item.company }}</strong>
-                    <span v-if="item.department" class="timeline-card__dept">· {{ item.department }}</span>
-                  </div>
-                </div>
-              </header>
-
-              <p v-if="item.summary" class="timeline-card__summary">
-                {{ item.summary }}
-              </p>
-            </article>
-          </div>
-        </div>
-      </div>
+  <section id="timeline" class="py-14 scroll-mt-20" aria-labelledby="timeline-heading">
+    <div class="mb-10">
+      <span class="font-mono text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-500">{{ timelineSection.eyebrow }}</span>
+      <h2 id="timeline-heading" class="mt-1 text-2xl font-extrabold sm:text-3xl">{{ timelineSection.title }}</h2>
     </div>
+    <ol class="relative ml-3 space-y-10 border-l-2 border-slate-200 pl-6 sm:ml-6 sm:pl-8 dark:border-slate-800">
+      <li v-for="(item, index) in careerMilestones" :key="item.id" v-reveal="index * 50" class="relative">
+        <span class="absolute -left-[33px] top-1 size-4 rounded-full ring-4 ring-slate-50 sm:-left-[41px] dark:ring-[#06090F]" :class="nodeColors[item.color]" aria-hidden="true" />
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="font-mono text-xs font-bold" :class="item.periodStyle === 'pill' ? 'rounded bg-amber-500 px-2.5 py-0.5 text-slate-950' : textColors[item.color]">{{ item.period }}</span>
+          <span v-for="badge in item.badges" :key="badge.label" class="rounded border px-2.5 py-0.5 font-mono text-xs" :class="badgeColors[badge.color]">{{ badge.label }}</span>
+        </div>
+        <h3 class="mt-2 text-lg font-bold" :class="{ 'sm:text-xl': !item.compact }">{{ item.role }} — {{ item.company }}</h3>
+        <ul v-if="item.bulletPoints?.length" class="mt-2 space-y-1.5 text-sm text-slate-600 dark:text-slate-300">
+          <li v-for="(point, pointIndex) in item.bulletPoints" :key="pointIndex" v-html="`• ${point}`" />
+        </ul>
+        <p v-else class="mt-1 text-sm text-slate-600 dark:text-slate-300">{{ item.summary }}</p>
+      </li>
+    </ol>
   </section>
 </template>
-
-<style scoped>
-.timeline-section {
-  position: relative;
-  padding-top: clamp(2rem, 4vw, 4rem);
-  padding-bottom: clamp(2rem, 4vw, 4rem);
-  scroll-margin-top: 6rem;
-}
-
-.timeline-spine {
-  position: absolute;
-  top: 1.25rem;
-  bottom: 2rem;
-  left: 0.95rem;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--interactive-accent), var(--interactive-border), var(--border));
-  border-radius: 9999px;
-}
-
-@media (min-width: 768px) {
-  .timeline-spine {
-    left: 1.35rem;
-  }
-}
-
-.timeline-item {
-  position: relative;
-}
-
-.timeline-node-wrap {
-  position: absolute;
-  top: 1.25rem;
-  left: -2rem;
-  transform: translateX(-50%);
-  z-index: 10;
-}
-
-@media (min-width: 768px) {
-  .timeline-node-wrap {
-    left: -3rem;
-  }
-}
-
-.timeline-node {
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 9999px;
-  border: 2px solid var(--border-strong);
-  background: var(--surface-solid);
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-sm);
-  transition: all 200ms ease;
-}
-
-@media (min-width: 640px) {
-  .timeline-node {
-    width: 2rem;
-    height: 2rem;
-  }
-}
-
-.timeline-item:hover .timeline-node {
-  transform: scale(1.1);
-  border-color: var(--interactive-accent);
-  color: var(--interactive-accent);
-}
-
-.timeline-node--current {
-  background: var(--interactive-soft);
-  border-color: var(--interactive-accent);
-  color: var(--interactive-accent);
-  box-shadow: 0 0 0 4px var(--interactive-soft);
-}
-
-.timeline-node-icon {
-  width: 0.875rem;
-  height: 0.875rem;
-}
-
-/* Card */
-.timeline-card {
-  position: relative;
-  background: var(--surface-solid);
-  border: 1px solid var(--border);
-  border-radius: 0.875rem;
-  padding: 1rem;
-  box-shadow: var(--shadow-sm);
-  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
-}
-
-@media (min-width: 640px) {
-  .timeline-card {
-    border-radius: 1rem;
-    padding: 1.5rem;
-  }
-}
-
-.timeline-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--interactive-border);
-  box-shadow: var(--shadow-lg);
-}
-
-.timeline-card--current {
-  border-color: var(--interactive-border);
-}
-
-.timeline-card__header {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-  padding-bottom: 0.85rem;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 0.85rem;
-}
-
-.timeline-card__badges {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.period-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 0.375rem;
-  background: var(--bg-soft);
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  font-weight: 600;
-  border: 1px solid var(--border);
-}
-
-.period-icon {
-  width: 0.85rem;
-  height: 0.85rem;
-}
-
-.badge-milestone {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0.65rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  background: var(--bg-soft);
-  color: var(--text-faint);
-  font-weight: 600;
-}
-
-.badge-milestone--current {
-  background: var(--interactive-soft);
-  color: var(--interactive-accent);
-  border: 1px solid var(--interactive-border);
-  font-weight: 700;
-}
-
-.pulse-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 9999px;
-  background: #10b981;
-}
-
-.location-text {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.75rem;
-  color: var(--text-faint);
-  margin-left: auto;
-}
-
-.location-icon {
-  width: 0.85rem;
-  height: 0.85rem;
-}
-
-.timeline-card__titles {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.timeline-card__role {
-  font-size: clamp(1.1rem, 2vw, 1.25rem);
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.3;
-}
-
-.timeline-card__company-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.35rem;
-  font-size: 0.875rem;
-}
-
-.timeline-card__company {
-  color: var(--interactive-accent);
-  font-weight: 600;
-}
-
-.timeline-card__dept {
-  color: var(--text-muted);
-  font-size: 0.82rem;
-}
-
-.timeline-card__summary {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  line-height: 1.65;
-  margin: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .timeline-card,
-  .timeline-node {
-    transition: none;
-  }
-}
-</style>

@@ -1,328 +1,137 @@
 <script setup>
-import BaseIcon from './BaseIcon.vue'
-
-defineProps({
-  skill: { type: Object, required: true },
-  fullWidth: { type: Boolean, default: false },
+import { skillsSection } from '../data/skills'
+const props = defineProps({
+  pillar: {
+    type: Object,
+    required: true,
+  },
+  isSelected: {
+    type: Boolean,
+    default: false,
+  },
 })
+
+const emit = defineEmits(['select-category'])
+
+function handleClick() {
+  emit('select-category', props.pillar.filterCategory || props.pillar.id)
+}
 </script>
 
 <template>
-  <article
-    v-reveal
+  <div
     v-spotlight
-    class="card card--spotlight-layer bento-card"
-    :class="{ 'bento-card--full': fullWidth || skill.type === 'highlights' }"
-    :aria-label="skill.title"
+    role="button"
+    tabindex="0"
+    :aria-pressed="isSelected"
+    :aria-label="`${pillar.title} — Lọc dự án theo nhóm kỹ năng này`"
+    aria-controls="deliverables"
+    :data-category="pillar.filterCategory"
+    class="spotlight-card min-w-0 rounded-2xl p-4 sm:p-6 bg-white dark:bg-slate-900/80 border transition-all duration-200 flex flex-col justify-between cursor-pointer group"
+    :class="[
+      isSelected
+        ? 'skill-selected border-amber-500'
+        : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+    ]"
+    @click="handleClick"
+    @keydown.enter.prevent="handleClick"
+    @keydown.space.prevent="handleClick"
   >
-    <div class="card-spotlight" aria-hidden="true" />
-    <header class="bento-card__head">
-      <div class="bento-card__icon" aria-hidden="true">
-        <BaseIcon :name="skill.icon || 'code'" />
-      </div>
-      <div class="bento-card__titles">
-        <h3 class="bento-card__title">{{ skill.title }}</h3>
-        <p v-if="skill.subtitle" class="bento-card__subtitle">{{ skill.subtitle }}</p>
-      </div>
-    </header>
-
-    <div v-if="skill.type === 'highlights' || skill.highlights" class="bento-card__body">
-      <ul class="bento-highlights grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4" role="list" :aria-label="skill.title">
-        <li
-          v-for="(item, idx) in skill.highlights"
-          :key="idx"
-          class="bento-highlight-item"
-          :class="[
-            idx < 3 ? 'lg:col-span-2' : 'lg:col-span-3',
-            idx === 4 ? 'md:col-span-2 lg:col-span-3' : ''
-          ]"
-        >
-          <span class="bento-highlight-bullet" aria-hidden="true">
-            <BaseIcon name="check" />
+    <div>
+      <!-- Card Header -->
+      <div class="flex flex-wrap items-start justify-between gap-3 mb-3 sm:flex-nowrap sm:gap-4">
+        <div class="min-w-0">
+          <span
+            class="text-xs font-mono font-semibold uppercase block"
+            :class="[
+              pillar.accentColor === 'emerald' ? 'text-emerald-700 dark:text-emerald-400' :
+              pillar.accentColor === 'cyan' ? 'text-cyan-700 dark:text-cyan-400' :
+              pillar.accentColor === 'purple' ? 'text-purple-700 dark:text-purple-400' :
+              'text-amber-700 dark:text-amber-500'
+            ]"
+          >
+            {{ pillar.categoryTitle }}
           </span>
-          <div class="bento-highlight-content">
-            <strong class="bento-highlight-title">{{ item.title }}</strong>
-            <p v-if="item.desc" class="bento-highlight-desc hidden sm:block">{{ item.desc }}</p>
+          <h3 class="text-xl font-bold mt-0.5 text-slate-900 dark:text-slate-100 group-hover:text-amber-500 transition-colors">
+            {{ pillar.title }}
+          </h3>
+        </div>
+        <div class="text-right shrink-0">
+          <span
+            class="inline-block px-3 py-1 rounded-xl font-mono font-extrabold text-sm border"
+            :class="[
+              pillar.accentColor === 'emerald' ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30' :
+              pillar.accentColor === 'cyan' ? 'bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border-cyan-500/30' :
+              pillar.accentColor === 'purple' ? 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30' :
+              'bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30'
+            ]"
+          >
+            {{ pillar.yearsBadge }}
+          </span>
+          <div class="text-[11px] font-mono text-slate-400 mt-1">
+            {{ pillar.period }}
           </div>
-        </li>
-      </ul>
-    </div>
+        </div>
+      </div>
 
-    <div v-else class="bento-card__body">
-      <ul class="bento-pills" role="list" :aria-label="skill.title">
+      <!-- 3 Sub-metrics Grid -->
+      <div
+        class="grid grid-cols-3 gap-1.5 sm:gap-2 mb-4 p-2 sm:p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/70 dark:border-slate-800 font-mono text-xs"
+      >
+        <div v-for="metric in pillar.subMetrics" :key="metric.label" class="min-w-0">
+          <div class="truncate text-slate-500 dark:text-slate-400 text-[9px] sm:text-[10px]" :title="metric.label">
+            {{ metric.label }}
+          </div>
+          <div
+            class="truncate font-bold text-[11px] sm:text-xs"
+            :title="metric.value"
+            :class="[
+              pillar.accentColor === 'emerald' ? 'text-emerald-700 dark:text-emerald-400' :
+              pillar.accentColor === 'cyan' ? 'text-cyan-700 dark:text-cyan-400' :
+              pillar.accentColor === 'purple' ? 'text-purple-700 dark:text-purple-400' :
+              'text-amber-700 dark:text-amber-500'
+            ]"
+          >
+            {{ metric.value }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Deliverables List -->
+      <div class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">
+        {{ skillsSection.deliverablesLabel }}
+      </div>
+      <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
         <li
-          v-for="chip in skill.chips"
-          :key="chip"
-          class="bento-pill"
+          v-for="(del, idx) in pillar.deliverables"
+          :key="idx"
+          class="flex gap-2 items-start"
         >
-          {{ chip }}
+          <span
+            class="font-bold shrink-0"
+            :class="[
+              pillar.accentColor === 'emerald' ? 'text-emerald-500' :
+              pillar.accentColor === 'cyan' ? 'text-cyan-400' :
+              pillar.accentColor === 'purple' ? 'text-purple-400' :
+              'text-amber-500'
+            ]"
+          >▸</span>
+          <span class="leading-relaxed" v-html="del" />
         </li>
       </ul>
     </div>
-  </article>
+
+    <!-- Tech Chips -->
+    <div
+      class="flex flex-wrap gap-1.5 mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs font-mono text-slate-600 dark:text-slate-400"
+    >
+      <span
+        v-for="chip in pillar.chips"
+        :key="chip"
+        class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800"
+      >
+        {{ chip }}
+      </span>
+    </div>
+  </div>
 </template>
-
-<style scoped>
-.bento-card {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  height: 100%;
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: var(--surface-solid);
-  box-shadow: var(--shadow-sm);
-  transition: transform 200ms ease-out, border-color 200ms ease-out, box-shadow 200ms ease-out;
-}
-
-@media (min-width: 640px) {
-  .bento-card {
-    padding: 1.5rem;
-    border-radius: 16px;
-  }
-}
-
-.bento-card.reveal.is-visible {
-  transition: opacity .35s var(--ease), transform 200ms ease-out, border-color 200ms ease-out, box-shadow 200ms ease-out;
-}
-
-.bento-card:hover {
-  transform: translateY(-2px);
-  border-color: #cbd5e1;
-  box-shadow: var(--shadow-hover);
-}
-
-[data-theme="dark"] .bento-card:hover {
-  border-color: var(--border-strong);
-}
-
-.bento-card--full {
-  padding: 1rem;
-}
-
-@media (min-width: 640px) {
-  .bento-card--full {
-    padding: 1.5rem 1.75rem;
-  }
-}
-
-.bento-card__head {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  margin-bottom: 0.85rem;
-}
-
-@media (min-width: 640px) {
-  .bento-card__head {
-    gap: 0.85rem;
-    margin-bottom: 1.25rem;
-  }
-}
-
-.bento-card__icon {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--interactive-soft);
-  color: var(--interactive-accent);
-  border: 1px solid var(--interactive-border);
-}
-
-@media (min-width: 640px) {
-  .bento-card__icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-  }
-}
-
-.bento-card__icon .icon {
-  width: 1.15rem;
-  height: 1.15rem;
-}
-
-@media (min-width: 640px) {
-  .bento-card__icon .icon {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-}
-
-.bento-card__titles {
-  min-width: 0;
-}
-
-.bento-card__title {
-  color: var(--text);
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: -0.015em;
-  overflow-wrap: anywhere;
-}
-
-@media (min-width: 640px) {
-  .bento-card__title {
-    font-size: 1.15rem;
-  }
-}
-
-.bento-card__subtitle {
-  margin-top: 0.15rem;
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  line-height: 1.45;
-}
-
-@media (min-width: 640px) {
-  .bento-card__subtitle {
-    margin-top: 0.2rem;
-    font-size: 0.8125rem;
-  }
-}
-
-.bento-card__body {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-/* Bento Badges / Pills */
-.bento-pills {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  gap: 0.35rem;
-}
-
-@media (min-width: 640px) {
-  .bento-pills {
-    gap: 0.5rem;
-  }
-}
-
-.bento-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.6rem;
-  border-radius: 0.5rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  line-height: 1.4;
-  background: var(--interactive-soft);
-  color: var(--interactive-accent);
-  border: 1px solid var(--interactive-border);
-  overflow-wrap: anywhere;
-  transition: transform 150ms ease, background-color 150ms ease, color 150ms ease, border-color 150ms ease;
-}
-
-@media (min-width: 640px) {
-  .bento-pill {
-    padding: 0.35rem 0.75rem;
-    font-size: 0.75rem;
-  }
-}
-
-.bento-pill:hover {
-  transform: translateY(-1px);
-  background: var(--bg-soft);
-  color: var(--text);
-  border-color: var(--accent);
-}
-
-/* Card Thế mạnh thực chiến: Bullet Points */
-.bento-highlight-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 0.75rem;
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--bg-soft) 60%, transparent);
-  border: 1px solid var(--border);
-  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
-}
-
-@media (min-width: 640px) {
-  .bento-highlight-item {
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.85rem 1rem;
-    border-radius: 12px;
-  }
-}
-
-.bento-highlight-item:hover {
-  transform: translateY(-2px);
-  border-color: var(--interactive-border);
-  box-shadow: var(--shadow-sm);
-}
-
-.bento-highlight-bullet {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  border-radius: 9999px;
-  background: var(--interactive-soft);
-  color: var(--interactive-accent);
-  border: 1px solid var(--interactive-border);
-}
-
-@media (min-width: 640px) {
-  .bento-highlight-bullet {
-    width: 22px;
-    height: 22px;
-    margin-top: 0.1rem;
-  }
-}
-
-.bento-highlight-bullet .icon {
-  width: 0.65rem;
-  height: 0.65rem;
-}
-
-@media (min-width: 640px) {
-  .bento-highlight-bullet .icon {
-    width: 0.75rem;
-    height: 0.75rem;
-  }
-}
-
-.bento-highlight-content {
-  min-width: 0;
-}
-
-.bento-highlight-title {
-  display: block;
-  color: var(--text);
-  font-size: 0.78rem;
-  font-weight: 600;
-  line-height: 1.35;
-}
-
-@media (min-width: 640px) {
-  .bento-highlight-title {
-    font-size: 0.875rem;
-    line-height: 1.4;
-  }
-}
-
-.bento-highlight-desc {
-  margin-top: 0.2rem;
-  color: var(--text-muted);
-  font-size: 0.8125rem;
-  line-height: 1.5;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .bento-card, .bento-pill, .bento-highlight-item {
-    transition: none;
-  }
-}
-</style>

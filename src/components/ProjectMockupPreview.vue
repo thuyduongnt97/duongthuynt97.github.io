@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import BaseIcon from './BaseIcon.vue'
+import { profile } from '../data/profile'
 import { useProjectLightbox } from '../composables/useProjectLightbox'
 
 const props = defineProps({
@@ -359,7 +360,7 @@ const hasSandbox = computed(() => ['landing-pages', 'government-map', 'experimen
             <div class="face-corner bl" />
             <div class="face-corner br" />
             <div class="face-tag">
-              <span class="pulse-indicator" /> Thuỳ Dương · Senior Frontend
+              <span class="pulse-indicator" /> {{ profile.shortName }} · {{ profile.title }}
             </div>
           </div>
           <div class="vision-hud">

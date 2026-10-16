@@ -1,50 +1,21 @@
 <script setup>
-import BaseIcon from './BaseIcon.vue'
-import SectionHead from './SectionHead.vue'
 import { recognition } from '../data/recognition'
-
-const { professional, research } = recognition
 </script>
 
 <template>
-  <section id="recognition" aria-labelledby="recognition-title">
-    <div class="container">
-      <SectionHead
-        eyebrow="02 — Thành tựu"
-        title="Những dấu mốc được ghi nhận"
-        title-id="recognition-title"
-        sub="Từ nghiên cứu tại đại học đến những đóng góp vào sản phẩm thực tế."
-      />
-      <div class="recognition-grid">
-        <article v-reveal v-spotlight class="card recognition-card recognition-card--career">
-          <div class="recognition-card__top">
-            <div class="recognition-card__icon"><BaseIcon name="award" /></div>
-            <span class="recognition-card__label">{{ professional.label }}</span>
-          </div>
-          <h3>{{ professional.title }}</h3>
-          <p class="recognition-card__description">{{ professional.description }}</p>
-          <ul class="recognition-years" aria-label="Các năm đạt danh hiệu Nhân viên Xuất sắc">
-            <li v-for="year in professional.years" :key="year">
-              <BaseIcon name="sparkle" />
-              <strong>{{ year }}</strong>
-              <span>Top Performer</span>
-            </li>
-          </ul>
-          <div class="recognition-card__values">
-            <span v-for="value in professional.values" :key="value">{{ value }}</span>
-          </div>
-        </article>
-
-        <article v-reveal="100" v-spotlight class="card recognition-card recognition-card--research">
-          <div class="recognition-card__top">
-            <div class="recognition-card__icon"><BaseIcon name="cap" /></div>
-            <span class="recognition-card__label">{{ research.label }}</span>
-          </div>
-          <h3>{{ research.title }}</h3>
-          <div class="recognition-card__meta">{{ research.period }} · {{ research.institution }}</div>
-          <p class="recognition-card__topic">“{{ research.topic }}”</p>
-          <div class="chips">
-            <span v-for="tech in research.tech" :key="tech" class="chip">{{ tech }}</span>
+  <section id="recognition" class="border-y border-slate-200 py-8 scroll-mt-20 dark:border-slate-800/80" aria-label="Ghi nhận, giải thưởng và cột mốc">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div v-for="(item, index) in recognition.items" :key="item.id" v-reveal="index * 50" class="min-w-0">
+        <article
+          v-spotlight
+          class="spotlight-card flex h-full items-start gap-4 rounded-2xl border p-5"
+          :class="item.id === 'professional' ? 'border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-white to-white dark:from-amber-500/10 dark:via-slate-900/90 dark:to-slate-900/90' : 'border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/80'"
+        >
+          <span class="flex size-11 shrink-0 items-center justify-center rounded-xl border text-lg" :class="item.color === 'amber' ? 'border-amber-500/40 bg-amber-500/20 text-amber-500' : item.color === 'cyan' ? 'border-cyan-500/30 bg-cyan-500/15 text-cyan-600 dark:text-cyan-400' : 'border-emerald-500/30 bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'" aria-hidden="true">{{ item.emoji }}</span>
+          <div class="min-w-0">
+            <span class="font-mono text-xs font-bold uppercase tracking-wider" :class="item.color === 'amber' ? 'text-amber-700 dark:text-amber-400' : item.color === 'cyan' ? 'text-cyan-700 dark:text-cyan-400' : 'text-emerald-700 dark:text-emerald-400'">{{ item.badge }}</span>
+            <h3 class="mt-0.5 text-base font-bold">{{ item.title }}</h3>
+            <p class="mt-1 text-xs leading-relaxed text-slate-600 dark:text-slate-400">{{ item.description }}</p>
           </div>
         </article>
       </div>

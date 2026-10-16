@@ -19,6 +19,7 @@ let previousActiveElement = null
 
 function scrollToSection(sectionId, toastText) {
   close()
+  if (sectionId.startsWith('project-')) setActiveFilter('all')
   nextTick(() => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
     if (toastText) showToast(toastText)
@@ -56,13 +57,13 @@ const commandItems = [
   { id: 'sec-skills', title: 'Kỹ năng chuyên môn (Bento Architecture)', category: 'Chuyển nhanh Section', icon: 'code', action: () => scrollToSection('skills') },
   { id: 'sec-exp', title: 'Dự án tiêu biểu (Visual Case Studies)', category: 'Chuyển nhanh Section', icon: 'layers', action: () => scrollToSection('experience') },
   { id: 'sec-timeline', title: 'Lịch sử sự nghiệp (Career Timeline & Milestones)', category: 'Chuyển nhanh Section', icon: 'briefcase', action: () => scrollToSection('timeline') },
-  { id: 'sec-edu', title: 'Học vấn & Bằng cấp', category: 'Chuyển nhanh Section', icon: 'cap', action: () => scrollToSection('education') },
-  { id: 'sec-vitals', title: 'Thước đo chất lượng (Core Web Vitals & Clean Code)', category: 'Chuyển nhanh Section', icon: 'zap', action: () => scrollToSection('engineering-vitals', '⚡ Khám phá chỉ số Core Web Vitals') },
+  { id: 'sec-edu', title: 'Học vấn & Bằng cấp', category: 'Chuyển nhanh Section', icon: 'cap', action: () => scrollToSection('timeline') },
+  { id: 'sec-vitals', title: 'Kỹ năng tối ưu hiệu năng & Core Web Vitals', category: 'Kỹ năng chuyên môn', icon: 'zap', action: () => scrollToSection('skill-matrix') },
   { id: 'sec-contact', title: 'Liên hệ & Hợp tác', category: 'Chuyển nhanh Section', icon: 'mail', action: () => scrollToSection('contact') },
 
   // 2. Tech Stack Filter & Deep-links
   { id: 'tech-vue', title: 'Lọc dự án: Vue / Nuxt.js', category: 'Bộ lọc công nghệ', icon: 'code', action: () => handleFilter('vue', 'Vue / Nuxt') },
-  { id: 'tech-react', title: 'Lọc dự án: React / Next.js', category: 'Bộ lọc công nghệ', icon: 'code', action: () => handleFilter('react', 'React / Next.js') },
+  { id: 'tech-adtech', title: 'Lọc dự án: PHP / Laravel & AdTech', category: 'Bộ lọc công nghệ', icon: 'code', action: () => handleFilter('adtech', 'PHP / Laravel & AdTech') },
   { id: 'tech-ds', title: 'Lọc dự án: Design System & UI', category: 'Bộ lọc công nghệ', icon: 'layers', action: () => handleFilter('design-system', 'Design System & UI') },
   { id: 'tech-perf', title: 'Lọc dự án: Performance Optimization & GIS', category: 'Bộ lọc công nghệ', icon: 'zap', action: () => handleFilter('perf', 'Performance Optimization') },
   { id: 'tech-ts', title: 'Kỹ năng: TypeScript & JavaScript ES6+', category: 'Kỹ năng chuyên môn', icon: 'code', action: () => scrollToSection('skills', '⚡ Khám phá kỹ năng TypeScript & ES6+') },
@@ -307,7 +308,7 @@ onBeforeUnmount(() => {
               <span><kbd>↵</kbd> để chọn</span>
               <span><kbd>ESC</kbd> để đóng</span>
             </div>
-            <span class="cmd-footer-brand">Senior Frontend Palette</span>
+            <span class="cmd-footer-brand">{{ profile.title }} Portfolio</span>
           </footer>
         </div>
       </div>

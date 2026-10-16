@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="light">
+<html lang="vi" class="dark scroll-smooth" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Title, SEO và JSON-LD được sinh từ src/data/profile.js bởi Vite. -->
-  <meta name="theme-color" content="#f8fafc">
+  <title>Nguyễn Thị Thùy Dương — Software Engineer</title>
+  <meta name="theme-color" content="#06090F">
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
@@ -13,25 +13,31 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
-  <!-- Theme + JS flag set early to avoid flash -->
+  <!-- Theme early init to avoid flash -->
   <script>
     (function () {
       var d = document.documentElement;
       d.classList.add('js');
       var t;
       try { t = localStorage.getItem('theme'); } catch (e) { }
-      if (t !== 'light' && t !== 'dark') t = 'light';
+      if (t !== 'light' && t !== 'dark') t = 'dark';
       d.setAttribute('data-theme', t);
-      d.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'light' ? '#f8fafc' : '#15181e');
+      if (t === 'dark') {
+        d.classList.add('dark');
+      } else {
+        d.classList.remove('dark');
+      }
+      var meta = d.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', t === 'light' ? '#f8fafc' : '#06090F');
     })();
   </script>
-
 </head>
 
-<body>
+<body
+  class="bg-slate-50 text-slate-900 dark:bg-[#06090F] dark:text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950 transition-colors duration-300">
   <div id="app"></div>
   <noscript>Trang này cần bật JavaScript để hiển thị. Bạn có thể xem CV tại <a href="/NguyenThiThuyDuong_SoftwareEngineer.pdf">NguyenThiThuyDuong_SoftwareEngineer.pdf</a>.</noscript>
   <script type="module" src="/src/main.js"></script>
