@@ -94,7 +94,7 @@ onBeforeUnmount(() => {
         >
           <BaseIcon :name="theme === 'dark' ? 'sun' : 'moon'" />
         </button>
-        <a :href="profile.cvUrl" download class="hidden items-center gap-1.5 rounded-xl border border-slate-300 px-3.5 py-2 text-sm font-medium hover:border-amber-500 sm:inline-flex dark:border-slate-700">
+        <a :href="profile.cvUrl" :download="profile.cvFileName" class="hidden items-center gap-1.5 rounded-xl border border-slate-300 px-3.5 py-2 text-sm font-medium hover:border-amber-500 sm:inline-flex dark:border-slate-700">
           <BaseIcon name="download" class="text-amber-500" /> Tải CV
         </a>
         <a href="#contact" class="inline-flex min-h-10 items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 px-3 py-2 text-xs font-bold text-slate-950 shadow-lg shadow-amber-500/20 hover:from-amber-600 hover:to-orange-600 sm:px-4 sm:text-sm" @click="closeMobileMenu">Liên hệ</a>
@@ -106,7 +106,7 @@ onBeforeUnmount(() => {
     <nav v-if="mobileMenuOpen" id="mobile-navigation" class="absolute inset-x-0 top-full border-b border-slate-200 bg-white p-4 shadow-lg lg:hidden dark:border-slate-800 dark:bg-[#06090F]" aria-label="Menu trên điện thoại">
       <a v-for="item in navLinks" :key="item.id" :href="item.href" class="block rounded-lg px-3 py-2 text-sm font-medium" :class="active === item.href.slice(1) ? 'bg-amber-500 text-slate-950' : 'hover:bg-slate-100 dark:hover:bg-slate-800'" :aria-current="active === item.href.slice(1) ? 'location' : undefined" @click="closeMobileMenu">{{ item.label }}</a>
       <div class="mt-2 flex items-center justify-between gap-3 border-t border-slate-200 px-3 pt-3 text-xs dark:border-slate-800">
-        <a :href="profile.cvUrl" download class="font-semibold text-amber-700 dark:text-amber-400">Tải CV (PDF)</a>
+        <a :href="profile.cvUrl" :download="profile.cvFileName" class="font-semibold text-amber-700 dark:text-amber-400">Tải CV (PDF)</a>
         <button type="button" class="inline-flex items-center gap-2 text-slate-600 dark:text-slate-300" @click="openSearch"><BaseIcon name="search" /> Tìm nhanh · Ctrl/⌘ K</button>
       </div>
     </nav>

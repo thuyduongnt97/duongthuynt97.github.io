@@ -20,7 +20,7 @@ import { profile } from '../data/profile'
           <a v-if="profile.linkedin" class="btn btn--ghost" :href="profile.linkedin" target="_blank" rel="noopener noreferrer">
             <BaseIcon name="linkedin" /> LinkedIn
           </a>
-          <a class="btn btn--ghost" :href="profile.cvUrl" download>
+          <a class="btn btn--ghost" :href="profile.cvUrl" :download="profile.cvFileName">
             <BaseIcon name="download" /> Tải CV (PDF)
           </a>
         </div>

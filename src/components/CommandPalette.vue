@@ -32,6 +32,20 @@ function handleFilter(filterId, label) {
   showToast(`✓ Đã kích hoạt bộ lọc: ${label}`)
 }
 
+function downloadCv() {
+  const link = document.createElement('a')
+  link.href = profile.cvUrl
+  link.download = profile.cvFileName
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+}
+
+function openCvHtml() {
+  close()
+  window.open(profile.cvHtmlUrl, '_blank')
+}
+
 function copyEmail() {
   close()
   navigator.clipboard?.writeText(profile.email).then(() => {
@@ -72,7 +86,8 @@ const commandItems = [
 
   // 3. Quick Actions
   { id: 'act-email', title: `Sao chép Email: ${profile.email}`, category: 'Hành động nhanh', icon: 'copy', action: copyEmail },
-  { id: 'act-cv', title: 'Tải CV hoàn chỉnh (PDF)', category: 'Hành động nhanh', icon: 'download', action: () => { window.open(profile.cvUrl, '_blank') } },
+  { id: 'act-cv', title: 'Tải CV hoàn chỉnh (PDF)', category: 'Hành động nhanh', icon: 'download', action: downloadCv },
+  { id: 'act-cv-html', title: 'Xem bản CV Web (HTML / Print)', category: 'Hành động nhanh', icon: 'external', action: openCvHtml },
   { id: 'act-theme', title: 'Đổi Theme Sáng / Tối', category: 'Hành động nhanh', icon: 'sun', action: handleThemeToggle },
 
   // 4. Accent Palette

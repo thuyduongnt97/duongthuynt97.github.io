@@ -31,8 +31,7 @@ const year = new Date().getFullYear()
         </a>
         <a
           :href="profile.cvUrl"
-          target="_blank"
-          rel="noopener noreferrer"
+          :download="profile.cvFileName"
           class="px-5 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-amber-500 text-slate-800 dark:text-slate-200 font-semibold transition"
         >
           📄 Tải CV (PDF)

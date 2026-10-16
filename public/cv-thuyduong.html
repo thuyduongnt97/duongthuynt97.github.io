@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CV Nguyễn Thị Thùy Dương — Software Engineer. Kinh nghiệm Vue.js, Svelte, Laravel, WebGIS và AdTech.">
+  <meta name="color-scheme" content="light">
+  <title>CV — Nguyễn Thị Thùy Dương — Software Engineer</title>
+  <style>
+    @page { size: A4; margin: 12mm 14mm; }
+    * { box-sizing: border-box; }
+    html { background: #edf1f5; }
+    body { margin: 0; color: #334155; font: 13px/1.45 Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #0f766e; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:focus-visible, button:focus-visible { outline: 2px solid #0f766e; outline-offset: 4px; }
+    strong { color: #172b3a; font-weight: 700; }
+    h1, h2, h3, p, ul { margin: 0; }
+    .toolbar { max-width: 210mm; margin: 20px auto 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 0 2px; }
+    .toolbar p { color: #526174; font-size: 13px; }
+    .toolbar-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .toolbar a, .toolbar button { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 10px 16px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; color: #24394a; font: 600 13px Arial, sans-serif; cursor: pointer; text-decoration: none; }
+    .toolbar .download { color: #fff; border-color: #0f766e; background: #0f766e; }
+    .cv-page { width: 210mm; min-height: 297mm; margin: 0 auto 24px; padding: 12mm 14mm; display: flex; flex-direction: column; background: #fff; box-shadow: 0 8px 36px #172b3a12; }
+    .page-content { flex: 1; }
+    .cv-header { display: flex; justify-content: space-between; align-items: center; border-top: 4px solid #0f766e; border-bottom: 1px solid #dce4eb; padding: 12px 0 10px; margin-bottom: 14px; }
+    .header-main { flex: 1; min-width: 0; }
+    .header-qr { display: flex; flex-direction: column; align-items: center; text-align: center; margin-left: 16px; flex-shrink: 0; }
+    .header-qr a { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; }
+    .header-qr img { width: 66px; height: 66px; border-radius: 6px; border: 1px solid #cbd5e1; padding: 2px; background: #fff; display: block; }
+    .header-qr span { margin-top: 3px; color: #0f766e; font-size: 9px; font-weight: 700; letter-spacing: .2px; }
+    h1 { color: #172b3a; font-size: 29px; line-height: 1.18; letter-spacing: -.65px; }
+    .title-role { margin-top: 5px; color: #0f766e; font-size: 16px; font-weight: 700; letter-spacing: .15px; }
+    .contact-info { display: flex; flex-wrap: wrap; gap: 3px 18px; margin-top: 10px; color: #526174; font-size: 12px; }
+    .contact-info a { color: inherit; }
+    .contact-info a:hover { color: #0f766e; }
+    section { margin-top: 16px; }
+    section:first-child { margin-top: 0; }
+    h2 { margin-bottom: 9px; padding-bottom: 5px; border-bottom: 1px solid #dce4eb; color: #172b3a; font-size: 11.5px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; break-after: avoid; }
+    .summary { line-height: 1.55; }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 20px; }
+    .skill-item { break-inside: avoid; font-size: 12px; line-height: 1.43; }
+    .skill-item h3 { margin-bottom: 3px; color: #172b3a; font-size: 12px; }
+    .skill-item h3 span { color: #0f766e; font-weight: 400; white-space: nowrap; }
+    .exp-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+    .company { color: #172b3a; font-size: 14px; font-weight: 700; }
+    .period { flex-shrink: 0; color: #526174; font-size: 11.5px; }
+    .role { margin-top: 2px; font-size: 12px; color: #0f766e; font-weight: 700; }
+    .career-note { margin-top: 4px; color: #64748b; font-size: 11px; }
+    .project { margin-top: 10px; break-inside: avoid; }
+    .project h3 { color: #172b3a; font-size: 13px; line-height: 1.4; }
+    .project-period { color: #526174; font-size: 11px; font-weight: 400; white-space: nowrap; }
+    .tech-stack { margin-top: 3px; color: #0f766e; font-size: 11px; line-height: 1.4; }
+    ul { margin-top: 5px; padding-left: 16px; }
+    li { margin-bottom: 3px; padding-left: 1px; }
+    li:last-child { margin-bottom: 0; }
+    .samples { margin-top: 5px; color: #64748b; font-size: 11px; }
+    .samples a { display: inline; text-decoration: underline; text-decoration-color: #b3d8d2; text-underline-offset: 2px; }
+    .samples .separator { padding: 0 6px; color: #94a3b8; }
+    .continuation-header { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 10px; margin-bottom: 17px; border-bottom: 1px solid #dce4eb; color: #526174; font-size: 11.5px; }
+    .continuation-header strong { font-size: 12px; }
+    .school { margin-top: 16px; break-inside: avoid; }
+    .education p + p { margin-top: 4px; }
+    .awards { margin-top: 6px; }
+    .page-footer { display: flex; justify-content: space-between; gap: 16px; margin-top: 12px; padding-top: 8px; border-top: 1px solid #dce4eb; color: #64748b; font-size: 10px; }
+    .page-footer a { color: inherit; }
+    @media screen and (max-width: 820px) {
+      .toolbar { padding: 0 16px; }
+      .cv-page { width: calc(100% - 32px); min-height: 0; padding: 28px; }
+    }
+    @media screen and (max-width: 520px) {
+      body { font-size: 13px; }
+      .toolbar { margin-top: 16px; }
+      .toolbar p { width: 100%; }
+      .toolbar-actions { width: 100%; }
+      .toolbar-actions > * { flex: 1; padding-inline: 10px; }
+      .cv-page { padding: 24px 20px; }
+      h1 { font-size: 25px; }
+      .skills-grid { grid-template-columns: 1fr; gap: 12px; }
+      .exp-header, .continuation-header { flex-wrap: wrap; gap: 4px; }
+      .contact-info { flex-direction: column; gap: 5px; }
+      .project-period { display: block; margin-top: 2px; }
+      .page-footer { font-size: 9px; }
+    }
+    @media print {
+      html, body { background: #fff; }
+      body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .toolbar { display: none !important; }
+      .cv-page { width: auto; min-height: 0; height: 272mm; margin: 0; padding: 0; box-shadow: none; break-after: page; }
+      .cv-page:last-child { break-after: auto; }
+      .page-footer { break-inside: avoid; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <aside class="toolbar" aria-label="Tải xuống và in CV">
+    <p>CV Nguyễn Thị Thùy Dương · 2 trang A4</p>
+    <div class="toolbar-actions">
+      <a class="download" href="./cv-thuyduong.pdf" download="NguyenThiThuyDuong_CV.pdf">Tải CV (PDF)</a>
+      <button type="button" id="print-cv">In / Lưu PDF</button>
+    </div>
+  </aside>
+
+  <main aria-label="CV Nguyễn Thị Thùy Dương">
+    <article class="cv-page" aria-label="Trang 1">
+      <div class="page-content">
+        <header class="cv-header">
+          <div class="header-main">
+            <h1>Nguyễn Thị Thùy Dương</h1>
+            <p class="title-role">Software Engineer</p>
+            <div class="contact-info">
+              <a href="tel:+84983688206">(+84) 983 688 206</a>
+              <a href="mailto:duongthuynt97@gmail.com">duongthuynt97@gmail.com</a>
+              <span>Hà Nội, Việt Nam</span>
+            </div>
+            <div class="contact-info" style="margin-top: 3px">
+              <a href="https://thuyduongnt97.github.io/">thuyduongnt97.github.io</a>
+              <a href="https://github.com/thuyduongnt97">github.com/thuyduongnt97</a>
+            </div>
+          </div>
+          <div class="header-qr">
+            <a href="https://thuyduongnt97.github.io/" target="_blank" rel="noopener noreferrer" title="Quét mở Profile trực tuyến">
+              <img src="./link_profile.png" alt="QR Code mở Profile trực tuyến" width="66" height="66">
+              <span>Quét mở Profile ↗</span>
+            </a>
+          </div>
+        </header>
+
+        <section aria-labelledby="summary-heading">
+          <h2 id="summary-heading">Tóm tắt chuyên môn</h2>
+          <p class="summary"><strong>Software Engineer với 7 năm kinh nghiệm</strong> phát triển ứng dụng web và công cụ nội bộ bằng <strong>Vue.js, Svelte và PHP/Laravel</strong>. Tập trung vào Core Box / Embeddable Widget, WebGIS, Landing Page chiến dịch, Emagazine và AdTech / Dynamic QR &amp; Shortlink; tham gia từ xây dựng giao diện, tích hợp API đến tối ưu dữ liệu, hiệu năng và bảo trì.</p>
+        </section>
+
+        <section aria-labelledby="skills-heading">
+          <h2 id="skills-heading">Kỹ năng chuyên môn</h2>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <h3>Frontend &amp; Interactive UI <span>· 7+ năm</span></h3>
+              <p>HTML5, CSS3/SCSS, JavaScript ES6+, jQuery, Tailwind CSS; responsive PC/Mobile, Core Web Vitals; GSAP, ScrollTrigger, TweenMax, Draggable.</p>
+            </div>
+            <div class="skill-item">
+              <h3>Frontend Frameworks <span>· 5.5+ năm</span></h3>
+              <p>Vue.js 2/3, Composition API, Nuxt.js, Pinia/Vuex; Svelte, TypeScript, Vite, Webpack; kiến trúc component và widget nhúng.</p>
+            </div>
+            <div class="skill-item">
+              <h3>WebGIS &amp; Spatial Data <span>· 4+ năm</span></h3>
+              <p>QGIS, Geometry Simplification, làm sạch GeoJSON; Leaflet.js, Marker Clustering, MapSVG.js và Chart.js.</p>
+            </div>
+            <div class="skill-item">
+              <h3>Backend &amp; AdTech <span>· 6+ năm</span></h3>
+              <p>PHP, Laravel, CodeIgniter, REST API; MySQL, Redis Cache; bảo trì và vá lỗi bảo mật AdServing, TagManager, Adsponsor; Git.</p>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="experience-heading">
+          <h2 id="experience-heading">Kinh nghiệm làm việc</h2>
+          <div class="exp-header">
+            <h3 class="company">Công ty Cổ phần VCCorp</h3>
+            <span class="period">2019 – Hiện tại · Hà Nội</span>
+          </div>
+          <p class="role">Software Engineer</p>
+          <p class="career-note">01/2025 – 08/2025: Nghỉ sinh em bé; trở lại công việc từ 08/2025.</p>
+
+          <div class="project">
+            <h3>01. Bản đồ số Cổng thông tin Nhà nước &amp; Báo Giao Thông</h3>
+            <p class="tech-stack">Vue.js · QGIS · GeoJSON · Leaflet.js · Marker Clustering · MapSVG.js · TweenMax</p>
+            <ul>
+              <li>Triển khai module bản đồ cho <strong>02 Cổng thông tin Nhà nước</strong> về cảnh báo thiên tai – lũ lụt và an toàn thực phẩm từ 08/2025.</li>
+              <li>Dùng QGIS giản lược hình học, làm sạch GeoJSON; kết hợp Leaflet Marker Clustering hiển thị hàng nghìn điểm tọa độ mượt trên di động.</li>
+              <li>Xây dựng <strong>02 chuyên đề bản đồ tương tác Báo Giao Thông</strong> (2021–2023): Cao tốc Bắc – Nam và Hầm đường bộ, với giao diện riêng cho PC/Mobile.</li>
+            </ul>
+            <p class="samples">Minh họa:
+              <a href="https://thuyduongnt97.github.io/interactives/cao-toc-bac-nam/index.html">Cao tốc Bắc – Nam</a><span class="separator">/</span><a href="https://thuyduongnt97.github.io/interactives/ham-giao-thong/index.html">Hầm đường bộ</a>
+            </p>
+          </div>
+
+          <div class="project">
+            <h3>02. Quản lý Template, Box Widget &amp; A/B Testing <span class="project-period">· 2024</span></h3>
+            <p class="tech-stack">Laravel · Vue.js · REST API · State Management · BigData Reporting</p>
+            <ul>
+              <li>Làm Frontend cho công cụ quản lý Template và dựng <strong>Box Widget độc lập</strong> để nhúng lên hệ thống báo điện tử.</li>
+              <li>Xây dựng giao diện cấu hình thử nghiệm cho các box Recommendation; tích hợp API từ BigData để hiển thị báo cáo <strong>A/B Testing</strong> và theo dõi hiệu quả.</li>
+            </ul>
+          </div>
+
+          <div class="project">
+            <h3>03. Core Box Feature &amp; Banner PR <span class="project-period">· 08/2025 – Nay</span></h3>
+            <p class="tech-stack">Svelte · Vue.js · Component Architecture · DOM Injection · CSS Animation</p>
+            <ul>
+              <li>Viết core và triển khai box chiến dịch trên <strong>Kenh14, Soha</strong>: <strong>Sticky Box neo màn hình</strong> và <strong>Inline Box giữa bài</strong>, nhúng độc lập và hạn chế ảnh hưởng đến bố cục trang báo.</li>
+            </ul>
+            <p class="samples">Minh họa:
+              <a href="https://kenh14.vn/do-noi-tieng-cua-vi-hon-the-ronaldo-hon-ca-vo-messi-va-victoria-beckham-cong-lai-xung-danh-wag-quyen-luc-nhat-world-cup-2026-215260617140236789.chn">Kenh14 · Box Sticky</a><span class="separator">/</span><a href="https://soha.vn/lich-thi-dau-asiad-ngay-20-9-the-thao-viet-nam-mo-hang-huy-chuong-198260920081317925.htm">Soha · Box Inline</a>
+            </p>
+          </div>
+        </section>
+      </div>
+      <footer class="page-footer"><span>Nguyễn Thị Thùy Dương · Software Engineer</span><span>01 / 02</span></footer>
+    </article>
+
+    <article class="cv-page" aria-label="Trang 2">
+      <div class="page-content">
+        <header class="continuation-header"><strong>Nguyễn Thị Thùy Dương</strong><span>Software Engineer · Kinh nghiệm &amp; Học vấn</span></header>
+        <section aria-labelledby="continued-heading">
+          <h2 id="continued-heading">Kinh nghiệm làm việc · tiếp</h2>
+          <div class="exp-header">
+            <h3 class="company">Công ty Cổ phần VCCorp</h3>
+            <span class="period">2019 – Hiện tại</span>
+          </div>
+
+          <div class="project">
+            <h3>04. Dynamic QR / Shortlink, AdsDemo &amp; Bảo trì AdTech</h3>
+            <p class="tech-stack">Laravel · Vue.js · MySQL · Redis Cache · REST API · Security Patching</p>
+            <ul>
+              <li>Thiết kế CSDL, API và giao diện quản trị <strong>Dynamic QR &amp; Shortlink</strong>; cho phép đổi URL đích của mã QR mà không cần in lại ấn phẩm.</li>
+              <li>Ứng dụng Redis cache cho luồng chuyển hướng với lưu lượng có thể lên tới <strong>~10.000 clicks/link/ngày</strong>.</li>
+              <li>Phát triển <strong>Ads Demo Simulator</strong> để xem trước quảng cáo Sponsor, Video, HTML5, Collection trong ngữ cảnh web PC/Mobile; hỗ trợ chia sẻ qua Shortlink/QR.</li>
+              <li>Bảo trì và vá lỗi bảo mật cho <strong>AdServing, TagManager, Adsponsor</strong>; từng vận hành công cụ khai thác vị trí quảng cáo (2019–2020).</li>
+            </ul>
+            <p class="samples">Sản phẩm:
+              <a href="https://short.bizfly.vn/">short.bizfly.vn</a><span class="separator">/</span><a href="https://adsdemo.admicro.vn">adsdemo.admicro.vn</a> (cần tài khoản nội bộ)
+            </p>
+          </div>
+
+          <div class="project">
+            <h3>05. Landing Page chiến dịch &amp; Emagazine CafeF</h3>
+            <p class="tech-stack">HTML5 · CSS3/SCSS · JavaScript · GSAP · ScrollTrigger · Responsive UI</p>
+            <ul>
+              <li>Từ 08/2025, tiếp nhận mảng Landing Page: maintain dự án cũ, lên báo giá và triển khai chiến dịch mới bằng <strong>GSAP ScrollTrigger</strong>.</li>
+              <li>Thực hiện định kỳ một số bài <strong>Emagazine chuyên đề Bất động sản và Thiết bị công nghệ</strong> trên CafeF và các site nội bộ từ 2022; cắt giao diện và làm hiệu ứng tương tác cuộn trang.</li>
+            </ul>
+            <p class="samples">Landing Page tiêu biểu:
+              <a href="https://omogieotrieumamxanh.vn/">OMO — Gieo triệu mầm xanh</a><span class="separator">/</span><a href="https://athenacm.dev.vcadm.vn/">Athena</a>
+            </p>
+          </div>
+
+          <div class="project">
+            <h3>Dự án bổ trợ &amp; Quy trình phát triển</h3>
+            <ul>
+              <li>Tích hợp <strong>Camera và API nhận diện khuôn mặt</strong> để vinh danh nhân viên; xây dựng minigame vòng quay Canvas cho hoạt động nội bộ.</li>
+              <li>Ứng dụng <strong>AI Agent từ 08/2025</strong> trong quá trình triển khai bản đồ số, Core Box Feature và Landing Page.</li>
+            </ul>
+          </div>
+
+          <div class="school">
+            <div class="exp-header">
+              <h3 class="company">Viện Đại học Mở Hà Nội</h3>
+              <span class="period">09/2018 – 05/2019</span>
+            </div>
+            <p class="role">Lập trình viên PHP · Tổ phát triển &amp; chuyển giao công nghệ</p>
+            <ul>
+              <li>Phát triển module xét tuyển, tiếp nhận hồ sơ, thẩm định văn bằng, thanh toán học phí và báo cáo tuyển sinh bằng <strong>PHP CodeIgniter, MySQL</strong>.</li>
+              <li>Tham gia phát triển hệ thống quản lý đào tạo phi chính quy bằng <strong>Laravel</strong>.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="education" aria-labelledby="education-heading">
+          <h2 id="education-heading">Học vấn</h2>
+          <div class="exp-header"><h3 class="company">Viện Đại học Mở Hà Nội</h3><span class="period">2015 – 2019</span></div>
+          <p>Kỹ sư Công nghệ phần mềm · Khoa Công nghệ Thông tin.</p>
+          <p>Thành viên Câu lạc bộ Mã nguồn mở.</p>
+        </section>
+
+        <section aria-labelledby="awards-heading">
+          <h2 id="awards-heading">Ghi nhận &amp; Giải thưởng</h2>
+          <ul class="awards">
+            <li><strong>Nhân viên Xuất sắc VCCorp — 2022, 2023, 2025.</strong></li>
+            <li><strong>Giải Ba Nghiên cứu Khoa học — 05/2019, Viện Đại học Mở Hà Nội.</strong> Đề tài: Tìm hiểu phần mềm R và ứng dụng thuật toán phân cụm K-Means.</li>
+          </ul>
+        </section>
+      </div>
+      <footer class="page-footer"><a href="https://thuyduongnt97.github.io/">thuyduongnt97.github.io</a><span>02 / 02</span></footer>
+    </article>
+  </main>
+  <script>
+    document.getElementById('print-cv').addEventListener('click', function () { window.print(); });
+  </script>
+</body>
+</html>

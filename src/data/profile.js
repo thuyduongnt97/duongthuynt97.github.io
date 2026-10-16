@@ -33,7 +33,9 @@ export const profile = {
   github: 'https://github.com/thuyduongnt97',
 
   // CV PDF trong thư mục /public
-  cvUrl: `${import.meta.env?.BASE_URL ?? '/'}NguyenThiThuyDuong_SoftwareEngineer.pdf`,
+  cvUrl: `${import.meta.env?.BASE_URL ?? '/'}cv-thuyduong.pdf`,
+  cvFileName: 'NguyenThiThuyDuong_CV.pdf',
+  cvHtmlUrl: `${import.meta.env?.BASE_URL ?? '/'}cv-thuyduong.html`,
 
   // Tiêu đề chính dạng text và HTML gradient
   heroHeadline: 'Làm chủ sản phẩm web từ Web App, Core Widget đến Bản đồ số WebGIS.',
