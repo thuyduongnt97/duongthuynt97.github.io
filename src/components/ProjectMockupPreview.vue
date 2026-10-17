@@ -194,7 +194,7 @@ const hasSandbox = computed(() => ['landing-pages', 'government-map', 'experimen
             <strong>Bizfly Dynamic QR &amp; Shortlink</strong>
           </div>
           <div class="qr-badge-live">
-            <span class="live-dot" /> Redis Cache Active
+            <span class="live-dot" /> Redis Sync Active
           </div>
         </div>
 
@@ -242,29 +242,29 @@ const hasSandbox = computed(() => ['landing-pages', 'government-map', 'experimen
             <div class="routing-row">
               <span class="routing-label">Target URL (Dynamic):</span>
               <div class="routing-url-pill">
-                <span class="pill-method">302</span>
+                <span class="pill-method">SYNC</span>
                 <span class="pill-url">https://bizfly.vn/event/digital-growth</span>
               </div>
             </div>
 
             <div class="routing-stats-grid">
               <div class="routing-stat-box">
-                <span class="stat-number text-sky-400">&lt; 15ms</span>
-                <span class="stat-name">Avg Latency</span>
+                <span class="stat-number text-sky-400">~10K</span>
+                <span class="stat-name">Clicks / ngày</span>
               </div>
               <div class="routing-stat-box">
-                <span class="stat-number text-emerald-400">99.8%</span>
-                <span class="stat-name">Cache Hit</span>
+                <span class="stat-number text-emerald-400">Redis</span>
+                <span class="stat-name">Sync từ MySQL</span>
               </div>
               <div class="routing-stat-box">
-                <span class="stat-number text-amber-300">5.2M+</span>
-                <span class="stat-name">Total Scans</span>
+                <span class="stat-number text-amber-300">API Log</span>
+                <span class="stat-name">Location &bull; Device</span>
               </div>
             </div>
 
             <div class="routing-status-badge">
               <span class="status-pulse-dot" />
-              <span>Realtime Destination Sync &bull; 0 downtime</span>
+              <span>Đổi URL linh hoạt &bull; Không cần in lại ấn phẩm</span>
             </div>
           </div>
         </div>

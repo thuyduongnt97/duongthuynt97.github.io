@@ -34,7 +34,7 @@ export const profile = {
 
   // CV PDF trong thư mục /public
   cvUrl: `${import.meta.env?.BASE_URL ?? '/'}cv-thuyduong.pdf`,
-  cvFileName: 'NguyenThiThuyDuong_CV.pdf',
+  cvFileName: 'NguyenThiThuyDuong_SoftwareEngineer.pdf',
   cvHtmlUrl: `${import.meta.env?.BASE_URL ?? '/'}cv-thuyduong.html`,
 
   // Tiêu đề chính dạng text và HTML gradient

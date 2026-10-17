@@ -86,7 +86,7 @@ export const pillars = [
       { label: 'AdTech & Redis', value: '5+ năm' },
     ],
     deliverables: [
-      'Xây dựng hệ thống <strong>Dynamic QR &amp; Shortlink (short.bizfly.vn)</strong> với Laravel, Vue, MySQL, Redis: đổi URL đích không cần in lại mã QR, chịu tải <strong>~10.000 clicks/link/ngày</strong>.',
+      'Xây dựng công cụ quản trị <strong>Dynamic QR &amp; Shortlink (short.bizfly.vn)</strong>, thiết kế MySQL, đồng bộ dữ liệu link lên Redis phục vụ luồng chuyển hướng (<strong>~10.000 clicks/link/ngày</strong>) và tích hợp API Log hiển thị thống kê (location, device, referer).',
       'Triển khai công cụ <strong>Ads Demo Simulator (adsdemo.admicro.vn)</strong> tạo preview quảng cáo trong ngữ cảnh web PC/Mobile.',
       'Maintain, vá lỗi bảo mật (<strong>Security Bug Fixes</strong>) cho <strong>AdServing, TagManager, Adsponsor</strong>; phát triển hệ thống Quản lý Tuyển sinh &amp; Đào tạo (ĐH Mở HN).',
     ],
@@ -138,7 +138,7 @@ export const detailedTable = [
     percent: 94,
     color: 'purple',
     deliverables:
-      'Xây dựng hệ thống Dynamic QR &amp; Shortlink (<code>short.bizfly.vn</code>), công cụ Ads Demo Simulator, phần mềm Tuyển sinh &amp; Đào tạo (ĐH Mở HN).',
+      'Xây dựng công cụ quản trị Dynamic QR &amp; Shortlink (<code>short.bizfly.vn</code>), thiết kế MySQL, đồng bộ dữ liệu link lên Redis phục vụ luồng chuyển hướng (~10.000 clicks/link/ngày) và tích hợp API Log hiển thị thống kê (location, device, referer); công cụ Ads Demo Simulator, phần mềm Tuyển sinh &amp; Đào tạo (ĐH Mở HN).',
   },
   {
     id: 'vue-ecosystem',

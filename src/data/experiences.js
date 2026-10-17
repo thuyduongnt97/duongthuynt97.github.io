@@ -80,7 +80,7 @@ export const deliverableGroups = [
     projectIds: ['qr', 'ads', 'ad-maintenance', 'ad-sponsor', 'ad-operations'],
     techStack: ['Laravel', 'Vue.js', 'MySQL', 'Redis', 'Security Patching'],
     sections: [
-      { label: 'Dynamic QR & Shortlink (short.bizfly.vn)', html: 'Thiết kế dữ liệu, API và Redis cache phục vụ luồng chuyển hướng; cho phép đổi URL đích của mã QR mà không cần in lại ấn phẩm, lượng traffic có thể lên tới <strong>~10.000 clicks / 1 link / ngày</strong>.' },
+      { label: 'Dynamic QR & Shortlink (short.bizfly.vn)', html: 'Xây dựng công cụ quản trị (<strong>Laravel + Vue.js</strong>): thiết kế CSDL <strong>MySQL</strong>, đồng bộ dữ liệu link lên <strong>Redis</strong> phục vụ luồng chuyển hướng (<strong>~10.000 clicks/link/ngày</strong>), cho phép đổi URL đích không cần in lại ấn phẩm; tích hợp API từ hệ thống Log hiển thị báo cáo thống kê lượt click (location, device, referer).' },
       { label: 'Tool AdsDemo (adsdemo.admicro.vn)', html: 'Tạo demo quảng cáo (Sponsor, Video, HTML5, Collection) ngay trong ngữ cảnh website PC/Mobile thực tế và chia sẻ nhanh qua Shortlink/QR. <em>Cần tài khoản nội bộ để truy cập.</em>' },
       { label: 'Bảo trì & Vá lỗi bảo mật', html: 'Maintain và xử lý các lỗi bảo mật (Security Bug Fixes) cho các dự án <strong>AdServing, TagManager, Adsponsor</strong>; vận hành tool quản lý khai thác vị trí quảng cáo (2019–2020).' },
     ],
@@ -416,17 +416,38 @@ export const experiences = [
       {
         id: 'qr',
         name: 'Hệ thống Dynamic QR & Shortlink',
-        role: 'Fullstack Engineer · Thiết kế & Vận hành',
-        domain: 'High-Traffic Infrastructure & Routing',
+        role: 'Fullstack Developer · Quản trị Dynamic QR & Đồng bộ Redis',
+        domain: 'AdTech Management Tool & High-Traffic Redis Sync',
         filterCategory: 'adtech',
         category: 'adtech',
         categories: ['adtech'],
         categoryTags: ['adtech', 'perf', 'vue'],
         description:
-          'Xây dựng hệ thống Dynamic QR & Shortlink (short.bizfly.vn) với Laravel, Vue, MySQL, Redis: đổi URL đích không cần in lại mã QR, chịu tải ~10.000 clicks/link/ngày.',
+          'Xây dựng công cụ quản trị Dynamic QR & Shortlink (short.bizfly.vn) bằng Laravel và Vue.js: thiết kế CSDL MySQL, đồng bộ dữ liệu link đích lên Redis phục vụ luồng chuyển hướng (~10.000 clicks/link/ngày) và tích hợp API Log hiển thị thống kê chi tiết.',
         achievements: [
-          'Đổi URL đích của mã QR linh hoạt mà không cần in lại ấn phẩm truyền thông.',
-          'Thiết kế cơ sở dữ liệu, API và Redis caching phục vụ luồng chuyển hướng chịu tải cao tới ~10.000 clicks/link/ngày.',
+          'Xây dựng công cụ quản trị Dynamic QR & Shortlink (Laravel, Vue.js): thiết kế CSDL MySQL và đồng bộ dữ liệu link lên Redis phục vụ luồng chuyển hướng tải cao (~10.000 clicks/link/ngày).',
+          'Cho phép đổi URL đích của mã QR tức thời mà không cần in lại ấn phẩm truyền thông.',
+          'Tích hợp REST API từ hệ thống Log để hiển thị báo cáo thống kê lượt click theo vị trí địa lý (location), thiết bị (device) và nguồn truy cập (referer).',
+        ],
+        caseStudy: {
+          challenge:
+            'Các chiến dịch marketing và ấn phẩm in ấn cần mã QR cố định lâu dài nhưng có thể linh hoạt thay đổi URL đích theo từng giai đoạn; đồng thời dữ liệu tạo/cập nhật link từ trang quản trị phải được đồng bộ tức thời sang tầng bộ nhớ đệm để phục vụ luồng chuyển hướng tải cao (~10.000 clicks/link/ngày) và cung cấp báo cáo thống kê trực quan.',
+          solution:
+            'Phát triển công cụ quản trị Dynamic QR & Shortlink bằng Laravel và Vue.js; thiết kế CSDL MySQL để quản lý thông tin link/QR và đồng bộ dữ liệu link đích lên Redis phục vụ service Redirect. Tích hợp REST API từ hệ thống Log để xây dựng dashboard thống kê lượt click chi tiết theo vị trí địa lý (location), thiết bị (device) và nguồn truy cập (referer).',
+          impact:
+            'Cho phép đổi URL đích của mã QR tức thời mà không cần in lại ấn phẩm; đảm bảo dữ liệu luôn đồng bộ trên Redis cho các link có lưu lượng tới ~10.000 clicks/link/ngày và cung cấp số liệu theo dõi trực quan cho người dùng.',
+          metrics: [
+            { label: 'Lưu lượng', value: '~10K clicks/link/ngày' },
+            { label: 'Đồng bộ dữ liệu', value: 'MySQL + Redis' },
+            { label: 'Báo cáo API Log', value: 'Location · Device · Referer' },
+            { label: 'Ấn phẩm QR', value: 'Đổi URL không cần in lại' },
+          ],
+        },
+        metrics: [
+          { label: 'Lưu lượng', value: '~10K clicks/link/ngày' },
+          { label: 'Đồng bộ dữ liệu', value: 'MySQL + Redis' },
+          { label: 'Báo cáo API Log', value: 'Location · Device · Referer' },
+          { label: 'Ấn phẩm QR', value: 'Đổi URL không cần in lại' },
         ],
         techStack: ['Laravel', 'Vue.js', 'MySQL', 'Redis Cache', 'REST API'],
         demoUrl: 'https://short.bizfly.vn/',
@@ -438,7 +459,7 @@ export const experiences = [
             url: 'https://short.bizfly.vn/',
             kind: 'site',
             category: 'Hệ thống Live',
-            description: 'Hệ thống rút gọn liên kết và tạo mã Dynamic QR chịu tải cao phục vụ doanh nghiệp.',
+            description: 'Công cụ quản trị Dynamic QR và rút gọn liên kết, đồng bộ Redis phục vụ luồng chuyển hướng tải cao.',
           },
         ],
         isHighlight: false,

@@ -72,12 +72,12 @@ export const careerMilestones = [
     award: 'Nhân viên Xuất sắc 2022 & 2023',
     badges: [{ label: '🏆 Nhân viên Xuất sắc 2022 & 2023', color: 'amber' }],
     bulletPoints: [
-      'Triển khai <strong>Tool Shortlink (short.bizfly.vn)</strong> chịu tải ~10.000 clicks/link/ngày và <strong>Tool AdsDemo (adsdemo.admicro.vn)</strong> bằng Laravel, Vue.js, MySQL, Redis.',
+      'Xây dựng công cụ quản trị <strong>Dynamic QR &amp; Shortlink (short.bizfly.vn)</strong>, thiết kế MySQL, đồng bộ dữ liệu link lên Redis phục vụ luồng chuyển hướng (~10.000 clicks/link/ngày) và tích hợp API Log hiển thị thống kê (location, device, referer); triển khai <strong>Tool AdsDemo (adsdemo.admicro.vn)</strong>.',
       'Maintain và vá lỗi bảo mật (Security Bug Fixes) cho các dự án <strong>AdServing</strong> và <strong>TagManager</strong>.',
       'Xây dựng 02 trang tương tác bản đồ cho <strong>Báo Giao Thông</strong> (Tuyến cao tốc &amp; Hầm đi bộ) bằng <strong>MapSVG.js, TweenMax, Draggable</strong>; tham gia cắt một số bài <strong>Emagazine chuyên đề (BĐS, Công nghệ) trên báo CafeF</strong>.',
     ],
     summary:
-      'Triển khai Tool Shortlink (short.bizfly.vn) chịu tải ~10.000 clicks/link/ngày và Tool AdsDemo; maintain & vá lỗi bảo mật AdServing, TagManager; làm bản đồ tương tác Báo Giao Thông và Emagazine CafeF.',
+      'Xây dựng công cụ quản trị Dynamic QR & Shortlink (short.bizfly.vn), thiết kế MySQL, đồng bộ dữ liệu link lên Redis phục vụ luồng chuyển hướng (~10.000 clicks/link/ngày) và tích hợp API Log hiển thị thống kê (location, device, referer); triển khai Tool AdsDemo; maintain & vá lỗi bảo mật AdServing, TagManager; làm bản đồ tương tác Báo Giao Thông và Emagazine CafeF.',
     icon: 'briefcase',
   },
   {
