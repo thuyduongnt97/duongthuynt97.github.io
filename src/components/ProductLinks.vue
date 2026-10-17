@@ -17,12 +17,12 @@ const productCta = link => ({ demo: 'Mở demo', site: 'Xem website', github: 'X
     <p v-if="showHeading && !compact" class="font-mono text-xs text-slate-500 dark:text-slate-400">{{ heading }}</p>
     <ul class="gap-2" :class="gridLayout ? 'grid grid-cols-1 sm:grid-cols-2' : 'flex flex-wrap'" role="list">
       <li v-for="link in links" :key="link.id" class="min-w-0 max-w-full">
-        <div v-if="link.desktopUrl || link.mobileUrl" class="flex h-full flex-wrap items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-2.5 dark:border-slate-800 dark:bg-slate-900">
-          <span class="min-w-0 text-xs font-semibold">{{ link.label }}</span>
-          <div class="flex shrink-0 gap-1 font-mono text-[11px]">
-            <a :href="resolveProjectUrl(link.url)" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center rounded bg-cyan-500 px-2 py-1 font-bold text-slate-950 hover:bg-cyan-400" :aria-label="`${productCta(link)} (Auto): ${link.label}`">Auto ↗</a>
-            <a v-if="link.desktopUrl" :href="resolveProjectUrl(link.desktopUrl)" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center rounded border border-slate-300 px-2 py-1 hover:border-amber-500 dark:border-slate-700" :aria-label="`${productCta(link)} (PC): ${link.label}`">PC</a>
-            <a v-if="link.mobileUrl" :href="resolveProjectUrl(link.mobileUrl)" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center rounded border border-slate-300 px-2 py-1 hover:border-amber-500 dark:border-slate-700" :aria-label="`${productCta(link)} (Mobile): ${link.label}`">MB</a>
+        <div v-if="link.desktopUrl || link.mobileUrl" class="flex h-full flex-col justify-between gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900">
+          <span class="min-w-0 text-xs font-semibold leading-snug text-slate-800 dark:text-slate-200">{{ link.label }}</span>
+          <div class="flex items-center gap-1.5 font-mono text-[11px]">
+            <a :href="resolveProjectUrl(link.url)" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[34px] items-center justify-center rounded-lg bg-cyan-500 px-3 py-1 font-bold text-slate-950 transition hover:bg-cyan-400" :aria-label="`${productCta(link)} (Auto): ${link.label}`">Auto ↗</a>
+            <a v-if="link.desktopUrl" :href="resolveProjectUrl(link.desktopUrl)" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[34px] min-w-[36px] items-center justify-center rounded-lg border border-slate-300 px-2.5 py-1 font-semibold text-slate-700 transition hover:border-amber-500 dark:border-slate-700 dark:text-slate-300 dark:hover:border-amber-400" :aria-label="`${productCta(link)} (PC): ${link.label}`">PC</a>
+            <a v-if="link.mobileUrl" :href="resolveProjectUrl(link.mobileUrl)" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[34px] min-w-[36px] items-center justify-center rounded-lg border border-slate-300 px-2.5 py-1 font-semibold text-slate-700 transition hover:border-amber-500 dark:border-slate-700 dark:text-slate-300 dark:hover:border-amber-400" :aria-label="`${productCta(link)} (Mobile): ${link.label}`">MB</a>
           </div>
         </div>
         <a
