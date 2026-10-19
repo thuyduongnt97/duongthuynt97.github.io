@@ -1,11 +1,19 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import ProductLinks from './ProductLinks.vue'
 
 const props = defineProps({
   group: { type: Object, required: true },
   compact: { type: Boolean, default: false },
+  collapsibleOnMobile: { type: Boolean, default: false },
 })
+
+const isExpandedMobile = ref(false)
+
+watch(() => props.collapsibleOnMobile, val => {
+  if (!val) isExpandedMobile.value = false
+})
+
 const category = computed(() => props.group.filterCategory)
 const badgeClass = computed(() => ({
   webgis: 'border-cyan-500/20 bg-cyan-500/10 text-cyan-700 dark:text-cyan-400',
@@ -32,10 +40,26 @@ const domainLabel = computed(() => [props.group.domain, props.group.period].filt
         <span v-if="!compact" class="font-mono text-xs text-slate-500 dark:text-slate-400">{{ group.techStack.join(' • ') }}</span>
       </div>
       <component :is="compact ? 'h4' : 'h3'" :id="`group-heading-${group.id}`" class="font-bold" :class="compact ? 'mt-1 text-base' : 'text-xl'">{{ group.title }}</component>
-      <div :class="compact ? 'mt-1.5 space-y-2 text-xs leading-relaxed text-slate-600 dark:text-slate-400' : ['space-y-2.5 border-l-2 pl-4 text-sm text-slate-600 dark:text-slate-300', borderClass]">
+      <div
+        :class="[
+          compact ? 'mt-1.5 space-y-2 text-xs leading-relaxed text-slate-600 dark:text-slate-400' : ['space-y-2.5 border-l-2 pl-4 text-sm text-slate-600 dark:text-slate-300', borderClass],
+          collapsibleOnMobile && !isExpandedMobile ? 'hidden md:block' : 'block'
+        ]"
+      >
         <p v-for="(section, index) in group.sections" :key="index">
           <strong v-if="section.label">• {{ section.label }}: </strong><span v-html="section.html" />
         </p>
+      </div>
+      <div v-if="collapsibleOnMobile" class="pt-1 md:hidden">
+        <button
+          type="button"
+          class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 font-mono text-xs font-semibold text-amber-700 transition hover:border-amber-500 hover:bg-white dark:border-slate-800 dark:bg-slate-950 dark:text-amber-400 dark:hover:border-amber-400"
+          :aria-expanded="isExpandedMobile"
+          @click="isExpandedMobile = !isExpandedMobile"
+        >
+          <span>{{ isExpandedMobile ? 'Thu gọn' : 'Xem chi tiết' }}</span>
+          <span class="text-[10px]" aria-hidden="true">{{ isExpandedMobile ? '▲' : '▼' }}</span>
+        </button>
       </div>
       <div v-if="group.links.length" class="rounded-xl border border-slate-200 bg-slate-50 p-3.5 dark:border-slate-800 dark:bg-slate-950">
         <ProductLinks :links="group.links" />

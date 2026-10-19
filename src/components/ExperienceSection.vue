@@ -9,6 +9,8 @@ const emit = defineEmits(['update:activeCategory'])
 const { filters, mainGroups, supportingGroups, setFilter, visibleGroups } = useDeliverables(props, emit)
 const filterStrip = ref(null)
 
+const featuredGroupIds = ['spatial-maps', 'template-widgets', 'core-box-features', 'adtech-tools']
+
 // Run after the active button renders, before the skill click's vertical scroll.
 watch(() => props.activeCategory, category => {
   if (!window.matchMedia('(max-width: 1023px)').matches) return
@@ -30,7 +32,12 @@ watch(() => props.activeCategory, category => {
           <h2 id="deliverables-heading" class="mt-1 text-2xl font-extrabold sm:text-3xl">{{ deliverablesSection.title }}</h2>
           <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">{{ deliverablesSection.description }}</p>
         </div>
-        <div ref="filterStrip" class="-mx-4 flex flex-nowrap gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:px-6 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0" role="group" aria-label="Lọc danh mục dự án">
+        <div
+          ref="filterStrip"
+          class="sticky top-16 z-30 -mx-4 flex flex-nowrap gap-2 overflow-x-auto border-b border-slate-200/60 bg-slate-50/90 px-4 py-2.5 backdrop-blur-md [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:px-6 lg:static lg:mx-0 lg:flex-col lg:overflow-visible lg:border-none lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none dark:border-slate-800/60 dark:bg-[#06090F]/90"
+          role="group"
+          aria-label="Lọc danh mục dự án"
+        >
           <button
             v-for="filter in filters" :id="`filter-${filter.id}`" :key="filter.id"
             type="button" :aria-pressed="activeCategory === filter.id" aria-controls="project-results"
@@ -45,9 +52,20 @@ watch(() => props.activeCategory, category => {
       </div>
       <div id="project-results" class="min-w-0 space-y-5 lg:col-span-8">
         <p class="sr-only" role="status" aria-live="polite">Đang hiển thị {{ visibleGroups.length }} nhóm dự án.</p>
-        <ProjectCard v-for="group in mainGroups" :key="group.id" :group="group" />
+        <ProjectCard
+          v-for="group in mainGroups"
+          :key="group.id"
+          :group="group"
+          :collapsible-on-mobile="activeCategory === 'all' && !featuredGroupIds.includes(group.id)"
+        />
         <div v-if="supportingGroups.length" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <ProjectCard v-for="group in supportingGroups" :key="group.id" :group="group" compact />
+          <ProjectCard
+            v-for="group in supportingGroups"
+            :key="group.id"
+            :group="group"
+            compact
+            :collapsible-on-mobile="activeCategory === 'all'"
+          />
         </div>
       </div>
     </div>

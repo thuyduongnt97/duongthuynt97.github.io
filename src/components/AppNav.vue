@@ -22,7 +22,7 @@ const emojiMap = {
 }
 const dockItems = navLinks.map(item => ({
   ...item,
-  label: item.id === 'timeline' ? 'Lộ trình' : item.label,
+  label: item.id === 'timeline' ? 'Kinh nghiệm' : item.label,
   emoji: emojiMap[item.id] || '📌',
 }))
 
