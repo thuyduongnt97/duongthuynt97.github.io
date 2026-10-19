@@ -36,20 +36,20 @@ onMounted(() => {
     <!-- 1. Hero Section -->
     <HeroSection />
 
-    <!-- 2. Recognition & Awards Banner -->
-    <RecognitionSection />
-
-    <!-- 3. Dual-View Skill Matrix -->
+    <!-- 2. Dual-View Skill Matrix -->
     <SkillsSection
       :active-category="selectedSkillCategory"
       @select-category="selectSkillCategory"
     />
 
-    <!-- 4. Deliverables & Selected Samples -->
+    <!-- 3. Deliverables & Selected Samples -->
     <ExperienceSection
       :active-category="selectedSkillCategory"
       @update:active-category="selectSkillCategory"
     />
+
+    <!-- 4. Recognition & Awards Banner -->
+    <RecognitionSection />
 
     <!-- 5. Career Timeline -->
     <CareerTimeline />

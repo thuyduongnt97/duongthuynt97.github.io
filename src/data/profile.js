@@ -189,10 +189,10 @@ export const seo = {
 
 // Menu điều hướng tinh gọn 1 dòng
 export const navLinks = [
-  { id: 'recognition', label: 'Ghi nhận', href: '#recognition' },
   { id: 'skills', label: 'Kỹ năng', href: '#skill-matrix' },
   { id: 'deliverables', label: 'Dự án', href: '#deliverables' },
-  { id: 'timeline', label: 'Kinh nghiệm', href: '#timeline' },
+  { id: 'recognition', label: 'Ghi nhận', href: '#recognition' },
+  { id: 'timeline', label: 'Lộ trình', href: '#timeline' },
 ]
 
 export const marquee = [

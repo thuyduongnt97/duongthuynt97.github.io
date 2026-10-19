@@ -14,10 +14,16 @@ const { open: openCommandPalette } = useCommandPalette()
 const mobileMenuOpen = ref(false)
 const headerRef = ref(null)
 const menuButtonRef = ref(null)
-const dockItems = navLinks.map((item, index) => ({
+const emojiMap = {
+  skills: '⚡',
+  deliverables: '🧩',
+  recognition: '🏆',
+  timeline: '⏳',
+}
+const dockItems = navLinks.map(item => ({
   ...item,
   label: item.id === 'timeline' ? 'Lộ trình' : item.label,
-  emoji: ['🏆', '⚡', '🧩', '⏳'][index],
+  emoji: emojiMap[item.id] || '📌',
 }))
 
 function closeMobileMenu() {

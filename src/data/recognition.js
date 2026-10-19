@@ -9,6 +9,17 @@ export const recognition = {
   /** @type {RecognitionItem[]} */
   items: [
     {
+      id: 'ai-workflow',
+      icon: 'sparkle',
+      emoji: '⚡',
+      badge: 'Modern Workflow • Từ 08/2025',
+      title: 'Ứng dụng AI Agent vào phát triển sản phẩm',
+      description: 'Chủ động kết hợp AI Agent khi triển khai module bản đồ số, viết Core Box Feature, tích hợp Camera nhận diện và dựng Landing Page.',
+      color: 'emerald',
+      accentColor: 'emerald',
+      period: '08/2025 – Nay',
+    },
+    {
       id: 'professional',
       icon: 'award',
       emoji: '🏆',
@@ -31,26 +42,15 @@ export const recognition = {
       period: '05/2019',
       institution: 'Viện Đại học Mở Hà Nội',
     },
-    {
-      id: 'ai-workflow',
-      icon: 'sparkle',
-      emoji: '⚡',
-      badge: 'Modern Workflow • Từ 08/2025',
-      title: 'Ứng dụng AI Agent vào phát triển sản phẩm',
-      description: 'Chủ động kết hợp AI Agent khi triển khai module bản đồ số, viết Core Box Feature, tích hợp Camera nhận diện và dựng Landing Page.',
-      color: 'emerald',
-      accentColor: 'emerald',
-      period: '08/2025 – Nay',
-    },
   ],
 
   // Thuộc tính tương thích ngược cho profile.js và RecognitionSection hiện tại
   get professional() {
-    const item = this.items[0]
+    const item = this.items.find(i => i.id === 'professional') || this.items[1]
     return { ...item, label: item.badge, values: ['Năng lực kỹ thuật', 'Tinh thần trách nhiệm', 'Đóng góp sản phẩm'] }
   },
   get research() {
-    const item = this.items[1]
+    const item = this.items.find(i => i.id === 'research') || this.items[2]
     return {
       ...item,
       label: item.badge,
@@ -59,7 +59,7 @@ export const recognition = {
     }
   },
   get aiWorkflow() {
-    const item = this.items[2]
+    const item = this.items.find(i => i.id === 'ai-workflow') || this.items[0]
     return { ...item, label: item.badge }
   },
 }
