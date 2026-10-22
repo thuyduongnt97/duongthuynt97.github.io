@@ -25,15 +25,37 @@ export const skillsSection = {
 }
 
 /**
- * 4 Khối Bento năng lực chính (Pillars) — đúng thứ tự bản mẫu.
+ * 4 Khối Bento năng lực chính, ưu tiên năng lực Fullstack ở hàng đầu.
  * @type {SkillPillar[]}
  */
 export const pillars = [
   {
+    id: 'adtech',
+    filterCategory: 'adtech',
+    categoryTitle: 'Fullstack & AdTech Systems',
+    title: 'Backend, Dynamic QR/Shortlink, AdTech & Redis',
+    yearsBadge: '6+ Năm',
+    period: '2018 – Nay',
+    icon: 'server',
+    accentColor: 'purple',
+    subMetrics: [
+      { label: 'PHP / CodeIgniter', value: 'Từ 2018' },
+      { label: 'Laravel / MySQL', value: '6+ năm' },
+      { label: 'AdTech & Redis', value: '5+ năm' },
+    ],
+    deliverables: [
+      'Phát triển Fullstack <strong class="text-white font-bold">Dynamic QR &amp; Shortlink</strong>: thiết kế MySQL, xây dựng trang quản trị <strong class="text-cyan-400 font-bold">Laravel/Vue.js</strong> và đồng bộ <strong class="text-amber-400 font-bold">Redis Cache</strong> cho luồng redirect <strong class="text-amber-400 font-bold">~10.000 clicks/link/ngày</strong>; đổi URL đích mà không cần in lại ấn phẩm.',
+      'Tích hợp REST API từ hệ thống Log cho <strong class="text-white font-bold">dashboard analytics</strong> theo location, device, referer; hệ thống ghi nhận <strong class="text-amber-400 font-bold">hơn 2 triệu clicks</strong>, đỉnh tổng lưu lượng <strong class="text-amber-400 font-bold">~240.000 clicks/ngày</strong>.',
+      'Triển khai công cụ <strong>Ads Demo Simulator (adsdemo.admicro.vn)</strong> tạo preview quảng cáo trong ngữ cảnh web PC/Mobile.',
+      'Maintain, vá lỗi bảo mật (<strong>Security Bug Fixes</strong>) cho <strong>AdServing, TagManager, Adsponsor</strong>; phát triển hệ thống Quản lý Tuyển sinh &amp; Đào tạo (ĐH Mở HN).',
+    ],
+    chips: ['PHP Laravel', 'CodeIgniter', 'MySQL / Redis Cache', 'AdServing / TagManager', 'AI Workflow: Codex • Antigravity • Gemini'],
+  },
+  {
     id: 'webapp',
     filterCategory: 'webapp',
     categoryTitle: 'Frontend Frameworks & Modular Engine',
-    title: 'Vue.js, Svelte Core Box & Quản trị A/B Testing',
+    title: 'Vue.js, Svelte, Core Box & Custom UI System',
     yearsBadge: '5.5+ Năm',
     period: '2020 – Nay',
     icon: 'code',
@@ -44,17 +66,17 @@ export const pillars = [
       { label: 'Svelte / TS / Vite', value: '2+ năm' },
     ],
     deliverables: [
-      'Làm Frontend cho <strong>Tool quản lý Template &amp; dựng Box Widget</strong> mang đi cắm lên site; quản trị kịch bản thử nghiệm <strong>A/B Testing</strong> và báo cáo số liệu Recommendation từ <strong>BigData</strong>.',
-      'Viết core và cắt các khối <strong>Core Box Feature / Banner PR</strong> hỗ trợ 2 chế độ: <strong>Box Sticky neo màn hình</strong> và <strong>Box Inline nhúng giữa bài</strong> (triển khai trên Kenh14, Soha...).',
-      'Nhận bàn giao, tái cấu trúc (Refactor) và maintain hệ thống Microsite &amp; công cụ nghiệp vụ.',
+      'Xây dựng <strong>hệ thống quản lý Template (Laravel/Vue.js)</strong> và kiến trúc <strong>Box Widget độc lập</strong> để nhúng lên hệ thống báo điện tử; cấu hình kịch bản <strong>A/B Testing</strong> và tích hợp API báo cáo Recommendation từ <strong>BigData</strong>.',
+      'Thiết kế kiến trúc <strong>Core Box Feature / Banner PR</strong> bằng Svelte/Vue.js với <strong>Box Sticky neo màn hình</strong> và <strong>Box Inline nhúng giữa bài</strong> trên Kenh14, Soha; cô lập CSS/JS, kiểm soát xô lệch bố cục (CLS).',
+      'Tái cấu trúc (Refactor) hệ thống Microsite &amp; công cụ nghiệp vụ; chuẩn hóa component tái sử dụng và quản lý trạng thái với <strong>Pinia / Vuex</strong>.',
     ],
-    chips: ['Vue.js (Vue 2 / Vue 3)', 'Svelte', 'TypeScript', 'Pinia / Vuex', 'Embeddable Widget'],
+    chips: ['Vue.js (Vue 2 / Vue 3)', 'Svelte', 'TypeScript', 'Pinia / Vuex', 'AI Workflow: Codex • Antigravity • Gemini'],
   },
   {
     id: 'webgis',
     filterCategory: 'webgis',
     categoryTitle: 'WebGIS & Spatial Data Visualization',
-    title: 'Bản đồ số Cổng thông tin, QGIS & Bản đồ SVG',
+    title: 'Bản đồ số / GIS, Dữ liệu địa lý & Biểu đồ',
     yearsBadge: '4+ Năm',
     period: '2021 – Nay',
     icon: 'map',
@@ -67,36 +89,15 @@ export const pillars = [
     deliverables: [
       'Triển khai module bản đồ số cho <strong>02 Cổng thông tin Nhà nước (Cảnh báo thiên tai - lũ lụt &amp; An toàn thực phẩm)</strong>.',
       'Dùng <strong>QGIS</strong> tiền xử lý, giản lược hình học (<em>Geometry Simplification</em>) và làm sạch dữ liệu <strong>GeoJSON</strong> giảm mạnh dung lượng tải; áp dụng <strong>Marker Clustering</strong> hiển thị mượt hàng nghìn điểm tọa độ.',
-      'Xây dựng 02 trang bản đồ tương tác cho <strong>Báo Giao Thông</strong> (Tuyến cao tốc &amp; Hầm đi bộ) bằng <strong>MapSVG.js, TweenMax, Draggable</strong>.',
+      'Xây dựng 02 trang bản đồ tương tác cho <strong>Báo Giao Thông</strong> (Tuyến cao tốc &amp; Hầm đường bộ) bằng <strong>MapSVG.js, TweenMax, Draggable</strong>.',
     ],
     chips: ['QGIS', 'Leaflet.js', 'GeoJSON Simplification', 'Marker Clustering', 'MapSVG.js'],
-  },
-  {
-    id: 'adtech',
-    filterCategory: 'adtech',
-    categoryTitle: 'Fullstack & AdTech Systems',
-    title: 'PHP Laravel, Dynamic QR/Shortlink & Bảo trì AdTech',
-    yearsBadge: '7+ Năm',
-    period: '2018 – Nay',
-    icon: 'server',
-    accentColor: 'purple',
-    subMetrics: [
-      { label: 'PHP / CodeIgniter', value: 'Từ 2018' },
-      { label: 'Laravel / MySQL', value: '6+ năm' },
-      { label: 'AdTech & Redis', value: '5+ năm' },
-    ],
-    deliverables: [
-      'Xây dựng công cụ quản trị <strong>Dynamic QR &amp; Shortlink (short.bizfly.vn)</strong>, thiết kế MySQL, đồng bộ dữ liệu link lên Redis phục vụ luồng chuyển hướng (<strong>~10.000 clicks/link/ngày</strong>) và tích hợp API Log hiển thị thống kê (location, device, referer).',
-      'Triển khai công cụ <strong>Ads Demo Simulator (adsdemo.admicro.vn)</strong> tạo preview quảng cáo trong ngữ cảnh web PC/Mobile.',
-      'Maintain, vá lỗi bảo mật (<strong>Security Bug Fixes</strong>) cho <strong>AdServing, TagManager, Adsponsor</strong>; phát triển hệ thống Quản lý Tuyển sinh &amp; Đào tạo (ĐH Mở HN).',
-    ],
-    chips: ['PHP Laravel', 'CodeIgniter', 'MySQL / Redis Cache', 'AdServing / TagManager', 'Security Patching'],
   },
   {
     id: 'motion',
     filterCategory: 'motion',
     categoryTitle: 'UI/UX Engineering & Interactive Motion',
-    title: 'Landing Page Chiến dịch, GSAP Motion & Interactive UI',
+    title: 'Landing Page Chiến dịch, GSAP & Interactive UI',
     yearsBadge: '7+ Năm',
     period: '2019 – Nay',
     icon: 'zap',
@@ -116,29 +117,19 @@ export const pillars = [
 ]
 
 /**
- * Bảng chi tiết từng nhóm kỹ năng (#skill-view-table), đúng thứ tự & phần trăm bản mẫu.
+ * Bảng chi tiết từng nhóm kỹ năng (#skill-view-table), ưu tiên PHP/Laravel và Vue.js.
  * @type {SkillDetailedItem[]}
  */
 export const detailedTable = [
   {
-    id: 'core-frontend',
-    skill: 'HTML5, CSS3/SCSS, JS (ES6+), jQuery, Tailwind CSS',
-    years: '7+ Năm',
-    timeline: '2018 ────────● Nay',
-    percent: 96,
-    color: 'amber',
-    deliverables:
-      'Cắt giao diện chuẩn thiết kế (PC/Mobile), tối ưu Core Web Vitals, maintain &amp; tái cấu trúc hệ thống Microsite, triển khai Campaign Landing Page và một số bài Emagazine trên CafeF.',
-  },
-  {
     id: 'fullstack-php',
     skill: 'PHP (Laravel, CodeIgniter), MySQL, Redis, REST API',
-    years: '7+ Năm',
+    years: '6+ Năm',
     timeline: '2018 ────────● Nay',
     percent: 94,
     color: 'purple',
     deliverables:
-      'Xây dựng công cụ quản trị Dynamic QR &amp; Shortlink (<code>short.bizfly.vn</code>), thiết kế MySQL, đồng bộ dữ liệu link lên Redis phục vụ luồng chuyển hướng (~10.000 clicks/link/ngày) và tích hợp API Log hiển thị thống kê (location, device, referer); công cụ Ads Demo Simulator, phần mềm Tuyển sinh &amp; Đào tạo (ĐH Mở HN).',
+      'Phát triển Fullstack Dynamic QR &amp; Shortlink (<code>short.bizfly.vn</code>): MySQL, Laravel/Vue.js, Redis Cache và REST API Analytics; redirect ~10.000 clicks/link/ngày, đổi URL không cần in lại ấn phẩm; AdsDemo và phần mềm Tuyển sinh &amp; Đào tạo (ĐH Mở HN).',
   },
   {
     id: 'vue-ecosystem',
@@ -148,7 +139,17 @@ export const detailedTable = [
     percent: 82,
     color: 'emerald',
     deliverables:
-      'Làm Frontend cho tool quản lý Template, dựng Box Widget nhúng đa nền tảng, giao diện cấu hình thuật toán Recommendation &amp; báo cáo A/B Testing từ BigData.',
+      'Xây dựng hệ thống quản lý Template (Laravel/Vue.js), Box Widget nhúng độc lập và giao diện cấu hình Recommendation; tích hợp REST API từ BigData cho báo cáo đối chiếu A/B Testing.',
+  },
+  {
+    id: 'core-frontend',
+    skill: 'HTML5, CSS3/SCSS, JS (ES6+), jQuery, Tailwind CSS',
+    years: '7+ Năm',
+    timeline: '2018 ────────● Nay',
+    percent: 96,
+    color: 'amber',
+    deliverables:
+      'Cắt giao diện chuẩn thiết kế (PC/Mobile), tối ưu Core Web Vitals, maintain &amp; tái cấu trúc hệ thống Microsite, triển khai Campaign Landing Page và một số bài Emagazine trên CafeF.',
   },
   {
     id: 'adtech-ops',
@@ -182,13 +183,13 @@ export const detailedTable = [
   },
   {
     id: 'svelte-ai',
-    skill: 'Svelte, TypeScript, Core Box Engine & AI Agent Workflow',
+    skill: 'Svelte, TypeScript, Core Box Engine & AI Workflow (Codex, Antigravity, Gemini)',
     years: '2+ Năm',
     timeline: '2024 ───● Nay',
     percent: 42,
     color: 'emerald',
     deliverables:
-      'Viết kiến trúc Core Box Feature (Sticky Box &amp; In-article Inline Box) chạy trên Kenh14, Soha; ứng dụng AI Agent tăng tốc độ sản xuất từ 08/2025.',
+      'Viết kiến trúc Core Box Feature (Sticky Box &amp; In-article Inline Box) chạy trên Kenh14, Soha; kết hợp bộ 3 AI (Codex, Antigravity, Gemini) từ 08/2025 để tăng tốc độ viết code, kiểm tra logic, tối ưu query và xử lý dữ liệu phức tạp.',
   },
 ]
 

@@ -16,7 +16,7 @@ import { forceUnlockScroll } from './utils/scrollLock.js'
 import { useSkillCategory } from './composables/useSkillCategory.js'
 
 // Một state cho cả chọn kỹ năng, bộ lọc dự án và Command Palette.
-const { selectedSkillCategory, selectSkillCategory } = useSkillCategory()
+const { selectedSkillCategory, selectSkillCategory } = useSkillCategory('adtech-tools')
 
 onMounted(() => {
   forceUnlockScroll()
@@ -32,7 +32,7 @@ onMounted(() => {
   <CommandPalette />
   <ProjectLightboxModal />
 
-  <main id="main" class="max-w-7xl mx-auto overflow-x-hidden px-4 sm:px-6 lg:overflow-visible">
+  <main id="main" class="max-w-[1380px] mx-auto overflow-x-hidden px-4 sm:px-6 lg:overflow-visible">
     <!-- 1. Hero Section -->
     <HeroSection />
 

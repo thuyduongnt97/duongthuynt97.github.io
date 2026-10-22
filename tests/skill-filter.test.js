@@ -49,3 +49,31 @@ test('skill selection and project filters share one state and restore every grou
     scope.stop()
   }
 })
+
+test('project navigation follows the CV and selects each group independently of skill categories', () => {
+  const { selectedSkillCategory, selectSkillCategory } = useSkillCategory()
+  const scope = effectScope()
+  try {
+    const props = { get activeCategory() { return selectedSkillCategory.value } }
+    const deliverables = scope.run(() => useDeliverables(props, (event, category) => selectSkillCategory(category)))
+    const projectOrder = ['adtech-tools', 'template-widgets', 'spatial-maps', 'core-box-features', 'campaigns-editorials']
+    assert.deepEqual(deliverables.navigation.map(item => item.id), ['all', ...projectOrder])
+    assert.deepEqual(deliverables.mainGroups.value.map(group => group.id), projectOrder)
+
+    deliverables.setFilter('webapp')
+    assert.deepEqual(deliverables.visibleGroups.value.map(group => group.id), ['template-widgets', 'core-box-features'])
+    for (const id of projectOrder) {
+      deliverables.setFilter(id)
+      assert.equal(selectedSkillCategory.value, id)
+      assert.deepEqual(deliverables.visibleGroups.value.map(group => group.id), [id])
+      assert.equal(deliverables.supportingGroups.value.length, 0)
+    }
+    deliverables.setFilter('unknown-project')
+    assert.equal(selectedSkillCategory.value, 'campaigns-editorials')
+    deliverables.setFilter('all')
+    assert.equal(deliverables.visibleGroups.value.length, 7)
+    assert.deepEqual(deliverables.mainGroups.value.map(group => group.id), projectOrder)
+  } finally {
+    scope.stop()
+  }
+})

@@ -1,13 +1,17 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import BaseIcon from './BaseIcon.vue'
 import ProductLinks from './ProductLinks.vue'
 import ProjectMockupPreview from './ProjectMockupPreview.vue'
 import { useProjectLightbox } from '../composables/useProjectLightbox'
 import { getAchievementSegments, getProjectLinks, resolveProjectUrl } from '../utils/portfolio'
-import { lockScroll, unlockScroll, forceUnlockScroll } from '../utils/scrollLock.js'
+import { forceUnlockScroll } from '../utils/scrollLock.js'
 
 const { activeProject, closeLightbox } = useProjectLightbox()
+const dialog = ref(null)
+const closeButton = ref(null)
+const selectedScreenshot = ref(null)
+let previousFocus = null
 
 const projectLinks = computed(() => {
   if (!activeProject.value) return []
@@ -25,8 +29,23 @@ const achievements = computed(() => {
 })
 
 function handleKeyDown(event) {
-  if (event.key === 'Escape' && activeProject.value) {
+  if (!activeProject.value) return
+  if (event.key === 'Escape') {
+    event.preventDefault()
     closeLightbox()
+  }
+  if (event.key === 'Tab') {
+    const controls = [...(dialog.value?.querySelectorAll('a[href], button:not([disabled]), [tabindex="0"]') ?? [])]
+      .filter(element => element.getClientRects().length)
+    const first = controls[0]
+    const last = controls.at(-1)
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault()
+      last?.focus()
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault()
+      first?.focus()
+    }
   }
 }
 
@@ -42,14 +61,20 @@ onBeforeUnmount(() => {
   forceUnlockScroll()
 })
 
-// Ensure scroll lock is safely synced if component re-renders or unmounts
-watch(activeProject, (newVal) => {
-  if (newVal) {
-    lockScroll()
+// The composable owns scroll locking; the modal owns focus and screenshot selection.
+watch(activeProject, async (project, previousProject) => {
+  selectedScreenshot.value = project?.screenshots?.find(screenshot => screenshot.src === project.imageUrl)
+    ?? (project?.imageUrl ? { src: project.imageUrl, alt: `Ảnh chụp màn hình ${project.name}` } : project?.screenshots?.[0])
+    ?? null
+  if (project) {
+    if (!previousProject) previousFocus = document.activeElement
+    await nextTick()
+    if (activeProject.value === project) closeButton.value?.focus()
   } else {
-    unlockScroll()
+    previousFocus?.focus()
+    previousFocus = null
   }
-})
+}, { flush: 'post' })
 </script>
 
 <template>
@@ -64,7 +89,7 @@ watch(activeProject, (newVal) => {
       @wheel.self.prevent
       @touchmove.self.prevent
     >
-      <div class="lightbox-dialog" @click.stop>
+      <div ref="dialog" class="lightbox-dialog" @click.stop>
         <!-- Modal Top Bar: Header + Sub-headline + Tech Stack Badges -->
         <header class="lightbox-header">
           <div class="lightbox-header__info">
@@ -101,6 +126,7 @@ watch(activeProject, (newVal) => {
           <div class="lightbox-header__actions">
             <span class="lightbox-shortcut-hint" aria-hidden="true">ESC</span>
             <button
+              ref="closeButton"
               type="button"
               class="lightbox-close-btn"
               aria-label="Đóng cửa sổ phóng to (Escape)"
@@ -126,12 +152,12 @@ watch(activeProject, (newVal) => {
         <!-- Modal Body Content -->
         <div class="lightbox-body">
           <!-- 1. Mockup Stage (Compact Visual Preview) -->
-          <section class="lightbox-stage" aria-label="Khung mô phỏng giao diện">
+          <section class="lightbox-stage" :aria-label="selectedScreenshot ? 'Ảnh chụp sản phẩm thực tế' : 'Khung mô phỏng giao diện'">
             <div class="stage-container">
               <img
-                v-if="activeProject.imageUrl"
-                :src="activeProject.imageUrl"
-                :alt="`Ảnh chụp màn hình chi tiết cho ${activeProject.name}`"
+                v-if="selectedScreenshot"
+                :src="resolveProjectUrl(selectedScreenshot.src)"
+                :alt="selectedScreenshot.alt"
                 class="lightbox-image"
               />
               <ProjectMockupPreview
@@ -139,6 +165,18 @@ watch(activeProject, (newVal) => {
                 :project="activeProject"
                 lightbox
               />
+              <p v-if="selectedScreenshot" class="mt-3 text-center text-xs">
+                <a :href="resolveProjectUrl(selectedScreenshot.src)" target="_blank" rel="noopener noreferrer" class="font-semibold text-amber-700 underline underline-offset-2 dark:text-amber-400">Mở ảnh đầy đủ ↗</a>
+              </p>
+              <div v-if="activeProject.screenshots?.length > 1" class="screenshot-options" role="group" aria-label="Chọn ảnh dự án">
+                <button
+                  v-for="screenshot in activeProject.screenshots"
+                  :key="screenshot.src"
+                  type="button"
+                  :aria-pressed="selectedScreenshot?.src === screenshot.src"
+                  @click="selectedScreenshot = screenshot"
+                >{{ screenshot.label }}</button>
+              </div>
             </div>
           </section>
 
@@ -173,7 +211,7 @@ watch(activeProject, (newVal) => {
               <div class="pillar-col">
                 <div class="pillar-col__head">
                   <span class="pillar-col__icon">⚙</span>
-                  <strong>Giải pháp Frontend</strong>
+                  <strong>Giải pháp kỹ thuật</strong>
                 </div>
                 <p class="pillar-col__text">
                   {{ activeProject.caseStudy.solution }}
@@ -457,11 +495,43 @@ watch(activeProject, (newVal) => {
 }
 
 .lightbox-image {
+  display: block;
+  margin: 0 auto;
   max-width: 100%;
   max-height: 50vh;
   object-fit: contain;
   border-radius: 10px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.screenshot-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0 0.35rem;
+}
+
+.screenshot-options button {
+  min-height: 36px;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-solid);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.screenshot-options button[aria-pressed="true"] {
+  border-color: #d97706;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.screenshot-options button:focus-visible {
+  outline: 2px solid #d97706;
+  outline-offset: 3px;
 }
 
 /* Details Section */

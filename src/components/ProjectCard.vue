@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import ProductLinks from './ProductLinks.vue'
+import ProjectScreenshots from './ProjectScreenshots.vue'
 
 const props = defineProps({
   group: { type: Object, required: true },
@@ -36,31 +37,36 @@ const domainLabel = computed(() => [props.group.domain, props.group.period].filt
     >
       <span v-for="project in group.projects" :id="`project-${project.id}`" :key="project.id" class="absolute top-0 scroll-mt-24" aria-hidden="true" />
       <div class="flex flex-wrap items-center justify-between gap-2">
-        <span class="font-mono text-xs" :class="compact ? textClass : ['rounded-md border px-2.5 py-1 font-semibold', badgeClass]">{{ domainLabel }}</span>
-        <span v-if="!compact" class="font-mono text-xs text-slate-500 dark:text-slate-400">{{ group.techStack.join(' • ') }}</span>
+        <span class="font-mono text-[13.5px]" :class="compact ? textClass : ['rounded-md border px-2.5 py-1 font-semibold', badgeClass]">{{ domainLabel }}</span>
+        <span v-if="!compact" class="font-mono text-[13px] text-slate-500 dark:text-slate-400 font-medium">{{ group.techStack.join(' • ') }}</span>
       </div>
-      <component :is="compact ? 'h4' : 'h3'" :id="`group-heading-${group.id}`" class="font-bold" :class="compact ? 'mt-1 text-base' : 'text-xl'">{{ group.title }}</component>
+      <component :is="compact ? 'h4' : 'h3'" :id="`group-heading-${group.id}`" class="font-bold text-slate-900 dark:text-white" :class="compact ? 'mt-1 text-lg' : 'text-xl sm:text-[22px] sm:leading-snug'">{{ group.title }}</component>
       <div
         :class="[
-          compact ? 'mt-1.5 space-y-2 text-xs leading-relaxed text-slate-600 dark:text-slate-400' : ['space-y-2.5 border-l-2 pl-4 text-sm text-slate-600 dark:text-slate-300', borderClass],
+          compact ? 'mt-2 space-y-2.5 text-[14.5px] leading-[1.65] text-slate-700 dark:text-slate-200' : ['space-y-3 border-l-2 pl-4 text-[15.5px] leading-[1.65] text-slate-700 dark:text-slate-200', borderClass],
           collapsibleOnMobile && !isExpandedMobile ? 'hidden md:block' : 'block'
         ]"
       >
         <p v-for="(section, index) in group.sections" :key="index">
-          <strong v-if="section.label">• {{ section.label }}: </strong><span v-html="section.html" />
+          <strong v-if="section.label" class="text-slate-900 dark:text-white font-bold">• {{ section.label }}: </strong><span v-html="section.html" />
         </p>
       </div>
       <div v-if="collapsibleOnMobile" class="pt-1 md:hidden">
         <button
           type="button"
-          class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 font-mono text-xs font-semibold text-amber-700 transition hover:border-amber-500 hover:bg-white dark:border-slate-800 dark:bg-slate-950 dark:text-amber-400 dark:hover:border-amber-400"
+          class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 font-mono text-[13px] font-semibold text-amber-700 transition hover:border-amber-500 hover:bg-white dark:border-slate-800 dark:bg-slate-950 dark:text-amber-400 dark:hover:border-amber-400"
           :aria-expanded="isExpandedMobile"
           @click="isExpandedMobile = !isExpandedMobile"
         >
           <span>{{ isExpandedMobile ? 'Thu gọn' : 'Xem chi tiết' }}</span>
-          <span class="text-[10px]" aria-hidden="true">{{ isExpandedMobile ? '▲' : '▼' }}</span>
+          <span class="text-xs" aria-hidden="true">{{ isExpandedMobile ? '▲' : '▼' }}</span>
         </button>
       </div>
+      <aside v-if="group.architecture" class="rounded-xl border border-purple-500/25 bg-purple-500/5 p-4 dark:bg-purple-500/10" aria-label="Kiến trúc chịu tải">
+        <p class="text-[15px] font-bold text-purple-800 dark:text-purple-300">Kiến trúc chịu tải</p>
+        <p class="mt-2 break-words font-mono text-[13.5px] leading-6 text-slate-800 dark:text-slate-200">{{ group.architecture }}</p>
+      </aside>
+      <ProjectScreenshots :projects="group.projects" />
       <div v-if="group.links.length" class="rounded-xl border border-slate-200 bg-slate-50 p-3.5 dark:border-slate-800 dark:bg-slate-950">
         <ProductLinks :links="group.links" />
       </div>

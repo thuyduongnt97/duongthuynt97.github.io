@@ -16,18 +16,28 @@ export function useDeliverables(props, emit) {
     ...filter,
     count: groups.filter(group => filter.id === 'all' || group.categories.includes(filter.id)).length,
   }))
-  const visibleGroups = computed(() => groups.filter(group => props.activeCategory === 'all' || group.categories.includes(props.activeCategory)))
+  const navigation = [
+    { id: 'all', label: 'Tất cả mảng công việc', number: null },
+    ...groups.filter(group => !group.isSupporting).map((group, index) => ({
+      id: group.id,
+      label: group.title,
+      number: String(index + 1).padStart(2, '0'),
+      categories: group.categories,
+    })),
+  ]
+  const supportsFilter = category => filters.some(filter => filter.id === category) || groups.some(group => group.id === category)
+  const visibleGroups = computed(() => groups.filter(group => props.activeCategory === 'all' || group.id === props.activeCategory || group.categories.includes(props.activeCategory)))
   const mainGroups = computed(() => visibleGroups.value.filter(group => !group.isSupporting))
   const supportingGroups = computed(() => visibleGroups.value.filter(group => group.isSupporting))
 
   function setFilter(category) {
-    if (filters.some(filter => filter.id === category)) emit('update:activeCategory', category)
+    if (supportsFilter(category)) emit('update:activeCategory', category)
   }
 
   watch(activeFilter, async filter => {
     const legacyCategory = { vue: 'webapp', perf: 'webgis', 'design-system': 'motion' }
     const category = legacyCategory[filter] ?? filter
-    if (!filters.some(item => item.id === category)) return
+    if (!supportsFilter(category)) return
     setFilter(category)
     setActiveFilter(null)
     await nextTick()
@@ -37,5 +47,5 @@ export function useDeliverables(props, emit) {
     })
   })
 
-  return { filters, mainGroups, supportingGroups, setFilter, visibleGroups }
+  return { filters, navigation, mainGroups, supportingGroups, setFilter, visibleGroups }
 }

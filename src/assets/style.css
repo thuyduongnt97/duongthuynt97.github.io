@@ -76,9 +76,9 @@
   --surface-hover: #131c31;
   --border: #1e293b;
   --border-strong: #334155;
-  --text: #f8fafc;
-  --text-muted: #94a3b8;
-  --text-faint: #64748b;
+  --text: #ffffff;
+  --text-muted: #cbd5e1;
+  --text-faint: #94a3b8;
 
   --violet: hsl(252 82% 74%);
   --cyan: hsl(188 65% 62%);
@@ -240,7 +240,7 @@ body {
   font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.65;
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -248,6 +248,27 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   transition: background-color .2s ease, color .2s ease;
+}
+
+strong, b {
+  font-weight: 700;
+  color: #0f172a;
+}
+.dark strong, .dark b {
+  color: #ffffff;
+}
+
+.dark p, .dark li {
+  color: #cbd5e1;
+}
+
+.tech-highlight-amber {
+  color: #fbbf24 !important;
+  font-weight: 700;
+}
+.tech-highlight-cyan {
+  color: #38bdf8 !important;
+  font-weight: 700;
 }
 
 @supports (overflow: clip) {

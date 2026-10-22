@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
-    content="CV Nguyễn Thị Thùy Dương — Software Engineer. Kinh nghiệm Vue.js, Svelte, Laravel, WebGIS và AdTech.">
+    content="CV Nguyễn Thị Thùy Dương — Software Engineer (Fullstack Vue.js &amp; PHP/Laravel). 7 năm kinh nghiệm phát triển ứng dụng web và sản phẩm AdTech tại VCCorp.">
   <meta name="color-scheme" content="light">
-  <title>CV — Nguyễn Thị Thùy Dương — Software Engineer</title>
+  <title>CV — Nguyễn Thị Thùy Dương — Software Engineer (Fullstack Vue.js &amp; PHP/Laravel)</title>
   <style>
     @page {
       size: A4;
@@ -378,6 +378,26 @@
       color: inherit;
     }
 
+    .cv-page--continued .continuation-header {
+      margin-bottom: 10px;
+    }
+
+    .cv-page--continued section {
+      margin-top: 8px;
+    }
+
+    .cv-page--continued .project {
+      margin-top: 5.5px;
+    }
+
+    .cv-page--continued .school {
+      margin-top: 9px;
+    }
+
+    .cv-page--continued .education {
+      margin-top: 8px;
+    }
+
     @media screen and (max-width: 820px) {
       .toolbar {
         padding: 0 16px;
@@ -502,7 +522,7 @@
         <header class="cv-header">
           <div class="header-main">
             <h1>Nguyễn Thị Thùy Dương</h1>
-            <p class="title-role">Software Engineer</p>
+            <p class="title-role">Software Engineer (Fullstack Vue.js &amp; PHP/Laravel)</p>
             <div class="contact-info">
               <a href="tel:+84983688206">(+84) 983 688 206</a>
               <a href="mailto:duongthuynt97@gmail.com">duongthuynt97@gmail.com</a>
@@ -526,19 +546,21 @@
 
         <section aria-labelledby="summary-heading">
           <h2 id="summary-heading">Tóm tắt chuyên môn</h2>
-          <p class="summary"><strong>Software Engineer với 7 năm kinh nghiệm</strong> phát triển ứng dụng web và công cụ
-            nội bộ bằng <strong>Vue.js, Svelte và PHP/Laravel</strong>. Tập trung vào Core Box / Embeddable Widget,
-            WebGIS, Landing Page chiến dịch, Emagazine và AdTech / Dynamic QR &amp; Shortlink; tham gia từ xây dựng giao
-            diện, tích hợp API đến tối ưu dữ liệu, hiệu năng và bảo trì.</p>
+          <p class="summary"><strong>Software Engineer với 7 năm kinh nghiệm phát triển toàn diện (Fullstack)</strong>
+            các ứng dụng web, công cụ nội bộ và sản phẩm AdTech tại VCCorp. Thế mạnh kết hợp giữa
+            phát triển <strong>Backend (PHP/Laravel, MySQL, tối ưu tải cao với Redis Cache, bảo mật hệ thống)</strong> và
+            <strong>Frontend chuyên sâu (Vue.js 2/3, Svelte, kiến trúc Core Widget nhúng độc lập, bản đồ số WebGIS)</strong>.
+            <strong>3 lần đạt danh hiệu Nhân viên Xuất sắc VCCorp (2022, 2023, 2025).</strong>
+          </p>
         </section>
 
         <section aria-labelledby="skills-heading">
           <h2 id="skills-heading">Kỹ năng chuyên môn</h2>
           <div class="skills-grid">
             <div class="skill-item">
-              <h3>Frontend &amp; Interactive UI <span>· 7+ năm</span></h3>
-              <p>HTML5, CSS3/SCSS, JavaScript ES6+, jQuery, Tailwind CSS; responsive PC/Mobile, Core Web Vitals; GSAP,
-                ScrollTrigger, TweenMax, Draggable.</p>
+              <h3>Backend &amp; AdTech <span>· 6+ năm</span></h3>
+              <p>PHP, Laravel, CodeIgniter, REST API; MySQL, Redis Cache; bảo trì và vá lỗi bảo mật AdServing,
+                TagManager, Adsponsor; Git; AI Workflow (Codex, Antigravity, Gemini).</p>
             </div>
             <div class="skill-item">
               <h3>Frontend Frameworks <span>· 5.5+ năm</span></h3>
@@ -546,14 +568,14 @@
                 component và widget nhúng.</p>
             </div>
             <div class="skill-item">
+              <h3>Frontend &amp; Interactive UI <span>· 7+ năm</span></h3>
+              <p>HTML5, CSS3/SCSS, JavaScript ES6+, jQuery, Tailwind CSS; responsive PC/Mobile, Core Web Vitals; GSAP,
+                ScrollTrigger, TweenMax, Draggable.</p>
+            </div>
+            <div class="skill-item">
               <h3>WebGIS &amp; Spatial Data <span>· 4+ năm</span></h3>
               <p>QGIS, Geometry Simplification, làm sạch GeoJSON; Leaflet.js, Marker Clustering, MapSVG.js và Chart.js.
               </p>
-            </div>
-            <div class="skill-item">
-              <h3>Backend &amp; AdTech <span>· 6+ năm</span></h3>
-              <p>PHP, Laravel, CodeIgniter, REST API; MySQL, Redis Cache; bảo trì và vá lỗi bảo mật AdServing,
-                TagManager, Adsponsor; Git.</p>
             </div>
           </div>
         </section>
@@ -564,18 +586,68 @@
             <h3 class="company">Công ty Cổ phần VCCorp</h3>
             <span class="period">2019 – Hiện tại · Hà Nội</span>
           </div>
-          <p class="role">Software Engineer</p>
-          <p class="career-note">01/2025 – 08/2025: Nghỉ sinh em bé; trở lại công việc từ 08/2025.</p>
+          <p class="role">Fullstack Software Engineer</p>
 
           <div class="project">
-            <h3>01. Bản đồ số Cổng thông tin Nhà nước &amp; Báo Giao Thông <span class="project-period">· 2021 –
+            <h3>01. Hệ thống Dynamic QR / Shortlink, AdsDemo &amp; Bảo trì AdTech <span class="project-period">· 2019 –
+                Nay</span></h3>
+            <p class="tech-stack">Laravel · Vue.js · MySQL · Redis Cache · REST API · Security Patching</p>
+            <ul>
+              <li>Phát triển Fullstack hệ thống <strong>Dynamic QR &amp; Shortlink</strong>: trực tiếp thiết kế CSDL
+                MySQL, xây dựng trang quản trị (Laravel/Vue.js) và đồng bộ dữ liệu link lên Redis phục vụ luồng chuyển
+                hướng tải cao (<strong>~10.000 clicks/link/ngày</strong>); cho phép đổi URL đích của mã QR mà không cần
+                in lại ấn phẩm.</li>
+              <li>Tích hợp <strong>REST API từ hệ thống Log</strong> để xử lý và hiển thị báo cáo thống kê lượt click
+                theo vị trí địa lý (location), thiết bị (device) và nguồn truy cập (referer).</li>
+              <li>Phát triển <strong>Ads Demo Simulator</strong> để xem trước quảng cáo Sponsor, Video, HTML5,
+                Collection trong ngữ cảnh web PC/Mobile; hỗ trợ đóng gói chia sẻ nhanh qua Shortlink/QR.</li>
+              <li>Bảo trì, tối ưu truy vấn và vá lỗi bảo mật (Security Patching) cho các hệ thống <strong>AdServing,
+                  Tag Manager, Adsponsor</strong>; từng vận hành công cụ khai thác vị trí quảng cáo (2019-2020).</li>
+            </ul>
+            <p class="samples">Sản phẩm:
+              <a href="https://short.bizfly.vn/" target="_blank" rel="noopener noreferrer">short.bizfly.vn</a><span
+                class="separator">|</span><a href="https://adsdemo.admicro.vn" target="_blank"
+                rel="noopener noreferrer">adsdemo.admicro.vn</a> (cần tài khoản nội bộ).
+            </p>
+          </div>
+
+          <div class="project">
+            <h3>02. Quản lý Template, Box Widget &amp; A/B Testing <span class="project-period">· 2024</span></h3>
+            <p class="tech-stack">Laravel · Vue.js · REST API · State Management · BigData Reporting</p>
+            <ul>
+              <li>Xây dựng hệ thống quản lý Template (Laravel/Vue.js) và kiến trúc <strong>Box Widget độc lập</strong>
+                để nhúng lên hệ thống báo điện tử.</li>
+              <li>Phát triển giao diện cấu hình kịch bản thử nghiệm cho các box Recommendation; tích hợp API từ BigData
+                để hiển thị báo cáo đối chiếu <strong>A/B Testing</strong> và theo dõi hiệu quả.</li>
+            </ul>
+          </div>
+
+        </section>
+      </div>
+      <footer class="page-footer"><span>Nguyễn Thị Thùy Dương · Fullstack Software Engineer</span><span>01 / 02</span></footer>
+    </article>
+
+    <article class="cv-page cv-page--continued" aria-label="Trang 2">
+      <div class="page-content">
+        <header class="continuation-header"><strong>Nguyễn Thị Thùy Dương</strong><span>Fullstack Software Engineer · Kinh nghiệm
+            &amp; Học vấn</span></header>
+        <section aria-labelledby="continued-heading">
+          <h2 id="continued-heading">Kinh nghiệm làm việc · tiếp</h2>
+          <div class="exp-header">
+            <h3 class="company">Công ty Cổ phần VCCorp</h3>
+            <span class="period">2019 – Hiện tại</span>
+          </div>
+
+          <div class="project">
+            <h3>03. Bản đồ số Cổng thông tin Nhà nước &amp; Báo Giao Thông <span class="project-period">· 2021 –
                 Nay</span></h3>
             <p class="tech-stack">Vue.js · QGIS · GeoJSON · Leaflet.js · Marker Clustering · MapSVG.js · TweenMax</p>
             <ul>
-              <li>Triển khai module bản đồ cho <strong>02 Cổng thông tin Nhà nước</strong> về cảnh báo thiên tai – lũ
-                lụt và an toàn thực phẩm từ 08/2025.</li>
-              <li>Dùng QGIS giản lược hình học, làm sạch GeoJSON; kết hợp Leaflet Marker Clustering hiển thị hàng nghìn
-                điểm tọa độ mượt trên di động.</li>
+              <li>Làm chủ luồng dữ liệu không gian cho <strong>02 Cổng thông tin Nhà nước</strong> (Cảnh báo thiên tai –
+                lũ lụt &amp; An toàn thực phẩm).</li>
+              <li>Dùng <strong>QGIS Geometry Simplification</strong> giản lược hình học &amp; làm sạch GeoJSON; kết hợp
+                Leaflet Marker Clustering (Canvas renderer) render mượt hàng nghìn điểm tọa độ ở chuẩn <strong>60
+                  FPS</strong> trên di động.</li>
               <li>Xây dựng <strong>02 chuyên đề bản đồ tương tác Báo Giao Thông</strong> (2021–2023): Cao tốc Bắc – Nam
                 và Hầm đường bộ, với giao diện riêng cho PC/Mobile.</li>
             </ul>
@@ -588,63 +660,18 @@
           </div>
 
           <div class="project">
-            <h3>02. Quản lý Template, Box Widget &amp; A/B Testing <span class="project-period">· 2024</span></h3>
-            <p class="tech-stack">Laravel · Vue.js · REST API · State Management · BigData Reporting</p>
-            <ul>
-              <li>Làm Frontend cho công cụ quản lý Template và dựng <strong>Box Widget độc lập</strong> để nhúng lên hệ
-                thống báo điện tử.</li>
-              <li>Xây dựng giao diện cấu hình thử nghiệm cho các box Recommendation; tích hợp API từ BigData để hiển thị
-                báo cáo <strong>A/B Testing</strong> và theo dõi hiệu quả.</li>
-            </ul>
-          </div>
-
-          <div class="project">
-            <h3>03. Core Box Feature &amp; Banner PR <span class="project-period">· 08/2025 – Nay</span></h3>
+            <h3>04. Core Box Feature &amp; Banner PR <span class="project-period">· 08/2025 – Nay</span></h3>
             <p class="tech-stack">Svelte · Vue.js · Component Architecture · DOM Injection · CSS Animation</p>
             <ul>
-              <li>Viết core và triển khai box chiến dịch trên <strong>Kenh14, Soha</strong>: <strong>Sticky Box neo màn
-                  hình</strong> và <strong>Inline Box giữa bài</strong>, nhúng độc lập và hạn chế ảnh hưởng đến bố cục
-                trang báo.</li>
+              <li>Thiết kế kiến trúc core bằng <strong>Svelte/Vue.js</strong> và triển khai box chiến dịch trên
+                <strong>Kenh14, Soha</strong> (Sticky Box neo màn hình và Inline Box giữa bài), đảm bảo cơ chế nhúng độc
+                lập, cô lập CSS/JS và không gây xô lệch bố cục (CLS) trang báo.</li>
             </ul>
             <p class="samples">Minh họa:
               <a href="https://kenh14.vn/do-noi-tieng-cua-vi-hon-the-ronaldo-hon-ca-vo-messi-va-victoria-beckham-cong-lai-xung-danh-wag-quyen-luc-nhat-world-cup-2026-215260617140236789.chn"
-                target="_blank" rel="noopener noreferrer">Kenh14 · Box Sticky</a><span class="separator">/</span><a
+                target="_blank" rel="noopener noreferrer">Kenh14 Box Sticky</a><span class="separator">|</span><a
                 href="https://soha.vn/lich-thi-dau-asiad-ngay-20-9-the-thao-viet-nam-mo-hang-huy-chuong-198260920081317925.htm"
-                target="_blank" rel="noopener noreferrer">Soha · Box Inline</a>
-            </p>
-          </div>
-        </section>
-      </div>
-      <footer class="page-footer"><span>Nguyễn Thị Thùy Dương · Software Engineer</span><span>01 / 02</span></footer>
-    </article>
-
-    <article class="cv-page" aria-label="Trang 2">
-      <div class="page-content">
-        <header class="continuation-header"><strong>Nguyễn Thị Thùy Dương</strong><span>Software Engineer · Kinh nghiệm
-            &amp; Học vấn</span></header>
-        <section aria-labelledby="continued-heading">
-          <h2 id="continued-heading">Kinh nghiệm làm việc · tiếp</h2>
-          <div class="exp-header">
-            <h3 class="company">Công ty Cổ phần VCCorp</h3>
-            <span class="period">2019 – Hiện tại</span>
-          </div>
-
-          <div class="project">
-            <h3>04. Dynamic QR / Shortlink, AdsDemo &amp; Bảo trì AdTech <span class="project-period">· 2019 –
-                Nay</span></h3>
-            <p class="tech-stack">Laravel · Vue.js · MySQL · Redis Cache · REST API · Security Patching</p>
-            <ul>
-              <li>Xây dựng công cụ quản trị <strong>Dynamic QR &amp; Shortlink</strong>: thiết kế CSDL <strong>MySQL</strong> và đồng bộ dữ liệu link lên <strong>Redis</strong> phục vụ luồng chuyển hướng tải cao (<strong>~10.000 clicks/link/ngày</strong>); cho phép đổi URL đích của mã QR mà không cần in lại ấn phẩm.</li>
-              <li>Tích hợp API từ hệ thống Log để hiển thị báo cáo thống kê lượt click theo vị trí địa lý (location), thiết bị (device) và nguồn truy cập (referer).</li>
-              <li>Phát triển <strong>Ads Demo Simulator</strong> để xem trước quảng cáo Sponsor, Video, HTML5,
-                Collection trong ngữ cảnh web PC/Mobile; hỗ trợ chia sẻ qua Shortlink/QR.</li>
-              <li>Bảo trì và vá lỗi bảo mật cho <strong>AdServing, TagManager, Adsponsor</strong>; từng vận hành công cụ
-                khai thác vị trí quảng cáo (2019–2020).</li>
-            </ul>
-            <p class="samples">Sản phẩm:
-              <a href="https://short.bizfly.vn/" target="_blank" rel="noopener noreferrer">short.bizfly.vn</a><span
-                class="separator">/</span><a href="https://adsdemo.admicro.vn" target="_blank"
-                rel="noopener noreferrer">adsdemo.admicro.vn</a> (cần tài khoản nội bộ)
+                target="_blank" rel="noopener noreferrer">Soha Box Inline</a>
             </p>
           </div>
 
@@ -669,8 +696,7 @@
             <ul>
               <li>Tích hợp <strong>Camera và API nhận diện khuôn mặt</strong> để vinh danh nhân viên; xây dựng minigame
                 vòng quay Canvas cho hoạt động nội bộ.</li>
-              <li>Ứng dụng <strong>AI Agent từ 08/2025</strong> trong quá trình triển khai bản đồ số, Core Box Feature
-                và Landing Page.</li>
+              <li>Ứng dụng kết hợp bộ 3 công cụ AI (Codex, Antigravity, Gemini) từ 08/2025 vào quy trình phát triển: hỗ trợ phân tích &amp; refactor code Fullstack (Laravel/Vue.js), tự động hóa chuẩn hóa dữ liệu bản đồ số (GeoJSON), dựng kiến trúc Core Box Feature (Svelte) và rút ngắn thời gian triển khai Landing Page.</li>
             </ul>
           </div>
 

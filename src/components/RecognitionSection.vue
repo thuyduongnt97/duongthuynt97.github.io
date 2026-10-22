@@ -11,11 +11,11 @@ import { recognition } from '../data/recognition'
           class="spotlight-card flex h-full items-start gap-4 rounded-2xl border p-5"
           :class="item.id === 'ai-workflow' ? 'border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 via-white to-white dark:from-emerald-500/10 dark:via-slate-900/90 dark:to-slate-900/90' : 'border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/80'"
         >
-          <span class="flex size-11 shrink-0 items-center justify-center rounded-xl border text-lg" :class="item.color === 'amber' ? 'border-amber-500/40 bg-amber-500/20 text-amber-500' : item.color === 'cyan' ? 'border-cyan-500/30 bg-cyan-500/15 text-cyan-600 dark:text-cyan-400' : 'border-emerald-500/30 bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'" aria-hidden="true">{{ item.emoji }}</span>
+          <span class="flex size-12 shrink-0 items-center justify-center rounded-xl border text-xl" :class="item.color === 'amber' ? 'border-amber-500/40 bg-amber-500/20 text-amber-500' : item.color === 'cyan' ? 'border-cyan-500/30 bg-cyan-500/15 text-cyan-600 dark:text-cyan-400' : 'border-emerald-500/30 bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'" aria-hidden="true">{{ item.emoji }}</span>
           <div class="min-w-0">
-            <span class="font-mono text-xs font-bold uppercase tracking-wider" :class="item.color === 'amber' ? 'text-amber-700 dark:text-amber-400' : item.color === 'cyan' ? 'text-cyan-700 dark:text-cyan-400' : 'text-emerald-700 dark:text-emerald-400'">{{ item.badge }}</span>
-            <h3 class="mt-0.5 text-base font-bold">{{ item.title }}</h3>
-            <p class="mt-1 text-xs leading-relaxed text-slate-600 dark:text-slate-400">{{ item.description }}</p>
+            <span class="font-mono text-[13px] font-bold uppercase tracking-wider" :class="item.color === 'amber' ? 'text-amber-700 dark:text-amber-400' : item.color === 'cyan' ? 'text-cyan-700 dark:text-cyan-400' : 'text-emerald-700 dark:text-emerald-400'">{{ item.badge }}</span>
+            <h3 class="mt-1 text-[17px] sm:text-[18px] font-bold text-slate-900 dark:text-white">{{ item.title }}</h3>
+            <p class="mt-1.5 text-[14.5px] sm:text-[15px] leading-relaxed text-slate-700 dark:text-[#CBD5E1]">{{ item.description }}</p>
           </div>
         </article>
       </div>

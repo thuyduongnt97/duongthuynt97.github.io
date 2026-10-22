@@ -6,15 +6,16 @@ import { useDeliverables } from '../composables/useDeliverables'
 
 const props = defineProps({ activeCategory: { type: String, default: 'all' } })
 const emit = defineEmits(['update:activeCategory'])
-const { filters, mainGroups, supportingGroups, setFilter, visibleGroups } = useDeliverables(props, emit)
+const { navigation, mainGroups, supportingGroups, setFilter, visibleGroups } = useDeliverables(props, emit)
 const filterStrip = ref(null)
 
-const featuredGroupIds = ['spatial-maps', 'template-widgets', 'core-box-features', 'adtech-tools']
+const featuredGroupIds = ['adtech-tools', 'template-widgets', 'core-box-features', 'spatial-maps']
+const isActive = item => props.activeCategory === item.id || item.categories?.includes(props.activeCategory)
 
 // Run after the active button renders, before the skill click's vertical scroll.
 watch(() => props.activeCategory, category => {
   if (!window.matchMedia('(max-width: 1023px)').matches) return
-  filterStrip.value?.querySelector(`#filter-${category}`)?.scrollIntoView({
+  filterStrip.value?.querySelector('[aria-pressed="true"]')?.scrollIntoView({
     behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
     inline: 'center',
     block: 'nearest',
@@ -29,8 +30,8 @@ watch(() => props.activeCategory, category => {
       <div class="min-w-0 space-y-5 lg:sticky lg:top-24 lg:col-span-4">
         <div>
           <span class="font-mono text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-500">{{ deliverablesSection.eyebrow }}</span>
-          <h2 id="deliverables-heading" class="mt-1 text-2xl font-extrabold sm:text-3xl">{{ deliverablesSection.title }}</h2>
-          <p class="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">{{ deliverablesSection.description }}</p>
+          <h2 id="deliverables-heading" class="mt-1 text-2xl font-extrabold sm:text-[32px] sm:leading-tight text-slate-900 dark:text-white">{{ deliverablesSection.title }}</h2>
+          <p class="mt-2 text-[15.5px] leading-relaxed text-slate-600 dark:text-slate-300">{{ deliverablesSection.description }}</p>
         </div>
         <div
           ref="filterStrip"
@@ -39,14 +40,14 @@ watch(() => props.activeCategory, category => {
           aria-label="Lọc danh mục dự án"
         >
           <button
-            v-for="filter in filters" :id="`filter-${filter.id}`" :key="filter.id"
-            type="button" :aria-pressed="activeCategory === filter.id" aria-controls="project-results"
-            class="flex min-h-11 shrink-0 items-center justify-between gap-3 whitespace-nowrap rounded-xl border px-3.5 py-2 text-left text-xs transition-colors sm:text-sm lg:w-full"
-            :class="activeCategory === filter.id ? 'border-amber-500 bg-amber-500 font-bold text-slate-950' : 'border-slate-200 bg-white font-medium hover:border-amber-500 dark:border-slate-800 dark:bg-slate-900'"
+            v-for="filter in navigation" :id="'filter-' + filter.id" :key="filter.id"
+            type="button" :aria-pressed="Boolean(isActive(filter))" aria-controls="project-results"
+            class="flex min-h-12 w-64 max-w-[80vw] shrink-0 items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left text-[15px] font-semibold leading-relaxed transition-colors lg:w-full lg:max-w-none shadow-sm"
+            :class="isActive(filter) ? 'border-amber-500 bg-amber-500 font-bold text-slate-950 shadow-md shadow-amber-500/20' : 'border-slate-200 bg-white hover:border-amber-500 dark:border-slate-800 dark:bg-slate-900 text-slate-800 dark:text-slate-200'"
             @click="setFilter(filter.id)"
           >
             <span>{{ filter.label }}</span>
-            <span class="shrink-0 font-mono text-xs" aria-hidden="true">{{ filter.id === 'all' ? 'Full' : String(filter.count).padStart(2, '0') }}</span>
+            <span class="shrink-0 font-mono text-[13px] font-bold" aria-hidden="true">{{ filter.number || 'Tất cả' }}</span>
           </button>
         </div>
       </div>

@@ -6,7 +6,7 @@ const year = new Date().getFullYear()
 
 <template>
   <footer id="contact" class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#04060A] pt-14 pb-24 md:pb-14 transition-colors">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+    <div class="max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
       <div class="min-w-0 break-words">
         <div class="inline-flex items-center gap-2 text-xs font-mono text-amber-500 mb-2">
           <span>● {{ profile.availability }}</span>

@@ -62,10 +62,10 @@ onBeforeUnmount(() => {
     class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl transition-shadow dark:border-slate-800/80 dark:bg-[#06090F]/85"
     :class="{ 'shadow-sm': scrollY > 12 }"
   >
-    <div class="mx-auto flex h-16 max-w-7xl flex-nowrap items-center justify-between gap-2 px-4 sm:gap-4 sm:px-6">
-      <a href="#home" class="group flex shrink-0 items-center gap-2 sm:gap-3" aria-label="Nguyễn Thị Thùy Dương — Về đầu trang" @click="closeMobileMenu">
+    <div class="mx-auto flex h-16 max-w-[1380px] flex-nowrap items-center justify-between gap-2 px-4 sm:gap-4 sm:px-6">
+      <a href="#home" class="group flex min-w-0 items-center gap-2 sm:gap-3" aria-label="Nguyễn Thị Thùy Dương — Về đầu trang" @click="closeMobileMenu">
         <span class="flex size-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 font-mono text-base font-extrabold text-slate-950 shadow-lg shadow-amber-500/20">{{ profile.initial }}</span>
-        <span class="flex flex-col whitespace-nowrap">
+        <span class="flex min-w-0 flex-col whitespace-nowrap">
           <span class="flex items-center gap-2">
             <span class="text-sm font-bold tracking-tight sm:text-base">
               <span class="sm:hidden">{{ profile.shortName }}</span>
@@ -73,7 +73,7 @@ onBeforeUnmount(() => {
             </span>
             <span class="hidden rounded-md border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 font-mono text-[11px] font-semibold text-amber-700 xl:inline-block dark:text-amber-400">{{ profile.experienceYears }} Năm KN</span>
           </span>
-          <span class="font-mono text-[10px] text-slate-500 sm:text-xs dark:text-slate-400">
+          <span class="truncate font-mono text-[10px] text-slate-500 sm:text-xs dark:text-slate-400" :title="profile.roleSummary">
             {{ profile.roleSummary }}
           </span>
         </span>

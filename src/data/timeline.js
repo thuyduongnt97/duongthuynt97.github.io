@@ -1,14 +1,13 @@
 /**
  * =====================================================
  *  LỘ TRÌNH SỰ NGHIỆP & HỌC VẤN (2015 – HIỆN TẠI)
- *  5 mốc bám 1:1 #timeline trong reference-redesign.html.
- *  `bulletPoints` chứa HTML tĩnh (<strong>) — render bằng v-html.
+ *  Nhóm theo tổ chức; các giai đoạn dự án nằm trong mốc VCCorp.
+ *  bulletPoints chứa HTML tĩnh (<strong>) — render bằng v-html.
  * =====================================================
  */
 
-import { profile } from './profile.js'
-
 /** @typedef {import('../types/portfolio.js').TimelineMilestone} TimelineMilestone */
+/** @typedef {import('../types/portfolio.js').TimelineGroup} TimelineGroup */
 
 export const timelineSection = {
   eyebrow: '03 / Lộ trình sự nghiệp',
@@ -23,23 +22,19 @@ export const careerMilestones = [
     // pill = nhãn nền đặc (mốc hiện tại); text = chữ màu đơn giản
     periodStyle: 'pill',
     color: 'amber',
-    role: profile.title,
+    role: 'Core Box Feature, WebGIS & Landing Page',
     company: 'Công ty Cổ phần VCCorp',
     location: 'Hà Nội',
     isCurrent: true,
     award: 'Nhân viên Xuất sắc 2025',
-    note: '[01/2025 – 08/2025: Nghỉ sinh em bé]',
-    badges: [
-      { label: '🏆 Nhân viên Xuất sắc 2025', color: 'emerald' },
-      { label: '[01/2025 – 08/2025: Nghỉ sinh em bé]', color: 'slate' },
-    ],
+    badges: [{ label: '🏆 Nhân viên Xuất sắc 2025', color: 'emerald' }],
     bulletPoints: [
-      'Triển khai <strong>Module Bản đồ số cho 02 Cổng thông tin</strong> (Cảnh báo thiên tai - lũ lụt; An toàn thực phẩm): dùng <strong>QGIS</strong> tiền xử lý, giản lược hình học &amp; làm sạch GeoJSON; áp dụng <strong>Marker Clustering</strong> hiển thị mượt hàng nghìn điểm tọa độ trên di động.',
-      'Nhận bàn giao phần công việc của đội Landing Page/Microsite, maintain các dự án cũ, làm các dự án mới (tiêu biểu: <strong>OMO, Athena...</strong>) với GSAP ScrollTrigger; cắt các <strong>box core (Sticky &amp; Inline)</strong> chạy dự án feature trên Kenh14, Soha.',
-      'Kết nối Camera &amp; API nhận diện khuôn mặt cho sự kiện vinh danh; ứng dụng <strong>AI Agent</strong> vào quy trình làm việc.',
+      'Chủ trì tối ưu dữ liệu không gian <strong>Module Bản đồ số 02 Cổng thông tin</strong> (Cảnh báo thiên tai - lũ lụt; An toàn thực phẩm): dùng <strong>QGIS</strong> giản lược hình học &amp; làm sạch GeoJSON; áp dụng <strong>Marker Clustering</strong> render mượt hàng nghìn điểm tọa độ ở <strong>60 FPS</strong> trên di động.',
+      'Thiết kế kiến trúc <strong>Core Box Feature bằng Svelte/Vue.js</strong>, triển khai Sticky &amp; Inline Box trên Kenh14, Soha với cơ chế nhúng độc lập, cô lập CSS/JS và kiểm soát CLS; phát triển, bảo trì Landing Page/Microsite (tiêu biểu: <strong>OMO, Athena...</strong>) với GSAP ScrollTrigger.',
+      'Kết nối Camera &amp; API nhận diện khuôn mặt cho sự kiện vinh danh; kết hợp bộ 3 công cụ AI (<strong class="text-cyan-400 font-bold">Codex, Antigravity, Gemini</strong>) từ 08/2025 vào quy trình phát triển: hỗ trợ phân tích &amp; refactor code Fullstack (<strong class="text-cyan-400 font-bold">Laravel/Vue.js</strong>), tối ưu truy vấn MySQL/Redis, chuẩn hóa GeoJSON và dựng nhanh component Core Widget.',
     ],
     summary:
-      'Triển khai Module Bản đồ số cho 02 Cổng thông tin Nhà nước; tiếp nhận & phát triển Landing Page (OMO, Athena); cắt Core Box Feature (Sticky & Inline) trên Kenh14, Soha và ứng dụng AI Agent vào quy trình làm việc.',
+      'Triển khai WebGIS cho 02 Cổng thông tin Nhà nước; thiết kế Core Box Feature (Svelte/Vue.js, Sticky & Inline) trên Kenh14, Soha; phát triển Landing Page (OMO, Athena) và ứng dụng bộ 3 AI (Codex, Antigravity, Gemini) vào quy trình làm việc.',
     icon: 'sparkle',
   },
   {
@@ -47,17 +42,17 @@ export const careerMilestones = [
     period: 'Năm 2024',
     periodStyle: 'text',
     color: 'emerald',
-    role: 'Frontend Developer (Template, Widget & A/B Testing)',
+    role: 'Quản lý Template, Box Widget & A/B Testing',
     company: 'VCCorp',
     location: 'Hà Nội',
     isCurrent: false,
     badges: [],
     bulletPoints: [
-      'Làm Frontend (<strong>Laravel, Vue.js</strong>) cho tool quản lý Template và dựng các <strong>Box Widget</strong> mang đi cắm lên hệ thống site.',
-      'Xây dựng giao diện quản lý các thử nghiệm (Experiments) và theo dõi số liệu <strong>A/B Testing</strong> của các box Recommendation từ dữ liệu BigData.',
+      'Xây dựng hệ thống quản lý Template bằng <strong class="text-cyan-400 font-bold">Laravel/Vue.js</strong> và kiến trúc <strong class="text-white font-bold">Box Widget độc lập</strong> để nhúng lên hệ thống báo điện tử.',
+      'Phát triển giao diện cấu hình kịch bản thử nghiệm cho các box Recommendation; tích hợp <strong>REST API từ BigData</strong> để hiển thị báo cáo đối chiếu <strong>A/B Testing</strong> và theo dõi hiệu quả.',
     ],
     summary:
-      'Làm Frontend cho tool quản lý Template, dựng các Box Widget mang đi cắm lên hệ thống site; xây dựng giao diện thử nghiệm và theo dõi số liệu A/B Testing của các box Recommendation từ dữ liệu BigData.',
+      'Xây dựng hệ thống quản lý Template (Laravel/Vue.js), Box Widget nhúng độc lập và giao diện cấu hình thử nghiệm; tích hợp REST API từ BigData để đối chiếu A/B Testing cho các box Recommendation.',
     icon: 'layers',
   },
   {
@@ -65,19 +60,19 @@ export const careerMilestones = [
     period: '2021 – 2023',
     periodStyle: 'text',
     color: 'purple',
-    role: 'Web Developer (AdTech Tools & Interactive Media)',
+    role: 'Dynamic QR / Shortlink, AdsDemo & Interactive Media',
     company: 'VCCorp',
     location: 'Hà Nội',
     isCurrent: false,
     award: 'Nhân viên Xuất sắc 2022 & 2023',
     badges: [{ label: '🏆 Nhân viên Xuất sắc 2022 & 2023', color: 'amber' }],
     bulletPoints: [
-      'Xây dựng công cụ quản trị <strong>Dynamic QR &amp; Shortlink (short.bizfly.vn)</strong>, thiết kế MySQL, đồng bộ dữ liệu link lên Redis phục vụ luồng chuyển hướng (~10.000 clicks/link/ngày) và tích hợp API Log hiển thị thống kê (location, device, referer); triển khai <strong>Tool AdsDemo (adsdemo.admicro.vn)</strong>.',
-      'Maintain và vá lỗi bảo mật (Security Bug Fixes) cho các dự án <strong>AdServing</strong> và <strong>TagManager</strong>.',
-      'Xây dựng 02 trang tương tác bản đồ cho <strong>Báo Giao Thông</strong> (Tuyến cao tốc &amp; Hầm đi bộ) bằng <strong>MapSVG.js, TweenMax, Draggable</strong>; tham gia cắt một số bài <strong>Emagazine chuyên đề (BĐS, Công nghệ) trên báo CafeF</strong>.',
+      'Phát triển Fullstack <strong class="text-white font-bold">Dynamic QR &amp; Shortlink (short.bizfly.vn)</strong> từ CSDL MySQL, <strong class="text-cyan-400 font-bold">Laravel</strong> và <strong class="text-amber-400 font-bold">Redis Cache</strong> đến dashboard <strong class="text-cyan-400 font-bold">Vue.js</strong>; tối ưu chuyển hướng <strong class="text-amber-400 font-bold">~10.000 clicks/link/ngày</strong>, <strong class="text-amber-400 font-bold">hơn 2 triệu clicks</strong> tổng cộng. Tích hợp REST API từ hệ thống Log để hiển thị analytics theo location, device, referer; cho phép đổi URL đích mà không cần in lại ấn phẩm.',
+      'Phát triển <strong>AdsDemo</strong> xem trước, chia sẻ quảng cáo trong ngữ cảnh web PC/Mobile qua Shortlink/QR; bảo trì, tối ưu truy vấn và vá lỗi bảo mật cho <strong>AdServing, TagManager, Adsponsor</strong>.',
+      'Xây dựng 02 trang tương tác bản đồ cho <strong>Báo Giao Thông</strong> (Tuyến cao tốc &amp; Hầm đường bộ) bằng <strong>MapSVG.js, TweenMax, Draggable</strong>; phát triển các bài <strong>Emagazine chuyên đề (BĐS, Công nghệ) trên báo CafeF</strong>.',
     ],
     summary:
-      'Xây dựng công cụ quản trị Dynamic QR & Shortlink (short.bizfly.vn), thiết kế MySQL, đồng bộ dữ liệu link lên Redis phục vụ luồng chuyển hướng (~10.000 clicks/link/ngày) và tích hợp API Log hiển thị thống kê (location, device, referer); triển khai Tool AdsDemo; maintain & vá lỗi bảo mật AdServing, TagManager; làm bản đồ tương tác Báo Giao Thông và Emagazine CafeF.',
+      'Làm chủ Dynamic QR/Shortlink từ kiến trúc đến vận hành: ~10.000 clicks/link/ngày, hơn 2 triệu clicks tổng cộng; Redis tối ưu redirect, REST API analytics và đổi URL không cần in lại ấn phẩm. Phát triển AdsDemo, bản đồ tương tác Báo Giao Thông, Emagazine CafeF; bảo trì AdServing, TagManager và Adsponsor.',
     icon: 'briefcase',
   },
   {
@@ -116,5 +111,29 @@ export const careerMilestones = [
     summary:
       'Tốt nghiệp Kỹ sư Phần mềm; đạt Giải Ba NCKH (05/2019) với đề tài phần mềm R và thuật toán phân cụm K-Means; tham gia CLB Mã nguồn mở và Tổ chuyển giao công nghệ, xây dựng phần mềm Quản lý Tuyển sinh & Đào tạo bằng PHP (CodeIgniter, Laravel).',
     icon: 'cap',
+  },
+]
+
+/** @type {TimelineGroup[]} */
+export const careerTimeline = [
+  {
+    id: 'vccorp',
+    period: '2019 – Hiện tại',
+    periodStyle: 'pill',
+    color: 'amber',
+    role: 'Fullstack Software Engineer',
+    company: 'Công ty Cổ phần VCCorp',
+    location: 'Hà Nội',
+    isCurrent: true,
+    tenure: '7 năm gắn bó và phát triển sản phẩm',
+    badges: [],
+    bulletPoints: [],
+    summary: 'Phát triển sản phẩm end-to-end với Vue.js/Svelte, PHP/Laravel, MySQL và Redis Cache; mở rộng từ nền tảng AdTech đến Web App, Core Widget và WebGIS.',
+    icon: 'briefcase',
+    milestones: careerMilestones.filter((item) => item.id.startsWith('vccorp-')),
+  },
+  {
+    ...careerMilestones.find((item) => item.id === 'hou-software-engineer'),
+    milestones: [],
   },
 ]

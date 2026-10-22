@@ -7,7 +7,7 @@ export const profile = {
   name: 'Nguyễn Thị Thùy Dương',
   shortName: 'Thùy Dương',
   initial: 'D',
-  title: 'Software Engineer',
+  title: 'Fullstack Software Engineer',
   get heroTitle() {
     return this.title
   },
@@ -38,25 +38,30 @@ export const profile = {
   cvHtmlUrl: `${import.meta.env?.BASE_URL ?? '/'}cv-thuyduong.html`,
 
   // Tiêu đề chính dạng text và HTML gradient
-  heroHeadline: 'Làm chủ sản phẩm web từ Web App, Core Widget đến Bản đồ số WebGIS.',
-  heroHeadlineHtml: 'Làm chủ sản phẩm web từ <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-cyan-400">Web App, Core Widget</span> đến <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Bản đồ số WebGIS</span>.',
+  heroHeadline: 'Phát triển toàn diện từ Hệ thống Web App, Nền tảng AdTech đến Core Widget & WebGIS.',
+  heroHeadlineHtml: 'Phát triển toàn diện từ<br />\n<span class="gradient-amber text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-cyan-400 font-extrabold">Hệ thống Web App, Nền tảng AdTech</span><br />\nđến <span class="gradient-cyan text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 font-extrabold">Core Widget &amp; WebGIS.</span>',
 
   // Đoạn giới thiệu chuẩn hóa bám sát reference-redesign
   get lead() {
-    return `<strong>${this.experienceYears} năm</strong> kinh nghiệm phát triển sản phẩm web từ kiến trúc đến vận hành thực tế tại <strong>VCCorp</strong>. Chuyên sâu <strong>Vue.js, Laravel, Svelte</strong> và <strong>GSAP / WebGIS</strong> — trực tiếp xây dựng công cụ quản trị <strong>Template &amp; A/B Testing</strong>, hệ thống <strong>Dynamic QR &amp; Shortlink</strong> chịu tải cao, <strong>Core Box Feature</strong>, <strong>Landing Page chiến dịch</strong> và tối ưu dữ liệu không gian cho <strong>02 Cổng thông tin Nhà nước</strong>.`
+    return '<strong class="text-amber-400 font-bold">' + this.experienceYears + ' năm</strong> phát triển sản phẩm end-to-end tại <strong class="text-white font-bold">VCCorp</strong>: từ thiết kế CSDL MySQL, tối ưu <strong class="text-amber-400 font-bold">Redis Cache</strong> chịu tải cao (<strong class="text-amber-400 font-bold">&gt;2 triệu clicks</strong>), xây dựng CMS <strong class="text-cyan-400 font-bold">Laravel/Vue.js</strong> đến kiến trúc Core Widget (Svelte) và bản đồ số WebGIS.'
   },
 
   // Badge trạng thái đầu Hero
   get heroBadge() {
-    return `${this.title} • ${this.location}`
+    return this.title + ' • ' + this.city
+  },
+
+  get heroRecognition() {
+    const years = recognition.professional.years
+    return '🏆 ' + years.length + 'x Nhân viên Xuất sắc VCCorp (' + years.join(', ') + ')'
   },
 
   ecosystemsLabel: 'Nền tảng & Hệ sinh thái đã triển khai sản phẩm:',
 
   // 2 nút CTA trong Hero (đúng nhãn bản mẫu)
   heroCtas: [
-    { id: 'cta-skills', label: 'Xem Số năm từng Kỹ năng & Mục làm được ↓', href: '#skill-matrix', variant: 'primary' },
-    { id: 'cta-deliverables', label: 'Xem Dự án & Link mẫu thực tế ↗', href: '#deliverables', variant: 'secondary' },
+    { id: 'cta-deliverables', label: 'Khám phá dự án ↗', href: '#deliverables', variant: 'primary' },
+    { id: 'cta-skills', label: 'Kỹ năng & kinh nghiệm ↓', href: '#skill-matrix', variant: 'secondary' },
   ],
 
   // Thông số dưới khung Canvas WebGIS (HeroPlayground)
@@ -70,9 +75,10 @@ export const profile = {
     hint: 'Di chuột để kiểm tra gom cụm điểm tọa độ',
     fps: '● 60 FPS',
     specs: [
-      { label: '▸ Web App & Core Widget:', value: 'Vue 2/3 • Svelte • Laravel', color: 'emerald' },
-      { label: '▸ Bản đồ số & Dữ liệu:', value: 'QGIS • Leaflet • MapSVG.js', color: 'cyan' },
-      { label: '▸ Interactive & Chuyển động:', value: 'GSAP • ScrollTrigger • Draggable', color: 'amber' },
+      { label: '• Backend & High-Load:', value: 'PHP Laravel • MySQL • Redis', color: 'amber' },
+      { label: '• Web App & Core Widget:', value: 'Vue 2/3 • Svelte • Zero CLS', color: 'emerald' },
+      { label: '• Bản đồ số & Dữ liệu:', value: 'QGIS • Leaflet • MapSVG.js', color: 'cyan' },
+      { label: '• AI Workflow:', value: 'Codex • Antigravity • Gemini', color: 'purple' },
     ],
   },
 
@@ -111,21 +117,21 @@ export const profile = {
         to: this.experienceYears,
         suffix: ' Năm',
         value: `${this.experienceYears} Năm`,
-        label: 'Kinh nghiệm thực chiến (Từ 2018)',
+        label: 'Kinh nghiệm từ 2018',
         color: 'amber',
       },
       {
         to: recognition.professional.years.length,
         suffix: ' Năm',
         value: `${recognition.professional.years.length} Năm`,
-        label: "Nhân viên Xuất sắc ('22, '23, '25)",
+        label: 'Nhân viên Xuất sắc',
         color: 'emerald',
       },
       {
-        to: 10,
-        suffix: 'K+',
-        value: '~10K+',
-        label: 'Clicks / link / ngày (Shortlink)',
+        to: 2,
+        suffix: 'M+',
+        value: '2M+',
+        label: 'Tổng lượt click Shortlink',
         color: 'cyan',
       },
       {
@@ -145,10 +151,10 @@ export const profile = {
   },
 
   highlights: [
-    { icon: 'code', text: 'Vue.js · Svelte Core Widget' },
-    { icon: 'map', text: 'WebGIS · Leaflet · QGIS' },
-    { icon: 'layers', text: 'Laravel · Dynamic QR & Shortlink' },
-    { icon: 'sparkle', text: 'GSAP · Campaign Landing Page' },
+    { icon: 'layers', text: 'PHP / Laravel' },
+    { icon: 'database', text: 'MySQL & Redis Cache' },
+    { icon: 'code', text: 'Vue.js / Svelte' },
+    { icon: 'map', text: 'Core Widget & WebGIS' },
   ],
 }
 
@@ -158,13 +164,13 @@ export const seo = {
     return `${profile.name} — ${profile.title} | Portfolio`
   },
   get description() {
-    return `${profile.name} — ${profile.title}, 7 năm kinh nghiệm phát triển sản phẩm web thực chiến tại VCCorp: Vue.js, Svelte Core Widget, WebGIS Leaflet, Fullstack Laravel và GSAP Motion. 3 năm Nhân viên Xuất sắc (2022, 2023, 2025).`
+    return `${profile.name} — ${profile.title}, ${profile.experienceYears} năm phát triển end-to-end tại VCCorp. Vue.js / Svelte, PHP / Laravel, MySQL & Redis Cache; Shortlink hơn 2 triệu clicks, dashboard analytics, Core Widget và WebGIS hiệu năng cao.`
   },
   get socialTitle() {
     return `${profile.name} — ${profile.title}`
   },
   get socialDescription() {
-    return `Portfolio của ${profile.name} — ${profile.title}. 7 năm kinh nghiệm thực chiến với Web App, Core Box Widget, WebGIS Leaflet và hệ sinh thái AdTech.`
+    return `Portfolio của ${profile.name} — ${profile.title} (Vue.js/Svelte + PHP/Laravel). Làm chủ sản phẩm từ kiến trúc đến vận hành: Dynamic QR/Shortlink, dashboard analytics, Core Widget và WebGIS hiệu năng cao.`
   },
   locale: 'vi_VN',
   knowsAbout: [
@@ -183,7 +189,7 @@ export const seo = {
     'Core Box Widget',
     'A/B Testing Platform',
     'Dynamic QR & Shortlink',
-    'AI Agent Workflow',
+    'AI Workflow (Codex, Antigravity, Gemini)',
   ],
 }
 
@@ -210,14 +216,14 @@ export const marquee = [
   'Dynamic QR',
   'MySQL',
   'Redis Cache',
-  'AI Agent Workflow',
+  'AI Workflow (Codex • Antigravity • Gemini)',
 ]
 
 export const about = {
   paragraphs: [
-    `Mình là <strong>${profile.name}</strong> (${profile.title}) với <strong>${profile.experienceYears} năm kinh nghiệm thực chiến</strong>, phát triển và làm chủ sản phẩm web bằng <strong>Vue.js, Svelte, GSAP và Laravel</strong> tại <strong>VCCorp</strong>.`,
+    `Mình là <strong>${profile.name}</strong> (${profile.title}) với <strong>${profile.experienceYears} năm kinh nghiệm thực chiến</strong>, phát triển toàn diện sản phẩm web bằng <strong>Vue.js / Svelte, PHP / Laravel, MySQL và Redis Cache</strong> tại <strong>VCCorp</strong>.`,
     'Bắt đầu từ môi trường <strong>nghiên cứu khoa học và chuyển giao công nghệ tại Viện Đại học Mở Hà Nội</strong> (Giải Ba NCKH 05/2019 về phân tích & phân cụm dữ liệu), mình xây dựng nền tảng tư duy toán học và kỹ thuật vững chắc qua các hệ thống tuyển sinh và quản lý đào tạo.',
-    'Trong công việc, mình tham gia từ thiết kế kiến trúc, triển khai giao diện đến tích hợp API và vận hành backend. Các đầu việc chính gồm <strong>Tool quản trị Template &amp; A/B Testing, Core Box Feature, WebGIS cho 02 Cổng thông tin Nhà nước, Dynamic QR/Shortlink và Landing Page chiến dịch</strong>; đồng thời thực hiện định kỳ một số bài <strong>Emagazine chuyên đề trên CafeF</strong>.',
+    'Với <strong>Dynamic QR/Shortlink</strong>, mình phụ trách từ thiết kế MySQL, backend Laravel và Redis cache đến dashboard Vue.js và vận hành: <strong>hơn 2 triệu clicks, đỉnh ~240.000 clicks/ngày</strong>. Các sản phẩm khác gồm <strong>Tool Template &amp; A/B Testing, Core Widget tái sử dụng, WebGIS cho 02 Cổng thông tin Nhà nước</strong>, Landing Page chiến dịch và Emagazine trên CafeF.',
   ],
   pills: [
     { icon: 'pin', text: profile.location },
@@ -227,18 +233,18 @@ export const about = {
   facts: [
     {
       icon: 'layers',
-      title: 'Làm chủ bài toán từ kiến trúc đến vận hành',
-      text: 'Trực tiếp phân tích yêu cầu, thiết kế kiến trúc component, tích hợp API dữ liệu lớn và tối ưu vận hành thực tế.',
+      title: 'End-to-End Product Ownership',
+      text: 'Phân tích bài toán, thiết kế MySQL, phát triển Laravel/Vue.js và vận hành Dynamic QR/Shortlink; cho phép đổi URL đích mà không cần in lại ấn phẩm.',
     },
     {
       icon: 'zap',
-      title: 'Hiệu năng cao & Trực quan dữ liệu mượt mà',
-      text: 'Tiền xử lý và làm sạch GeoJSON bằng QGIS, kết hợp Marker Clustering và GSAP mang lại trải nghiệm 60 FPS mượt mà trên di động.',
+      title: 'High-Performance & Data Visualization',
+      text: 'Tối ưu redirect bằng Redis; trực quan hóa dữ liệu qua dashboard analytics. Giảm dung lượng GeoJSON bằng QGIS, kết hợp Leaflet, Marker Clustering và Canvas renderer cho WebGIS 60 FPS trên di động.',
     },
     {
       icon: 'sparkle',
-      title: 'Quy trình hiện đại tích hợp AI Agent',
-      text: 'Chủ động ứng dụng AI Agent vào quy trình phát triển sản phẩm từ 08/2025, gia tăng tốc độ triển khai và chất lượng mã nguồn.',
+      title: 'Quy trình AI Workflow: Codex • Antigravity • Gemini',
+      text: 'Chủ động kết hợp bộ 3 công cụ AI (Codex, Antigravity, Gemini) trong quy trình lập trình hàng ngày từ 08/2025: tăng tốc độ viết code, kiểm tra logic, tối ưu truy vấn MySQL/Redis, tự động hóa chuẩn hóa GeoJSON và xử lý dữ liệu phức tạp.',
     },
   ],
 }

@@ -43,16 +43,16 @@ async function handlePillarSelect(category) {
     <div class="mb-8 flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
       <div class="min-w-0">
         <span class="font-mono text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-500">{{ skillsSection.eyebrow }}</span>
-        <h2 id="skills-heading" class="mt-1 text-2xl font-extrabold sm:text-3xl">{{ skillsSection.title }}</h2>
-        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400" v-html="skillsSection.subtitleHtml" />
+        <h2 id="skills-heading" class="mt-1 text-2xl font-extrabold sm:text-[32px] sm:leading-tight text-slate-900 dark:text-white">{{ skillsSection.title }}</h2>
+        <p class="mt-2 text-[15.5px] leading-relaxed text-slate-600 dark:text-slate-300" v-html="skillsSection.subtitleHtml" />
       </div>
       <div class="grid w-full max-w-full grid-cols-2 self-start rounded-xl border border-slate-300 bg-slate-200/80 p-1 sm:w-auto lg:max-w-[50%] lg:self-auto dark:border-slate-800 dark:bg-slate-900" role="tablist" aria-label="Chế độ xem kỹ năng">
         <button
           v-for="(view, index) in skillsSection.views" :id="`tab-${view.id}`" :key="view.id"
           type="button" role="tab" :aria-selected="currentView === view.id" :aria-controls="`skill-view-${view.id}`"
           :tabindex="currentView === view.id ? 0 : -1"
-          class="min-h-11 min-w-0 rounded-lg px-2 py-2 text-center font-mono text-[11px] transition-colors sm:px-3.5 sm:text-left sm:text-xs"
-          :class="currentView === view.id ? 'bg-amber-500 font-bold text-slate-950' : 'font-medium text-slate-600 hover:text-amber-700 dark:text-slate-400 dark:hover:text-amber-400'"
+          class="min-h-11 min-w-0 rounded-lg px-2.5 py-2 text-center font-mono text-xs transition-colors sm:px-4 sm:text-left sm:text-[13.5px]"
+          :class="currentView === view.id ? 'bg-amber-500 font-bold text-slate-950' : 'font-semibold text-slate-600 hover:text-amber-700 dark:text-slate-400 dark:hover:text-amber-400'"
           @click="switchView(view.id)" @keydown="handleTabKey($event, index)"
         ><span class="whitespace-nowrap sm:hidden">{{ mobileViewLabels[view.id] }}</span><span class="hidden sm:inline">{{ view.label }}</span></button>
       </div>

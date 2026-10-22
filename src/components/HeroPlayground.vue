@@ -2,6 +2,8 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { profile } from '../data/profile'
 
+defineProps({ compact: { type: Boolean, default: false } })
+
 const playground = profile.playground
 const canvasRef = ref(null)
 let context
@@ -211,8 +213,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl">
-    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 bg-slate-950 px-4 py-3">
+  <div :class="compact ? 'h-full overflow-hidden' : 'overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl'">
+    <div v-if="!compact" class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 bg-slate-950 px-4 py-3">
       <div class="flex min-w-0 items-center gap-1.5" aria-hidden="true">
         <span class="size-2.5 shrink-0 rounded-full bg-rose-500" />
         <span class="size-2.5 shrink-0 rounded-full bg-amber-500" />
@@ -221,7 +223,7 @@ onBeforeUnmount(() => {
       </div>
       <span class="rounded border border-cyan-500/20 bg-cyan-500/10 px-2 py-0.5 font-mono text-[11px] text-cyan-400">{{ playground.badge }}</span>
     </div>
-    <div class="relative h-64 cursor-crosshair bg-[#05080F]">
+    <div class="relative cursor-crosshair bg-[#05080F]" :class="compact ? 'h-full' : 'h-64'">
       <canvas ref="canvasRef" id="gisCanvas" class="block h-full w-full touch-pan-y" role="img" aria-label="Mô phỏng WebGIS: 55 điểm tọa độ chuyển động; di chuột hoặc chạm tay để gom cụm và xem số điểm trong bán kính."
         @pointermove="updatePointer" @pointerleave="leavePointer" @pointercancel="leavePointer"
       />
@@ -233,7 +235,7 @@ onBeforeUnmount(() => {
         <span class="shrink-0 font-bold text-emerald-400">{{ playground.fps }}</span>
       </div>
     </div>
-    <div class="space-y-2 border-t border-slate-800 bg-slate-950/95 p-4 font-mono text-xs">
+    <div v-if="!compact" class="space-y-2 border-t border-slate-800 bg-slate-950/95 p-4 font-mono text-xs">
       <div v-for="spec in playground.specs" :key="spec.label" class="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-slate-400">
         <span>{{ spec.label }}</span>
         <span class="font-semibold" :class="spec.color === 'emerald' ? 'text-emerald-400' : spec.color === 'cyan' ? 'text-cyan-400' : 'text-amber-400'">{{ spec.value }}</span>

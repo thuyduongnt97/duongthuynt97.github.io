@@ -27,10 +27,10 @@ function handleClick() {
     :aria-label="`${pillar.title} — Lọc dự án theo nhóm kỹ năng này`"
     aria-controls="deliverables"
     :data-category="pillar.filterCategory"
-    class="spotlight-card min-w-0 rounded-2xl p-4 sm:p-6 bg-white dark:bg-slate-900/80 border transition-all duration-200 flex flex-col justify-between cursor-pointer group"
+    class="spotlight-card min-w-0 rounded-2xl p-5 sm:p-7 bg-white dark:bg-slate-900/85 border transition-all duration-200 flex flex-col justify-between cursor-pointer group shadow-sm"
     :class="[
       isSelected
-        ? 'skill-selected border-amber-500'
+        ? 'skill-selected border-amber-500 ring-2 ring-amber-500/30'
         : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
     ]"
     @click="handleClick"
@@ -39,10 +39,10 @@ function handleClick() {
   >
     <div>
       <!-- Card Header -->
-      <div class="flex flex-wrap items-start justify-between gap-3 mb-3 sm:flex-nowrap sm:gap-4">
+      <div class="flex flex-wrap items-start justify-between gap-3 mb-3.5 sm:flex-nowrap sm:gap-4">
         <div class="min-w-0">
           <span
-            class="text-xs font-mono font-semibold uppercase block"
+            class="text-[13px] font-mono font-bold uppercase block tracking-wider"
             :class="[
               pillar.accentColor === 'emerald' ? 'text-emerald-700 dark:text-emerald-400' :
               pillar.accentColor === 'cyan' ? 'text-cyan-700 dark:text-cyan-400' :
@@ -52,23 +52,23 @@ function handleClick() {
           >
             {{ pillar.categoryTitle }}
           </span>
-          <h3 class="text-xl font-bold mt-0.5 text-slate-900 dark:text-slate-100 group-hover:text-amber-500 transition-colors">
+          <h3 class="text-xl sm:text-[22px] font-bold mt-1 text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">
             {{ pillar.title }}
           </h3>
         </div>
         <div class="text-right shrink-0">
           <span
-            class="inline-block px-3 py-1 rounded-xl font-mono font-extrabold text-sm border"
+            class="inline-block px-3.5 py-1.5 rounded-xl font-mono font-extrabold text-[15px] sm:text-[16px] border shadow-sm"
             :class="[
-              pillar.accentColor === 'emerald' ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30' :
-              pillar.accentColor === 'cyan' ? 'bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border-cyan-500/30' :
-              pillar.accentColor === 'purple' ? 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30' :
-              'bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30'
+              pillar.accentColor === 'emerald' ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-500/40' :
+              pillar.accentColor === 'cyan' ? 'bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border-cyan-500/40' :
+              pillar.accentColor === 'purple' ? 'bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-500/40' :
+              'bg-amber-500/20 text-amber-700 dark:text-amber-300 border-amber-500/40'
             ]"
           >
             {{ pillar.yearsBadge }}
           </span>
-          <div class="text-[11px] font-mono text-slate-400 mt-1">
+          <div class="text-[13px] font-mono text-slate-500 dark:text-slate-400 mt-1 font-medium">
             {{ pillar.period }}
           </div>
         </div>
@@ -76,14 +76,14 @@ function handleClick() {
 
       <!-- 3 Sub-metrics Grid -->
       <div
-        class="grid grid-cols-3 gap-1.5 sm:gap-2 mb-4 p-2 sm:p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/70 dark:border-slate-800 font-mono text-xs"
+        class="grid grid-cols-3 gap-2 mb-4 p-3 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200/80 dark:border-slate-800 font-mono"
       >
         <div v-for="metric in pillar.subMetrics" :key="metric.label" class="min-w-0">
-          <div class="truncate text-slate-500 dark:text-slate-400 text-[9px] sm:text-[10px]" :title="metric.label">
+          <div class="truncate text-slate-600 dark:text-slate-400 text-[13px] font-medium" :title="metric.label">
             {{ metric.label }}
           </div>
           <div
-            class="truncate font-bold text-[11px] sm:text-xs"
+            class="truncate font-bold text-[16px] sm:text-[17px] mt-0.5 text-slate-900 dark:text-white"
             :title="metric.value"
             :class="[
               pillar.accentColor === 'emerald' ? 'text-emerald-700 dark:text-emerald-400' :
@@ -98,17 +98,17 @@ function handleClick() {
       </div>
 
       <!-- Deliverables List -->
-      <div class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">
+      <div class="text-[13px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold mb-2.5">
         {{ skillsSection.deliverablesLabel }}
       </div>
-      <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+      <ul class="space-y-2.5 text-[15px] sm:text-[15.5px] text-slate-700 dark:text-[#CBD5E1] leading-[1.65]">
         <li
           v-for="(del, idx) in pillar.deliverables"
           :key="idx"
-          class="flex gap-2 items-start"
+          class="flex gap-2.5 items-start"
         >
           <span
-            class="font-bold shrink-0"
+            class="font-bold text-base shrink-0 mt-0.5"
             :class="[
               pillar.accentColor === 'emerald' ? 'text-emerald-500' :
               pillar.accentColor === 'cyan' ? 'text-cyan-400' :
@@ -123,12 +123,12 @@ function handleClick() {
 
     <!-- Tech Chips -->
     <div
-      class="flex flex-wrap gap-1.5 mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs font-mono text-slate-600 dark:text-slate-400"
+      class="flex flex-wrap gap-2 mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 text-[13.5px] font-mono text-slate-700 dark:text-slate-300 font-medium"
     >
       <span
         v-for="chip in pillar.chips"
         :key="chip"
-        class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800"
+        class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60"
       >
         {{ chip }}
       </span>

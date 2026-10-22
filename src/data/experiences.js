@@ -1,4 +1,5 @@
 import { profile } from './profile.js'
+import { projectScreenshots } from './projectScreenshots.js'
 
 /** @typedef {import('../types/portfolio.js').Experience} Experience */
 /** @typedef {import('../types/portfolio.js').DeliverableGroup} DeliverableGroup */
@@ -8,42 +9,46 @@ export const selectedSamplesNotice = '📌 Một số sản phẩm minh họa ti
 export const deliverablesSection = {
   eyebrow: '02 / Sản phẩm thực chiến',
   title: 'Các mảng công việc chính & Ví dụ điển hình',
-  description: 'Trình bày theo đúng các mảng kỹ thuật trọng tâm đã phụ trách. Các đường link đính kèm là một số sản phẩm minh họa tiêu biểu (Selected Samples).',
+  description: 'Các sản phẩm đã triển khai thực tế: từ kiến trúc dữ liệu và giao diện quản trị đến tối ưu hiệu năng, tích hợp và vận hành. Ảnh chụp màn hình và link minh họa đi kèm từng nhóm dự án.',
   sampleNotice: selectedSamplesNotice,
   filters: [
     { id: 'all', label: 'Tất cả mảng công việc' },
-    { id: 'webgis', label: '🗺️ 1. Bản đồ số WebGIS & MapSVG' },
+    { id: 'adtech', label: '⚡ 1. Shortlink/QR, AdsDemo & AdTech' },
     { id: 'webapp', label: '🧩 2. Core Box, Widget & A/B Testing' },
-    { id: 'adtech', label: '⚡ 3. Shortlink/QR, AdsDemo & AdTech' },
+    { id: 'webgis', label: '🗺️ 3. Bản đồ số WebGIS & MapSVG' },
     { id: 'motion', label: '✨ 4. Landing Page, Emagazine & Sự kiện' },
   ],
 }
 
 /**
- * Thứ tự trình bày theo #deliverables của bản mẫu: 5 thẻ chính, 2 nhóm bổ trợ.
+ * Thứ tự theo CV Fullstack: AdTech, Web App, WebGIS, Core Box, Landing Page.
  * Chỉ tham chiếu ID; experiences bên dưới vẫn là nguồn duy nhất sở hữu dự án.
  * isSupporting quyết định tỷ trọng hiển thị mới, độc lập với isHighlight cũ.
  * @type {DeliverableGroup[]}
  */
 export const deliverableGroups = [
   {
-    id: 'spatial-maps',
-    title: 'Module Bản đồ số Cổng thông tin Nhà nước & Bản đồ Tương tác Báo Giao Thông',
-    filterCategory: 'webgis',
-    categories: ['webgis'],
-    domain: 'WebGIS & Spatial Data',
-    period: '2021 – Nay',
-    projectIds: ['government-map', 'maps'],
-    techStack: ['QGIS', 'Leaflet', 'GeoJSON', 'Marker Clustering', 'MapSVG.js'],
+    id: 'adtech-tools',
+    title: 'Hệ thống Dynamic QR / Shortlink, AdsDemo & Bảo trì AdTech',
+    filterCategory: 'adtech',
+    categories: ['adtech'],
+    domain: 'AdTech & High-Traffic Tools',
+    period: '2019 – Nay',
+    projectIds: ['qr', 'ads', 'ad-maintenance', 'ad-sponsor', 'ad-operations'],
+    techStack: ['Laravel', 'Vue.js', 'MySQL', 'Redis', 'Security Patching'],
+    architecture: 'User Request → Redis Cache Lookup (~10.000 clicks/link/ngày) → Async Log Tracking → MySQL & REST API Analytics',
     sections: [
-      { label: '02 Cổng thông tin (Cảnh báo thiên tai - lũ lụt & An toàn thực phẩm | 08/2025 – Nay)', html: 'Dùng <strong>QGIS</strong> tiền xử lý, giản lược hình học (<em>Geometry Simplification</em>) và làm sạch dữ liệu <strong>GeoJSON</strong> giúp giảm mạnh dung lượng file tải trên web. Áp dụng <strong>Leaflet &amp; Marker Clustering</strong> hiển thị mượt hàng nghìn điểm tọa độ, duy trì FPS ổn định trên thiết bị di động.' },
-      { label: '02 Trang Bản đồ Tương tác Báo Giao Thông (2021 – 2023)', html: 'Xây dựng chuyên đề Tuyến cao tốc Bắc – Nam và Hầm đường bộ trên nền bản đồ SVG bằng <strong>HTML, CSS, jQuery, MapSVG.js, TweenMax, Draggable</strong> với giao diện riêng cho PC &amp; Mobile.' },
+      { label: 'Shortlink / End-to-End Ownership', html: 'Thiết kế <strong class="text-white font-bold">CSDL MySQL</strong>, xây dựng trang quản trị <strong class="text-cyan-400 font-bold">Laravel/Vue.js</strong> và đồng bộ link lên <strong class="text-amber-400 font-bold">Redis Cache</strong> cho luồng chuyển hướng tải cao (<strong class="text-amber-400 font-bold">~10.000 clicks/link/ngày</strong>); vận hành thực tế ghi nhận <strong class="text-amber-400 font-bold">hơn 2 triệu clicks</strong> trong kỳ thống kê.' },
+      { label: 'Dashboard Analytics', html: 'Tích hợp <strong>API Log phục vụ real-time tracking</strong>; trực quan hóa lưu lượng theo thời gian, <strong>Top referrers, Top location</strong>. Bộ lọc, gắn tag, import và bảng phân trang giúp quản trị link/QR, đổi redirect và mở báo cáo ngay trên từng liên kết.' },
+      { label: 'Dynamic QR / Product Impact', html: 'Tách mã QR cố định khỏi URL đích qua lớp ánh xạ Shortlink; cập nhật trang đích theo chiến dịch <strong>không cần in lại bao bì, ấn phẩm</strong>, giảm chi phí vận hành.' },
+      { label: 'AdsDemo / Product Workflow', html: 'Xây dựng luồng <strong>nhập URL → chọn PC/Mobile → cấu hình vị trí, nội dung → preview → lưu và chia sẻ qua Shortlink/QR</strong>. Hỗ trợ Sponsor, Video, HTML5 và Collection ngay trong ngữ cảnh website thực tế. <em>Cần tài khoản nội bộ để truy cập.</em>' },
+      { label: 'Bảo trì & Vá lỗi bảo mật', html: 'Bảo trì, tối ưu truy vấn và <strong>Security Patching</strong> cho <strong>AdServing, TagManager, Adsponsor</strong>; vận hành công cụ khai thác vị trí quảng cáo (2019–2020).' },
     ],
     isSupporting: false,
   },
   {
     id: 'template-widgets',
-    title: 'Tool Quản lý Template, Dựng Box Widget & Đo lường A/B Testing',
+    title: 'Web App & Quản lý Template, Box Widget & Dự đoán A/B Testing',
     filterCategory: 'webapp',
     categories: ['webapp'],
     domain: 'Product Tool & Experimentation Platform',
@@ -51,14 +56,30 @@ export const deliverableGroups = [
     projectIds: ['experiments'],
     techStack: ['Laravel', 'Vue.js', 'REST API', 'BigData Reporting'],
     sections: [
-      { label: 'Bài toán', html: 'Xây dựng công cụ quản trị tập trung để cấu hình giao diện mẫu (Template), dựng các khối Box Widget mang đi cắm lên hệ thống site và theo dõi hiệu quả của các box gợi ý nội dung (Recommendation).' },
-      { label: 'Giải pháp kỹ thuật', html: 'Làm Frontend bằng <strong>Laravel &amp; Vue.js</strong> giúp quản lý kịch bản, cấu hình thuật toán và xuất file core widget; tích hợp API nhận dữ liệu từ <strong>BigData</strong> để hiển thị báo cáo thử nghiệm <strong>A/B Testing</strong>.' },
+      { label: 'Quản trị & Triển khai', html: 'Xây dựng hệ thống quản lý Template bằng <strong>Laravel/Vue.js</strong> và kiến trúc <strong>Box Widget độc lập</strong> để nhúng lên hệ thống báo điện tử; quản lý kịch bản, cấu hình thuật toán và xuất core widget.' },
+      { label: 'Dashboard A/B Testing', html: 'Tích hợp <strong>REST API từ BigData</strong> để trực quan hóa báo cáo thử nghiệm, giúp đội sản phẩm theo dõi hiệu quả các phương án gợi ý nội dung trên cùng giao diện quản trị.' },
+    ],
+    isSupporting: false,
+  },
+  {
+    id: 'spatial-maps',
+    title: 'Bản đồ số Cổng thông tin Nhà nước & Chuyên đề tương tác Báo Giao Thông',
+    filterCategory: 'webgis',
+    categories: ['webgis'],
+    domain: 'WebGIS & Spatial Data',
+    period: '2021 – Nay',
+    projectIds: ['government-map', 'maps'],
+    techStack: ['QGIS', 'Leaflet', 'GeoJSON', 'Marker Clustering', 'MapSVG.js'],
+    sections: [
+      { label: 'WebGIS / Tối ưu dữ liệu (08/2025 – Nay)', html: 'Triển khai module bản đồ cho <strong>02 Cổng thông tin Nhà nước</strong> về thiên tai – lũ lụt và an toàn thực phẩm; tiền xử lý <strong>GeoJSON</strong> bằng <strong>QGIS Geometry Simplification</strong> để giảm dung lượng dữ liệu tải xuống.' },
+      { label: 'High-Performance Rendering', html: 'Kết hợp <strong>Leaflet, Marker Clustering và Canvas renderer</strong> xử lý hàng nghìn điểm tọa độ, duy trì tương tác <strong>60 FPS trên di động</strong> để tra cứu dữ liệu không gian mượt mà.' },
+      { label: 'Bản đồ tương tác Báo Giao Thông (2021 – 2023)', html: 'Trực quan hóa <strong>22 dự án cao tốc và 12 tuyến hầm</strong> bằng <strong>MapSVG.js</strong>; liên kết lựa chọn trên bản đồ với thông tin quy mô, vốn đầu tư và tiến độ. Dùng <strong>TweenMax, Draggable</strong> và giao diện riêng PC/Mobile để tối ưu thao tác kéo, chạm và điều hướng.' },
     ],
     isSupporting: false,
   },
   {
     id: 'core-box-features',
-    title: 'Kiến trúc Core Box Feature & Cắt Box Chạy Chiến dịch (Banner PR)',
+    title: 'Core Box Feature & Banner PR (Kenh14, Soha)',
     filterCategory: 'webapp',
     categories: ['webapp', 'motion'],
     domain: 'Component Architecture',
@@ -66,29 +87,14 @@ export const deliverableGroups = [
     projectIds: ['feature-core'],
     techStack: ['Svelte', 'Vue.js', 'Sticky & Inline Box', 'DOM Injection'],
     sections: [
-      { label: 'Đầu việc thực tế', html: 'Viết core cho các box feature và trực tiếp cắt các box chạy dự án chiến dịch (Banner PR, chuyên đề thể thao World Cup, ASIAD...), hỗ trợ cả 2 cơ chế hiển thị: <strong>Box Sticky neo cố định màn hình</strong> và <strong>Box Inline nhúng giữa bài viết</strong> mà không làm vỡ bố cục báo.' },
-    ],
-    isSupporting: false,
-  },
-  {
-    id: 'adtech-tools',
-    title: 'Hệ thống Dynamic QR & Shortlink, Tool AdsDemo & Bảo trì AdServing / TagManager',
-    filterCategory: 'adtech',
-    categories: ['adtech'],
-    domain: 'AdTech & High-Traffic Tools',
-    period: '2019 – Nay',
-    projectIds: ['qr', 'ads', 'ad-maintenance', 'ad-sponsor', 'ad-operations'],
-    techStack: ['Laravel', 'Vue.js', 'MySQL', 'Redis', 'Security Patching'],
-    sections: [
-      { label: 'Dynamic QR & Shortlink (short.bizfly.vn)', html: 'Xây dựng công cụ quản trị (<strong>Laravel + Vue.js</strong>): thiết kế CSDL <strong>MySQL</strong>, đồng bộ dữ liệu link lên <strong>Redis</strong> phục vụ luồng chuyển hướng (<strong>~10.000 clicks/link/ngày</strong>), cho phép đổi URL đích không cần in lại ấn phẩm; tích hợp API từ hệ thống Log hiển thị báo cáo thống kê lượt click (location, device, referer).' },
-      { label: 'Tool AdsDemo (adsdemo.admicro.vn)', html: 'Tạo demo quảng cáo (Sponsor, Video, HTML5, Collection) ngay trong ngữ cảnh website PC/Mobile thực tế và chia sẻ nhanh qua Shortlink/QR. <em>Cần tài khoản nội bộ để truy cập.</em>' },
-      { label: 'Bảo trì & Vá lỗi bảo mật', html: 'Maintain và xử lý các lỗi bảo mật (Security Bug Fixes) cho các dự án <strong>AdServing, TagManager, Adsponsor</strong>; vận hành tool quản lý khai thác vị trí quảng cáo (2019–2020).' },
+      { label: 'Component Architecture', html: 'Thiết kế core <strong>Svelte/Vue.js</strong> tái sử dụng cho <strong>Box Sticky và Inline</strong>; nhúng độc lập qua <strong>DOM Injection</strong>, cô lập CSS/JS và không gây xô lệch bố cục (CLS) trang báo.' },
+      { label: 'Triển khai chiến dịch', html: 'Phát triển box lịch thi đấu, huy chương và Banner PR trên <strong>Kenh14, Soha</strong>; tái sử dụng core cho World Cup, ASIAD và nhiều vị trí nhúng, giữ trải nghiệm đọc liền mạch.' },
     ],
     isSupporting: false,
   },
   {
     id: 'campaigns-editorials',
-    title: 'Triển khai Landing Page Chiến dịch (OMO, Athena...) & Bài Emagazine Chuyên đề (CafeF)',
+    title: 'Emagazine & Landing Page Chiến dịch (CafeF, Kenh14...)',
     filterCategory: 'motion',
     categories: ['motion'],
     domain: 'Campaign Landing Pages & Emagazine',
@@ -103,14 +109,15 @@ export const deliverableGroups = [
   },
   {
     id: 'events-gamification',
-    title: 'Camera Check-in Vinh danh & Minigame Vòng quay',
+    title: 'Camera Check-in Vinh danh & Dự án Bổ trợ (AI Workflow)',
     filterCategory: 'motion',
     categories: ['motion'],
-    domain: 'AI Event & Gamification • VCCorp',
+    domain: 'AI Event & AI Workflow • VCCorp',
     projectIds: ['recognition-event', 'minigames'],
-    techStack: ['Camera Stream', 'Face Recognition API', 'Canvas'],
+    techStack: ['Camera Stream', 'Face Recognition API', 'Canvas', 'Codex', 'Antigravity', 'Gemini'],
     sections: [
-      { label: '', html: 'Tích hợp luồng Camera trực tiếp trên Canvas với API nhận diện khuôn mặt để hiển thị vinh danh nhân viên khối kinh doanh; xây dựng minigame vòng quay may mắn nội bộ.' },
+      { label: 'Camera & Nhận diện', html: 'Tích hợp luồng Camera trực tiếp trên Canvas với API nhận diện khuôn mặt để hiển thị vinh danh nhân viên khối kinh doanh; xây dựng minigame vòng quay may mắn nội bộ.' },
+      { label: 'Quy trình AI Workflow', html: 'Ứng dụng kết hợp bộ 3 công cụ AI (<strong class="text-cyan-400 font-bold">Codex, Antigravity, Gemini</strong>) từ 08/2025 vào quy trình phát triển: hỗ trợ phân tích &amp; refactor code Fullstack (<strong class="text-cyan-400 font-bold">Laravel/Vue.js</strong>), tự động hóa chuẩn hóa dữ liệu bản đồ số (GeoJSON), dựng kiến trúc Core Box Feature (Svelte) và rút ngắn thời gian triển khai Landing Page.' },
     ],
     isSupporting: true,
   },
@@ -157,7 +164,7 @@ export const experiences = [
     agentMilestone: {
       period: '08/2025',
       date: '2025-08',
-      label: 'Trở lại công việc & bắt đầu sử dụng agent',
+      label: 'Bắt đầu ứng dụng AI Agent vào quy trình phát triển',
     },
     projects: [
       {
@@ -184,6 +191,7 @@ export const experiences = [
       },
       {
         id: 'landing-pages',
+        screenshots: projectScreenshots['landing-pages'],
         name: 'Triển khai Landing Page Chiến dịch (OMO & Athena)',
         role: 'Báo giá & Triển khai Landing Page',
         domain: 'FMCG & Campaign Landing Pages',
@@ -233,10 +241,10 @@ export const experiences = [
         categories: ['webgis'],
         categoryTags: ['webgis', 'perf'],
         description:
-          'Triển khai module bản đồ số cho 02 Cổng thông tin Nhà nước (Cảnh báo thiên tai - lũ lụt & An toàn thực phẩm).',
+          'Triển khai module WebGIS cho 02 Cổng thông tin Nhà nước về thiên tai – lũ lụt và an toàn thực phẩm; tối ưu dữ liệu tải xuống và hiệu năng tương tác trên di động.',
         achievements: [
-          'Dùng QGIS tiền xử lý, giản lược hình học (Geometry Simplification) và làm sạch dữ liệu GeoJSON giúp giảm mạnh dung lượng tải.',
-          'Áp dụng Leaflet & Marker Clustering hiển thị mượt mà hàng nghìn điểm tọa độ, duy trì 60 FPS ổn định trên thiết bị di động.',
+          'Tiền xử lý và làm sạch GeoJSON bằng QGIS Geometry Simplification, giảm dung lượng dữ liệu không gian tải xuống.',
+          'Kết hợp Leaflet, Marker Clustering và Canvas renderer để xử lý hàng nghìn điểm tọa độ, duy trì tương tác 60 FPS trên di động.',
         ],
         techStack: ['QGIS', 'Leaflet.js', 'GeoJSON Simplification', 'Marker Clustering', 'WebGIS'],
         isHighlight: false,
@@ -274,11 +282,11 @@ export const experiences = [
         categories: ['webapp', 'motion'],
         categoryTags: ['webapp', 'motion', 'design-system'],
         description:
-          'Viết core cho các box feature và trực tiếp cắt các box chạy dự án chiến dịch (Banner PR, chuyên đề thể thao World Cup, ASIAD...), hỗ trợ cả 2 cơ chế hiển thị: Box Sticky neo cố định màn hình và Box Inline nhúng giữa bài viết mà không làm vỡ bố cục báo.',
+          'Xây dựng Core Widget Svelte/Vue.js tái sử dụng cho Box Sticky và Inline; trực tiếp triển khai box chiến dịch, tích hợp vào trang báo qua DOM Injection.',
         achievements: [
-          'Thiết kế kiến trúc Core Box Feature hỗ trợ 2 chế độ hiển thị: Box Sticky neo màn hình và Box Inline nhúng giữa bài.',
-          'Triển khai thực tế trên các trang báo Kenh14, Soha cho các chuyên đề World Cup, ASIAD và chiến dịch tài trợ.',
-          'Chuẩn hóa component độc lập, chống vỡ layout báo và đảm bảo hiệu năng tải trang.',
+          'Chuẩn hóa component độc lập hỗ trợ 2 chế độ Sticky và Inline, tái sử dụng cho nhiều chiến dịch và vị trí nhúng.',
+          'Triển khai DOM Injection tương thích bố cục trang báo, tối ưu hiệu năng tải và giữ luồng đọc liền mạch.',
+          'Phát triển box lịch thi đấu, huy chương và Banner PR cho World Cup, ASIAD trên Kenh14 và Soha.',
         ],
         techStack: ['Svelte', 'Vue.js', 'Sticky & Inline Box', 'DOM Injection'],
         sampleNotice: selectedSamplesNotice,
@@ -378,6 +386,7 @@ export const experiences = [
       },
       {
         id: 'ads',
+        screenshots: projectScreenshots.ads,
         name: 'Tool Ads Demo Simulator',
         role: 'Phát triển công cụ · Preview quảng cáo đa nền tảng',
         domain: 'AdTech & Responsive Sandbox',
@@ -386,10 +395,11 @@ export const experiences = [
         categories: ['adtech'],
         categoryTags: ['adtech', 'vue', 'webapp'],
         description:
-          'Triển khai công cụ Ads Demo Simulator (adsdemo.admicro.vn) tạo preview quảng cáo (Sponsor, Video, HTML5, Collection) ngay trong ngữ cảnh website PC/Mobile thực tế và chia sẻ nhanh qua Shortlink/QR.',
+          'Phát triển AdsDemo trên Laravel/Vue.js để cấu hình, xem trước và chia sẻ quảng cáo Sponsor, Video, HTML5, Collection ngay trong ngữ cảnh website PC/Mobile thực tế.',
         achievements: [
-          'Tạo preview các định dạng quảng cáo cao cấp ngay trên ngữ cảnh website PC/Mobile.',
-          'Tích hợp luồng lưu trữ, chia sẻ demo nhanh qua Dynamic QR và Shortlink cho đội kinh doanh.',
+          'Xây dựng luồng nhập URL → chọn PC/Mobile → cấu hình vị trí, nội dung → preview → lưu demo trên cùng công cụ.',
+          'Mô phỏng quảng cáo trong bố cục website thực tế, giúp kiểm tra vị trí hiển thị và trình bày phương án trực quan.',
+          'Tích hợp lưu trữ và chia sẻ demo qua Dynamic QR/Shortlink cho đội kinh doanh.',
         ],
         techStack: ['Laravel', 'Vue.js', 'HTML5', 'MySQL', 'Responsive Sandbox'],
         isHighlight: true,
@@ -415,39 +425,39 @@ export const experiences = [
       },
       {
         id: 'qr',
+        screenshots: projectScreenshots.qr,
         name: 'Hệ thống Dynamic QR & Shortlink',
-        role: 'Fullstack Developer · Quản trị Dynamic QR & Đồng bộ Redis',
-        domain: 'AdTech Management Tool & High-Traffic Redis Sync',
+        role: 'Fullstack Developer · End-to-End Product Ownership',
+        domain: 'High-Performance Redirect & Dashboard Analytics',
         filterCategory: 'adtech',
         category: 'adtech',
         categories: ['adtech'],
         categoryTags: ['adtech', 'perf', 'vue'],
         description:
-          'Xây dựng công cụ quản trị Dynamic QR & Shortlink (short.bizfly.vn) bằng Laravel và Vue.js: thiết kế CSDL MySQL, đồng bộ dữ liệu link đích lên Redis phục vụ luồng chuyển hướng (~10.000 clicks/link/ngày) và tích hợp API Log hiển thị thống kê chi tiết.',
+          'Làm chủ Dynamic QR/Shortlink từ thiết kế MySQL, backend Laravel, Redis cache đến dashboard Vue.js và vận hành; phục vụ hơn 2 triệu clicks, đỉnh ~240.000 clicks/ngày.',
         achievements: [
-          'Xây dựng công cụ quản trị Dynamic QR & Shortlink (Laravel, Vue.js): thiết kế CSDL MySQL và đồng bộ dữ liệu link lên Redis phục vụ luồng chuyển hướng tải cao (~10.000 clicks/link/ngày).',
-          'Cho phép đổi URL đích của mã QR tức thời mà không cần in lại ấn phẩm truyền thông.',
-          'Tích hợp REST API từ hệ thống Log để hiển thị báo cáo thống kê lượt click theo vị trí địa lý (location), thiết bị (device) và nguồn truy cập (referer).',
+          'Thiết kế MySQL và lớp cache ánh xạ link trên Redis để tối ưu redirect tải cao: hơn 2 triệu clicks, đỉnh ~240.000 clicks/ngày.',
+          'Xây dựng dashboard analytics tích hợp API Log phục vụ real-time tracking: biểu đồ theo thời gian, Top referrers và Top location.',
+          'Tích hợp bộ lọc thời gian, gắn tag, import, bảng phân trang và thao tác QR/redirect/report trên từng liên kết.',
+          'Tách QR cố định khỏi URL đích qua lớp ánh xạ Shortlink, cho phép đổi trang đích theo chiến dịch mà không cần in lại ấn phẩm.',
         ],
         caseStudy: {
           challenge:
-            'Các chiến dịch marketing và ấn phẩm in ấn cần mã QR cố định lâu dài nhưng có thể linh hoạt thay đổi URL đích theo từng giai đoạn; đồng thời dữ liệu tạo/cập nhật link từ trang quản trị phải được đồng bộ tức thời sang tầng bộ nhớ đệm để phục vụ luồng chuyển hướng tải cao (~10.000 clicks/link/ngày) và cung cấp báo cáo thống kê trực quan.',
+            'Giữ mã QR đã in trên bao bì/ấn phẩm trong khi thay đổi trang đích theo chiến dịch; phục vụ traffic tăng mạnh và cung cấp báo cáo trực quan cho đội vận hành.',
           solution:
-            'Phát triển công cụ quản trị Dynamic QR & Shortlink bằng Laravel và Vue.js; thiết kế CSDL MySQL để quản lý thông tin link/QR và đồng bộ dữ liệu link đích lên Redis phục vụ service Redirect. Tích hợp REST API từ hệ thống Log để xây dựng dashboard thống kê lượt click chi tiết theo vị trí địa lý (location), thiết bị (device) và nguồn truy cập (referer).',
+            'Thiết kế MySQL, backend Laravel và cache ánh xạ Shortlink → URL trên Redis để tối ưu redirect. Xây dựng dashboard Vue.js tích hợp API Log, biểu đồ theo thời gian, Top referrers/Top location và bảng link phân trang với thao tác QR, redirect, report.',
           impact:
-            'Cho phép đổi URL đích của mã QR tức thời mà không cần in lại ấn phẩm; đảm bảo dữ liệu luôn đồng bộ trên Redis cho các link có lưu lượng tới ~10.000 clicks/link/ngày và cung cấp số liệu theo dõi trực quan cho người dùng.',
+            'Phục vụ hơn 2 triệu clicks, đỉnh ~240.000 clicks/ngày; giúp đội vận hành theo dõi hiệu quả phân phối nội dung và đổi URL đích mà không cần in lại QR trên ấn phẩm.',
           metrics: [
-            { label: 'Lưu lượng', value: '~10K clicks/link/ngày' },
-            { label: 'Đồng bộ dữ liệu', value: 'MySQL + Redis' },
-            { label: 'Báo cáo API Log', value: 'Location · Device · Referer' },
-            { label: 'Ấn phẩm QR', value: 'Đổi URL không cần in lại' },
+            { label: 'Tổng lượt click trong kỳ thống kê', value: '2.085.513 clicks' },
+            { label: 'Lưu lượng đỉnh', value: '~240K clicks/ngày' },
+            { label: 'Vận hành linh hoạt', value: 'Đổi URL không cần in lại QR' },
           ],
         },
         metrics: [
-          { label: 'Lưu lượng', value: '~10K clicks/link/ngày' },
-          { label: 'Đồng bộ dữ liệu', value: 'MySQL + Redis' },
-          { label: 'Báo cáo API Log', value: 'Location · Device · Referer' },
-          { label: 'Ấn phẩm QR', value: 'Đổi URL không cần in lại' },
+          { label: 'Tổng lượt click trong kỳ thống kê', value: '2.085.513 clicks' },
+          { label: 'Lưu lượng đỉnh', value: '~240K clicks/ngày' },
+          { label: 'Vận hành linh hoạt', value: 'Đổi URL không cần in lại QR' },
         ],
         techStack: ['Laravel', 'Vue.js', 'MySQL', 'Redis Cache', 'REST API'],
         demoUrl: 'https://short.bizfly.vn/',
@@ -491,6 +501,7 @@ export const experiences = [
       },
       {
         id: 'maps',
+        screenshots: projectScreenshots.maps,
         name: 'Bản đồ Tương tác Báo Giao Thông',
         role: 'Frontend · Bản đồ SVG & Chuyển động tương tác',
         domain: 'Interactive Map & Editorial Visualization',
@@ -499,10 +510,11 @@ export const experiences = [
         categories: ['webgis', 'motion'],
         categoryTags: ['webgis', 'motion', 'perf'],
         description:
-          'Xây dựng 02 trang bản đồ tương tác cho Báo Giao Thông (Tuyến cao tốc Bắc – Nam & Hầm đường bộ) bằng MapSVG.js, TweenMax, Draggable với phiên bản riêng cho PC & Mobile.',
+          'Xây dựng 02 chuyên đề bản đồ tương tác Báo Giao Thông: 22 dự án cao tốc Bắc – Nam và 12 tuyến hầm; kết nối bản đồ tổng quan với dữ liệu chi tiết trên PC/Mobile.',
         achievements: [
-          'Triển khai bản đồ tương tác Tuyến cao tốc Bắc – Nam và Hầm đường bộ với dữ liệu trực quan sinh động.',
-          'Thiết kế giao diện thích ứng riêng biệt cho PC (màn hình rộng) và Mobile (cảm ứng vuốt chạm).',
+          'Dùng MapSVG.js liên kết lựa chọn tuyến/điểm trên bản đồ với thông tin chiều dài, quy mô, vốn đầu tư và tiến độ.',
+          'Thiết kế luồng từ bản đồ tổng quan đến chi tiết 22 dự án cao tốc và 12 tuyến hầm, hỗ trợ điều hướng trực tiếp theo từng dự án.',
+          'Kết hợp TweenMax, Draggable và giao diện riêng PC/Mobile để tối ưu thao tác kéo, chạm và chuyển nội dung.',
         ],
         techStack: ['MapSVG.js', 'TweenMax', 'Draggable', 'SVG', 'jQuery', 'Dual Layout'],
         demoUrl: 'interactives/cao-toc-bac-nam/index.html',
@@ -538,18 +550,19 @@ export const experiences = [
       },
       {
         id: 'experiments',
+        screenshots: projectScreenshots.experiments,
         name: 'Tool Quản lý Template, Dựng Box Widget & Đo lường A/B Testing',
-        role: 'Frontend Developer · Quản trị & Báo cáo BigData',
+        role: 'Fullstack Developer · Laravel/Vue.js & BigData Reporting',
         domain: 'Product Tool & Experimentation Platform',
         filterCategory: 'webapp',
         category: 'webapp',
         categories: ['webapp'],
         categoryTags: ['webapp', 'vue', 'perf'],
         description:
-          'Xây dựng công cụ quản trị tập trung để cấu hình giao diện mẫu (Template), dựng các khối Box Widget mang đi cắm lên hệ thống site và theo dõi hiệu quả của các box gợi ý nội dung (Recommendation) qua báo cáo A/B Testing từ dữ liệu BigData.',
+          'Xây dựng hệ thống quản lý Template Laravel/Vue.js và kiến trúc Box Widget độc lập để nhúng lên báo điện tử; cấu hình kịch bản thử nghiệm và trực quan hóa báo cáo A/B Testing từ BigData.',
         achievements: [
-          'Làm Frontend bằng Laravel & Vue.js giúp quản lý kịch bản, cấu hình thuật toán và xuất file core widget.',
-          'Tích hợp API nhận dữ liệu từ BigData để hiển thị báo cáo thử nghiệm A/B Testing trực quan.',
+          'Xây dựng luồng cấu hình template, kịch bản, thuật toán và xuất core widget để triển khai box Recommendation trên hệ thống site.',
+          'Tích hợp REST API BigData để hiển thị dashboard A/B Testing, giúp đội sản phẩm theo dõi hiệu quả các phương án gợi ý nội dung.',
         ],
         techStack: ['Laravel', 'Vue.js', 'REST API', 'BigData Reporting', 'A/B Testing'],
         isHighlight: true,

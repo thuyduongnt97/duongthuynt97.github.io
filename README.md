@@ -27,6 +27,7 @@ Nội dung hồ sơ, kỹ năng và kinh nghiệm nằm trong [`src/data/`](src/
 | `recognition.js` | Danh hiệu Nhân viên Xuất sắc và giải nghiên cứu khoa học |
 | `skills.js` | Sáu nhóm công nghệ trong Bento Grid: frontend, UI/animation, bản đồ, backend, dữ liệu và công cụ |
 | `experiences.js` | Các giai đoạn làm việc/nghiên cứu, dự án thuộc từng giai đoạn, dấu mốc dùng agent và link demo/landing page |
+| `projectScreenshots.js` | Danh sách ảnh chụp màn hình thực tế theo ID dự án; mỗi ảnh gồm `src`, `label`, `alt` |
 
 Hợp đồng dữ liệu được mô tả bằng JSDoc trong [`src/types/portfolio.js`](src/types/portfolio.js), dùng với JavaScript hiện tại:
 
@@ -35,6 +36,11 @@ Hợp đồng dữ liệu được mô tả bằng JSDoc trong [`src/types/portf
 - `Project.links` chứa nhiều sản phẩm với `id`, `label`, `url`, `kind` (`demo`, `site` hoặc `github`); có thể thêm `category`, `description`, `techStack`, `desktopUrl`, `mobileUrl`.
 
 Các lưu ý khi cập nhật:
+
+- Portfolio định vị Fullstack Software Engineer. Menu dự án và các thẻ chính lấy thứ tự từ `deliverableGroups`: AdTech → Web App/Template → WebGIS → Core Box → Emagazine/Landing Page. Mặc định mở nhóm AdTech; menu chọn từng nhóm riêng, thẻ kỹ năng lọc theo danh mục và “Tất cả” khôi phục đầy đủ dự án.
+- Timeline lấy các nhóm từ `careerTimeline`: VCCorp (2019 – Hiện tại) là một mốc công ty, với các giai đoạn dự án lồng bên dưới; học vấn/công việc tại Đại học Mở là mốc riêng. `careerMilestones` giữ dữ liệu từng giai đoạn và ID để tham chiếu.
+
+- Để bổ sung ảnh sản phẩm: đặt file trong `public/images/screen/`, thêm `{ src: 'images/screen/ten-anh.png', label: 'Tên giao diện', alt: 'Mô tả ảnh' }` vào mảng dự án tương ứng trong `src/data/projectScreenshots.js`. Khi thêm ảnh cho dự án chưa có, tạo mảng theo ID và thêm `screenshots: projectScreenshots['id-du-an']` vào dự án trong `experiences.js`. Website tự hiển thị thumbnail và hỗ trợ bấm phóng to, chuyển ảnh, đóng bằng Escape. Thay ảnh cùng tên sẽ cập nhật giao diện sau khi build lại.
 
 - Email / LinkedIn để trống (`''`) thì nút tương ứng tự ẩn.
 - Sửa `profile.title`, `experienceYears`, `since`, `city`, `country` và `countryCode` để cập nhật thông tin dùng chung. Chức danh, số năm và địa điểm trong giao diện được lấy từ đây.

@@ -5,7 +5,8 @@
 
 /** @typedef {'before-ai' | 'with-agents' | 'ongoing'} ProjectDelivery */
 /** @typedef {'webgis' | 'webapp' | 'adtech' | 'motion'} ProjectCategory */
-/** @typedef {'all' | ProjectCategory} PortfolioFilter */
+/** @typedef {'adtech-tools' | 'template-widgets' | 'spatial-maps' | 'core-box-features' | 'campaigns-editorials' | 'events-gamification' | 'university-systems'} DeliverableGroupId */
+/** @typedef {'all' | ProjectCategory | DeliverableGroupId} PortfolioFilter */
 
 /**
  * Một sản phẩm hoặc repo công khai thuộc dự án.
@@ -20,6 +21,13 @@
  * @property {string[]} [techStack]
  * @property {string} [desktopUrl]
  * @property {string} [mobileUrl]
+ */
+
+/**
+ * @typedef {Object} ProjectScreenshot
+ * @property {string} src Đường dẫn ảnh tính từ public/, tương thích BASE_URL.
+ * @property {string} label Tên ảnh hiển thị dưới thumbnail và trong cửa sổ xem ảnh.
+ * @property {string} alt Mô tả nội dung ảnh cho trình đọc màn hình.
  */
 
 /**
@@ -43,6 +51,7 @@
  * @property {string} [sampleNotice] Ghi chú dẫn link minh họa tiêu biểu.
  * @property {ProjectLink[]} [links] Nhiều demo/sản phẩm thuộc cùng một dự án.
  * @property {string[]} [details] Luồng sử dụng hoặc chi tiết triển khai.
+ * @property {ProjectScreenshot[]} [screenshots] Ảnh chụp thực tế, khai báo tại data/projectScreenshots.js.
  * @property {string} [icon]
  * @property {string} [status]
  */
@@ -72,6 +81,7 @@
  * @property {string} [period] Để trống khi bản mẫu không xác nhận thời gian.
  * @property {string[]} projectIds ID dự án theo thứ tự hiển thị trong nhóm.
  * @property {string[]} techStack Công nghệ tóm tắt của nhóm theo bản mẫu.
+ * @property {string} [architecture] Luồng xử lý kỹ thuật hiển thị trong box điểm nhấn.
  * @property {{ label: string, html: string }[]} sections Nội dung trình bày tĩnh từ bản mẫu; không nhận HTML người dùng.
  * @property {boolean} isSupporting Nhóm bổ trợ hiển thị gọn hơn thẻ chính.
  */
@@ -142,6 +152,10 @@
  * @property {string[]} bulletPoints
  * @property {string} summary
  * @property {string} icon
+ */
+
+/**
+ * @typedef {TimelineMilestone & { milestones: TimelineMilestone[], tenure?: string }} TimelineGroup
  */
 
 export {}
